@@ -1730,6 +1730,72 @@ const TREATMENTS_DATA = [
     id: "face-01",
     categoryId: "face-care",
     categoryName: "Face Care",
+    name: "Njavara Facial",
+    subtitle: "Classical Royal Medicated Rice Nourishing Facial",
+    duration: "60 Minutes",
+    priceMUR: 1500,
+    priceUSD: 33,
+    badge: "Royal Rejuvenation",
+    requiresDoctorConsultation: false,
+    image: "assets/images/pkg_beauty.png",
+    description: "Classical royal Ayurvedic facial using medicated Njavara rice cooked in herbal milk to deeply nourish tissues and restore youthful radiance.",
+    benefits: [
+      "Njavara Rice Compress",
+      "Mukhabhyanga Massage",
+      "Herbal Cleanse & Steam",
+      "Nourishing Face Pack"
+    ],
+    doshaFocus: "Vata & Pitta Nourishment",
+    recommendedFor: "Dry skin, loss of radiance, mature skin, deep tissue nourishment"
+  },
+  {
+    id: "face-02",
+    categoryId: "face-care",
+    categoryName: "Face Care",
+    name: "Panchagavya Facial",
+    subtitle: "Sacred Classical Botanical Sebum Balancing Therapy",
+    duration: "60 Minutes",
+    priceMUR: 1500,
+    priceUSD: 33,
+    badge: "Botanical Purifying",
+    requiresDoctorConsultation: false,
+    image: "assets/images/card_beauty.png",
+    description: "Sacred Ayurvedic purifying therapy formulated with classical botanical ingredients to clear blemishes, balance natural sebum, and detoxify congested facial pores.",
+    benefits: [
+      "Deep Pore Cleansing",
+      "Panchagavya Herbal Pack",
+      "Facial Acupressure",
+      "Hydrating Floral Mist"
+    ],
+    doshaFocus: "Pitta & Kapha Detox",
+    recommendedFor: "Blemishes, congested pores, excess sebum, toxin buildup"
+  },
+  {
+    id: "face-03",
+    categoryId: "face-care",
+    categoryName: "Face Care",
+    name: "Red Sandal Facial",
+    subtitle: "Opulent Cooling & Sun Tan Reversal Therapy",
+    duration: "60 Minutes",
+    priceMUR: 1500,
+    priceUSD: 33,
+    badge: "Cooling Radiance",
+    requiresDoctorConsultation: false,
+    image: "assets/images/card_wellness.png",
+    description: "Opulent cooling therapy enriched with pure red sandalwood to soothe inflammation, minimize sun tanning, and restore an even, luminous complexion.",
+    benefits: [
+      "Red Sandalwood Infusion",
+      "Cooling Herbal Scrub",
+      "Lymphatic Massage",
+      "Raktachandana Lepam"
+    ],
+    doshaFocus: "Pitta Soothing & Cooling",
+    recommendedFor: "Sun tan, inflammation, skin redness, uneven complexion"
+  },
+  {
+    id: "face-04",
+    categoryId: "face-care",
+    categoryName: "Face Care",
     name: "Deep Cleansing Facial",
     subtitle: "Purifying Botanical Extraction & Clay Mask",
     duration: "60 Minutes",
@@ -1749,7 +1815,7 @@ const TREATMENTS_DATA = [
     recommendedFor: "Pollution-exposed skin, congested pores, dull tired complexion"
   },
   {
-    id: "face-02",
+    id: "face-05",
     categoryId: "face-care",
     categoryName: "Face Care",
     name: "Anti-Aging Facial",
@@ -1771,7 +1837,7 @@ const TREATMENTS_DATA = [
     recommendedFor: "Fine lines, loss of elasticity, mature skin, tired eye contours"
   },
   {
-    id: "face-03",
+    id: "face-06",
     categoryId: "face-care",
     categoryName: "Face Care",
     name: "Brightening Facial",
@@ -1793,7 +1859,7 @@ const TREATMENTS_DATA = [
     recommendedFor: "Hyperpigmentation, uneven skin tone, dark spots, dullness"
   },
   {
-    id: "face-04",
+    id: "face-07",
     categoryId: "face-care",
     categoryName: "Face Care",
     name: "Manjishta Facial",
@@ -1815,7 +1881,7 @@ const TREATMENTS_DATA = [
     recommendedFor: "Redness, blemishes, sensitive skin, uneven complexion"
   },
   {
-    id: "face-05",
+    id: "face-08",
     categoryId: "face-care",
     categoryName: "Face Care",
     name: "Eladi Facial",
@@ -1837,7 +1903,7 @@ const TREATMENTS_DATA = [
     recommendedFor: "Textured skin, roughness, environmental stress, moisture loss"
   },
   {
-    id: "face-06",
+    id: "face-09",
     categoryId: "face-care",
     categoryName: "Face Care",
     name: "Nalpamaradi Facial",
@@ -1859,7 +1925,7 @@ const TREATMENTS_DATA = [
     recommendedFor: "Sun tan, UV exposure, pigmentation, skin revitalization"
   },
   {
-    id: "face-07",
+    id: "face-10",
     categoryId: "face-care",
     categoryName: "Face Care",
     name: "Threading",
