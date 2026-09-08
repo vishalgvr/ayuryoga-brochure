@@ -1099,8 +1099,657 @@ button {
 }
 
 /* ==========================================================================
+   Body Care Luxury Dedicated Experience
+   ========================================================================== */
+
+.body-care-luxury-container {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+  animation: fadeIn 0.4s ease;
+}
+
+/* 1. HERO SHOWCASE CARD */
+.body-care-hero-card {
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-md);
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  gap: 40px;
+  padding: 36px;
+  align-items: center;
+}
+
+.body-care-hero-media {
+  position: relative;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  aspect-ratio: 1 / 1;
+}
+
+.body-care-hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.body-care-hero-media:hover .body-care-hero-img {
+  transform: scale(1.04);
+}
+
+.body-care-hero-badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background: rgba(9, 35, 27, 0.88);
+  backdrop-filter: blur(8px);
+  color: #ffffff;
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid rgba(223, 190, 125, 0.4);
+}
+
+.body-care-hero-duration {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(6px);
+  color: var(--color-primary-dark);
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.body-care-hero-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.body-care-pill-tag {
+  align-self: flex-start;
+  background: var(--color-gold-lighter);
+  color: var(--color-gold-dark);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(197, 160, 89, 0.3);
+}
+
+.body-care-hero-title {
+  font-family: var(--font-serif);
+  font-size: 2.75rem;
+  color: var(--color-primary-dark);
+  line-height: 1.15;
+  font-weight: 600;
+}
+
+.body-care-pricing-strip {
+  display: flex;
+  align-items: center;
+  background: #faf7f2;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 14px 22px;
+  gap: 28px;
+  width: fit-content;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.02);
+}
+
+.body-care-price-block,
+.body-care-duration-block {
+  display: flex;
+  flex-direction: column;
+}
+
+.body-care-price-val {
+  font-family: var(--font-serif);
+  font-size: 1.85rem;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  line-height: 1.1;
+}
+
+.body-care-price-lbl,
+.body-care-duration-lbl {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+.body-care-price-divider {
+  width: 1px;
+  height: 38px;
+  background: var(--color-border);
+}
+
+.body-care-duration-val {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--color-gold-dark);
+  line-height: 1.2;
+}
+
+.body-care-hero-desc {
+  font-size: 0.96rem;
+  color: var(--color-text-main);
+  line-height: 1.7;
+}
+
+.body-care-hero-actions {
+  display: flex;
+  gap: 16px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+
+.body-care-btn {
+  padding: 13px 26px;
+  font-weight: 700;
+  font-size: 0.88rem;
+  letter-spacing: 0.6px;
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-whatsapp-outline {
+  background: var(--color-white);
+  color: var(--color-whatsapp-dark);
+  border: 1.5px solid var(--color-whatsapp);
+}
+
+.btn-whatsapp-outline:hover {
+  background: var(--color-whatsapp);
+  color: #ffffff;
+  box-shadow: var(--shadow-whatsapp);
+  transform: translateY(-2px);
+}
+
+/* 2. SECTION HEADINGS */
+.body-care-section {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.body-care-section-header {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.body-care-sub-heading {
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: var(--color-gold-dark);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.body-care-main-heading {
+  font-family: var(--font-serif);
+  font-size: 2.2rem;
+  color: var(--color-primary-dark);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.body-care-section-desc {
+  font-size: 0.92rem;
+  color: var(--color-text-muted);
+  margin-top: 6px;
+  line-height: 1.6;
+}
+
+/* 3. STEP CARDS */
+.body-care-steps-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.body-care-step-card {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+}
+
+.body-care-step-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-gold);
+}
+
+.body-care-step-number {
+  font-family: var(--font-serif);
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: var(--color-gold);
+  line-height: 1;
+  margin-bottom: 2px;
+}
+
+.body-care-step-title {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+}
+
+.body-care-step-desc {
+  font-size: 0.84rem;
+  color: var(--color-text-muted);
+  line-height: 1.55;
+}
+
+/* 4. BOTANICALS CARDS */
+.body-care-botanicals-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.body-care-botanical-card {
+  background: #faf7f2;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 22px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: var(--transition);
+}
+
+.body-care-botanical-card:hover {
+  background: var(--color-white);
+  border-color: var(--color-gold);
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-3px);
+}
+
+.body-care-botanical-name {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+}
+
+.body-care-botanical-sanskrit {
+  font-style: italic;
+  font-size: 0.8rem;
+  color: var(--color-gold-dark);
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.body-care-botanical-desc {
+  font-size: 0.83rem;
+  color: var(--color-text-muted);
+  line-height: 1.55;
+}
+
+/* 5. BENEFITS CARDS */
+.body-care-benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.body-care-benefit-card {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 26px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+}
+
+.body-care-benefit-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-gold);
+}
+
+.body-care-benefit-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--color-primary-soft);
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4px;
+  transition: var(--transition);
+}
+
+.body-care-benefit-card:hover .body-care-benefit-icon {
+  background: var(--color-primary-dark);
+  color: var(--color-gold);
+}
+
+.body-care-benefit-title {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+}
+
+.body-care-benefit-desc {
+  font-size: 0.84rem;
+  color: var(--color-text-muted);
+  line-height: 1.55;
+}
+
+/* ==========================================================================
+   Hair Care Dedicated Horizontal Experience
+   ========================================================================== */
+
+.hair-care-container {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+  animation: fadeIn 0.4s ease;
+}
+
+.hair-care-card {
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+  display: grid;
+  grid-template-columns: 440px 1fr;
+  overflow: hidden;
+  transition: var(--transition);
+}
+
+.hair-care-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-gold);
+}
+
+.hair-care-media {
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  min-height: 320px;
+}
+
+.hair-care-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.hair-care-card:hover .hair-care-img {
+  transform: scale(1.05);
+}
+
+.hair-care-duration-badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background: rgba(9, 35, 27, 0.88);
+  backdrop-filter: blur(8px);
+  color: #ffffff;
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  font-size: 0.78rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid rgba(223, 190, 125, 0.4);
+}
+
+.hair-care-content {
+  padding: 32px 36px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.hair-care-header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.hair-care-title {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--color-primary-dark);
+  line-height: 1.2;
+}
+
+.hair-care-duration-text {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--color-gold-dark);
+}
+
+.hair-care-desc {
+  font-size: 0.92rem;
+  color: var(--color-text-main);
+  line-height: 1.65;
+}
+
+.hair-care-includes {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 12px;
+  border-top: 1px solid var(--color-border-light);
+}
+
+.hair-care-includes-label {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  color: var(--color-primary-dark);
+  text-transform: uppercase;
+}
+
+.hair-care-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.hair-care-pill {
+  background: #f7edd4;
+  color: var(--color-primary-dark);
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(197, 160, 89, 0.3);
+}
+
+.hair-care-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 14px;
+  border-top: 1px solid var(--color-border-light);
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.hair-care-price {
+  font-family: var(--font-serif);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+}
+
+.hair-care-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.hair-care-action-btn {
+  padding: 10px 22px;
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 0.5px;
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+/* Card Treatment Inclusions / Pill Tags for Spa Categories */
+.treatment-duration-pill-top {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: rgba(9, 35, 27, 0.88);
+  backdrop-filter: blur(8px);
+  color: #ffffff;
+  padding: 5px 12px;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid rgba(223, 190, 125, 0.4);
+}
+
+.treatment-includes-box {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--color-border-light);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.treatment-includes-title {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  color: var(--color-primary-dark);
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.treatment-pills-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+}
+
+.treatment-pill-tag {
+  background: #f7edd4;
+  color: var(--color-primary-dark);
+  font-size: 0.74rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(197, 160, 89, 0.3);
+  text-align: center;
+}
+
+.treatment-card-center-head {
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.treatment-card-duration-gold {
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: var(--color-gold-dark);
+  margin-top: 4px;
+}
+
+.treatment-card-bottom-price {
+  font-family: var(--font-serif);
+  font-size: 1.65rem;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  text-align: center;
+  margin: 16px 0 12px;
+}
+
+/* ==========================================================================
    Responsive Breakpoints
    ========================================================================== */
+
+@media (max-width: 992px) {
+  .body-care-hero-card {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding: 24px;
+  }
+  .body-care-steps-grid,
+  .body-care-botanicals-grid,
+  .body-care-benefits-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .hair-care-card {
+    grid-template-columns: 1fr;
+  }
+  .hair-care-media {
+    min-height: 240px;
+    max-height: 280px;
+  }
+  .hair-care-content {
+    padding: 24px;
+  }
+}
 
 @media (max-width: 768px) {
   .top-bar-inner {
@@ -1127,3 +1776,35 @@ button {
     grid-template-columns: 1fr;
   }
 }
+
+@media (max-width: 600px) {
+  .body-care-steps-grid,
+  .body-care-botanicals-grid,
+  .body-care-benefits-grid {
+    grid-template-columns: 1fr;
+  }
+  .body-care-pricing-strip {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .body-care-hero-actions {
+    flex-direction: column;
+  }
+  .body-care-btn {
+    width: 100%;
+    justify-content: center;
+  }
+  .hair-care-footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .hair-care-actions {
+    width: 100%;
+  }
+  .hair-care-action-btn {
+    flex: 1;
+    justify-content: center;
+  }
+}
+
+

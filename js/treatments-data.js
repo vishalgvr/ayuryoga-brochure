@@ -1645,7 +1645,7 @@ const TREATMENTS_DATA = [
     priceUSD: 33,
     badge: "Purifying & Detox",
     requiresDoctorConsultation: false,
-    image: "assets/images/card_beauty.png",
+    image: "assets/images/Beauty Care/Panchagavya Facial.jpg",
     description: "Sacred Ayurvedic purifying therapy formulated with classical botanical ingredients to clear blemishes, balance natural sebum, and detoxify congested facial pores.",
     benefits: [
       "Deep Pore Cleansing & Sebum Balance",
@@ -1667,7 +1667,7 @@ const TREATMENTS_DATA = [
     priceUSD: 27,
     badge: "Hair & Scalp",
     requiresDoctorConsultation: false,
-    image: "assets/images/pkg_hair_pack.jpg",
+    image: "assets/images/Beauty Care/Herbal Hair Pack.jpg",
     description: "A soothing natural herbal mask prepared with freshly blended botanical extracts including Amla, Brahmi, Bhringraj, and Hibiscus. Deeply conditions the hair follicles and restores natural luster.",
     benefits: [
       "Fresh Herbal Scalp Pack Application",
@@ -1689,7 +1689,7 @@ const TREATMENTS_DATA = [
     priceUSD: 33,
     badge: "Royal Radiance",
     requiresDoctorConsultation: false,
-    image: "assets/images/pkg_beauty.png",
+    image: "assets/images/Beauty Care/Njavara Facial.jpg",
     description: "Classical royal Ayurvedic facial using medicated Njavara rice cooked in herbal milk to deeply nourish tissues, improve skin elasticity, and restore youthful radiance.",
     benefits: [
       "Njavara Rice Compress Fomentation",
@@ -1711,7 +1711,7 @@ const TREATMENTS_DATA = [
     priceUSD: 47,
     badge: "Clarifying & Relief",
     requiresDoctorConsultation: false,
-    image: "assets/images/pkg_back_facial.jpg",
+    image: "assets/images/Beauty Care/Back Facial.jpg",
     description: "Comprehensive clarifying therapy for the back that includes deep exfoliation, warm herbal steam, gentle pore cleansing, detoxifying clay mask, and tension-melting back massage.",
     benefits: [
       "Deep Exfoliation Back Scrub",
@@ -1737,7 +1737,7 @@ const TREATMENTS_DATA = [
     priceUSD: 33,
     badge: "Royal Rejuvenation",
     requiresDoctorConsultation: false,
-    image: "assets/images/pkg_beauty.png",
+    image: "assets/images/Face Care/Njavara Facial.jpg",
     description: "Classical royal Ayurvedic facial using medicated Njavara rice cooked in herbal milk to deeply nourish tissues and restore youthful radiance.",
     benefits: [
       "Njavara Rice Compress",
@@ -1759,7 +1759,7 @@ const TREATMENTS_DATA = [
     priceUSD: 33,
     badge: "Botanical Purifying",
     requiresDoctorConsultation: false,
-    image: "assets/images/card_beauty.png",
+    image: "assets/images/Face Care/Panchagavya Facial.jpg",
     description: "Sacred Ayurvedic purifying therapy formulated with classical botanical ingredients to clear blemishes, balance natural sebum, and detoxify congested facial pores.",
     benefits: [
       "Deep Pore Cleansing",
@@ -1781,7 +1781,7 @@ const TREATMENTS_DATA = [
     priceUSD: 33,
     badge: "Cooling Radiance",
     requiresDoctorConsultation: false,
-    image: "assets/images/card_wellness.png",
+    image: "assets/images/Face Care/Red Sandal Facial.jpg",
     description: "Opulent cooling therapy enriched with pure red sandalwood to soothe inflammation, minimize sun tanning, and restore an even, luminous complexion.",
     benefits: [
       "Red Sandalwood Infusion",
@@ -1803,7 +1803,7 @@ const TREATMENTS_DATA = [
     priceUSD: 33,
     badge: "Purifying Care",
     requiresDoctorConsultation: false,
-    image: "assets/images/pkg_therapy.png",
+    image: "assets/images/Face Care/Deep Cleansing Facial.jpg",
     description: "Intensive purifying treatment combining gentle steam, herbal exfoliation, and therapeutic clay masks to eliminate pollutants and refresh dull tired skin.",
     benefits: [
       "Steam & Gentle Extraction",
@@ -1825,7 +1825,7 @@ const TREATMENTS_DATA = [
     priceUSD: 33,
     badge: "Age-Defying",
     requiresDoctorConsultation: false,
-    image: "assets/images/pkg_rejuv.png",
+    image: "assets/images/Face Care/Anti-Aging Facial.jpg",
     description: "Restorative age-defying ritual infused with Kumkumadi oils and firming Marma massage to boost natural collagen synthesis and soften fine lines.",
     benefits: [
       "Firming Marma Massage",
@@ -1847,7 +1847,7 @@ const TREATMENTS_DATA = [
     priceUSD: 33,
     badge: "Radiance & Glow",
     requiresDoctorConsultation: false,
-    image: "assets/images/card_ayurveda.png",
+    image: "assets/images/Face Care/Brightening Facial.jpg",
     description: "Glow-enhancing facial rich in saffron, turmeric, and natural antioxidants to fade dark spots and unveil vibrant, translucent, radiant facial skin.",
     benefits: [
       "Saffron & Turmeric Scrub",
@@ -1869,7 +1869,7 @@ const TREATMENTS_DATA = [
     priceUSD: 40,
     badge: "Complexion Clearing",
     requiresDoctorConsultation: false,
-    image: "assets/images/card_beauty.png",
+    image: "assets/images/Face Care/Manjishta Facial.jpg",
     description: "Targeted complexion-clearing facial utilizing potent Manjistha roots to purify blood toxins, soothe persistent redness, and impart a crystal-clear natural tone.",
     benefits: [
       "Manjistha Herbal Cleanser",
@@ -1891,7 +1891,7 @@ const TREATMENTS_DATA = [
     priceUSD: 40,
     badge: "Texture Refining",
     requiresDoctorConsultation: false,
-    image: "assets/images/pkg_rejuv.png",
+    image: "assets/images/Face Care/Eladi Facial.jpg",
     description: "Ancient Ayurvedic beauty ritual with Eladi Choornam and aromatic herbs to refine skin texture, combat environmental pollution, and balance moisture.",
     benefits: [
       "Eladi Choornam Exfoliation",
@@ -1913,7 +1913,7 @@ const TREATMENTS_DATA = [
     priceUSD: 40,
     badge: "Golden Radiance",
     requiresDoctorConsultation: false,
-    image: "assets/images/pkg_therapy.png",
+    image: "assets/images/Face Care/Nalpamaradi Facial.jpg",
     description: "Luxurious skin-brightening therapy formulated with sacred Nalpamaradi barks and turmeric to repair sun damage and illuminate your natural golden glow.",
     benefits: [
       "Nalpamaradi Oil Infusion",
@@ -1935,7 +1935,7 @@ const TREATMENTS_DATA = [
     priceUSD: 2,
     badge: "Express Shaping",
     requiresDoctorConsultation: false,
-    image: "assets/images/hero_bg.png",
+    image: "assets/images/Face Care/Threading.jpg",
     description: "Precise, gentle organic cotton thread facial hair removal for perfectly sculpted eyebrows, upper lip, or chin, finished with cooling aloe.",
     benefits: [
       "Organic Cotton Threading",
@@ -1953,89 +1953,89 @@ const TREATMENTS_DATA = [
     id: "body-01",
     categoryId: "body-care",
     categoryName: "Body Care",
-    name: "Udvartana Herbal Slimming Scrub",
-    subtitle: "Invigorating Deep Tissue Herbal Powder Massage",
-    duration: "75 Mins",
-    priceMUR: 3400,
-    priceUSD: 76,
-    badge: "Slimming & Toning",
+    name: "Herbal Body Scrub",
+    subtitle: "Traditional Udvarthanam-Inspired Therapy",
+    duration: "60 Minutes",
+    priceMUR: 1980,
+    priceUSD: 44,
+    badge: "Signature Full Body Ritual",
     requiresDoctorConsultation: false,
-    image: "assets/images/udwarthanam.jpg",
-    description: "A vigorous upward lymphatic massage using warm dry herbal powders and minerals. It breaks down subcutaneous fat, stimulates metabolism, eliminates cellulite, and imparts silky soft skin.",
+    image: "assets/images/Body Care/Herbal Body Scrub.jpg",
+    description: "Our signature Herbal Body Scrub is an invigorating Ayurvedic polishing ritual that combines finely powdered therapeutic herbs, precious sandalwood, and cold-pressed botanical oils. Performed using rhythmic upward strokes (Udvarthanam), it gently buffs away dull surface cells, stimulates lymphatic microcirculation, releases trapped metabolic toxins, and restores velvety softness and radiant suppleness to every inch of your skin.",
     benefits: [
-      "Assists in healthy weight loss and body contouring",
-      "Significantly reduces cellulite and localized fat deposits",
-      "Stimulates sluggish metabolism and lymphatic flow",
-      "Exfoliates dead cells, leaving skin remarkably smooth"
+      "Herbal Oil Anointing",
+      "Botanical Scrub Blend",
+      "Rhythmic Udvarthanam",
+      "Warm Rinse & Hydration"
     ],
-    doshaFocus: "Kapha Reduction",
-    recommendedFor: "Weight management, sluggish circulation, cellulite, water retention"
-  },
-  {
-    id: "body-02",
-    categoryId: "body-care",
-    categoryName: "Body Care",
-    name: "Ksheeradhara Rehydrating Milk Bath",
-    subtitle: "Medicated Warm Herbal Milk Full Body Cascade",
-    duration: "60 Mins",
-    priceMUR: 3800,
-    priceUSD: 85,
-    badge: "Nourishing",
-    requiresDoctorConsultation: false,
-    image: "assets/images/dhara.jpg",
-    description: "A continuous flow of cow's milk infused with precious healing herbs like Bala, Ashwagandha, and Sandalwood poured over the entire body. Perfect for dry, fatigued, or weather-worn skin.",
-    benefits: [
-      "Intensely nourishes and repairs dry, peeling skin",
-      "Soothes intense body heat, rashes, and eczema",
-      "Strengthens deep tissues (Dhatus) and immunity",
-      "Deeply calming for nerves and body aches"
+    doshaFocus: "Tridoshic / All Skin Types",
+    recommendedFor: "Lymphatic drainage, dry flakiness, deep pore detoxification, radiant skin glow",
+    steps: [
+      {
+        step: "01",
+        title: "Herbal Oil Anointing",
+        desc: "Light application of warm, dosha-specific medicated oils to soften the epidermis and prepare skin tissues for exfoliation."
+      },
+      {
+        step: "02",
+        title: "Botanical Scrub Blend",
+        desc: "Application of freshly compounded medicinal herbs, Triphala, and micro-fine grains customized to your skin constitution."
+      },
+      {
+        step: "03",
+        title: "Rhythmic Udvarthanam",
+        desc: "Dynamic upward friction massage strokes stimulate lymphatic drainage, tone subcutaneous tissues, and smooth skin texture."
+      },
+      {
+        step: "04",
+        title: "Warm Rinse & Hydration",
+        desc: "Soothing aromatic rinse followed by a nourishing botanical lotion to seal in moisture and impart an all-day golden glow."
+      }
     ],
-    doshaFocus: "Pitta & Vata Soothing",
-    recommendedFor: "Severe dry skin, eczema, psoriasis, hot flash relief"
-  },
-  {
-    id: "body-03",
-    categoryId: "body-care",
-    categoryName: "Body Care",
-    name: "Ayurvedic Hot Herbal Stone Therapy",
-    subtitle: "Volcanic Basalt Stones & Infused Herbal Elixirs",
-    duration: "90 Mins",
-    priceMUR: 4200,
-    priceUSD: 94,
-    badge: "Deep Muscle Relief",
-    requiresDoctorConsultation: false,
-    image: "assets/images/hero.jpg",
-    description: "Warm volcanic basalt stones coated in Ayurvedic medicinal oils are placed on vital energy centers and used to massage deep muscle groups, melting chronic stiffness effortlessly.",
-    benefits: [
-      "Penetrates deep muscle layers to release stubborn spasms",
-      "Enhances peripheral blood flow and cellular oxygenation",
-      "Relieves chronic back pain and fibromyalgia discomfort",
-      "Induces a profound state of tranquil relaxation"
+    botanicals: [
+      {
+        name: "Red Sandalwood",
+        sanskrit: "Raktachandana",
+        desc: "Soothes irritated skin, cools internal body heat, and evens out pigmentation and sun tan."
+      },
+      {
+        name: "Triphala Extract",
+        sanskrit: "Amalaki, Bibhitaki & Haritaki",
+        desc: "Rich in natural antioxidants and Vitamin C to detoxify pores and neutralize free radicals."
+      },
+      {
+        name: "Vetiver Roots",
+        sanskrit: "Ushira",
+        desc: "Imparts a deeply calming earthy aroma while refining skin texture and boosting microcirculation."
+      },
+      {
+        name: "Organic Gram Flour",
+        sanskrit: "Chanaka Choornam",
+        desc: "Gently sloughs off dead cells and excess sebum without stripping the skin's protective lipid barrier."
+      }
     ],
-    doshaFocus: "Vata Pacifying",
-    recommendedFor: "Deep muscle knots, chronic body fatigue, winter chill relief"
-  },
-  {
-    id: "body-04",
-    categoryId: "body-care",
-    categoryName: "Body Care",
-    name: "Swedana Herbal Steam Detox Therapy",
-    subtitle: "Aromatic Herbal Steam Cabin Treatment",
-    duration: "45 Mins",
-    priceMUR: 2100,
-    priceUSD: 47,
-    badge: "Detox Booster",
-    requiresDoctorConsultation: false,
-    image: "assets/images/swedana.jpg",
-    description: "A classical therapeutic steam bath where you recline inside an Ayurvedic wooden steam chamber while medicated herbal vapors open body pores while keeping the head cool.",
-    benefits: [
-      "Facilitates maximum release of accumulated cellular toxins",
-      "Relieves stiffness in joints and all muscles",
-      "Improves digestion and metabolic fire (Agni)",
-      "Enhances the absorption of subsequent massage oils"
-    ],
-    doshaFocus: "Kapha & Vata Cleansing",
-    recommendedFor: "Post-massage detox, joint stiffness, cold/congested body"
+    holisticBenefits: [
+      {
+        icon: "clock",
+        title: "Lymphatic Drainage",
+        desc: "Upward rhythmic friction stimulates lymph flow, reducing fluid retention and heavy limbs."
+      },
+      {
+        icon: "shield",
+        title: "Silky Smooth Skin",
+        desc: "Instantly removes dry flakiness, rough patches, and keratosis, leaving skin touchably soft."
+      },
+      {
+        icon: "sun",
+        title: "Deep Detoxification",
+        desc: "Opens clogged sweat glands and pores, assisting the body in natural metabolic waste elimination."
+      },
+      {
+        icon: "heart",
+        title: "Radiant Natural Glow",
+        desc: "Enhances blood circulation to the skin surface, imparting a youthful, healthy radiance."
+      }
+    ]
   },
 
   // =========================================================================
@@ -2045,89 +2045,44 @@ const TREATMENTS_DATA = [
     id: "hair-01",
     categoryId: "hair-care",
     categoryName: "Hair Care",
-    name: "Keshini Intensive Herbal Hair Spa",
-    subtitle: "Root Nourishing Hair Mask & Scalp Marma Massage",
-    duration: "60 Mins",
-    priceMUR: 2500,
-    priceUSD: 56,
-    badge: "Hair Nutrition",
+    name: "Herbal Hair Pack",
+    subtitle: "Fresh Botanical Scalp Mask & Conditioning",
+    duration: "30 Minutes",
+    priceMUR: 1200,
+    priceUSD: 27,
+    badge: "Scalp Nourishment",
     requiresDoctorConsultation: false,
-    image: "assets/images/facial.jpg",
-    description: "A restorative head and hair ceremony using cold-pressed coconut oil steeped with Bhringraj, Amla, Brahmi, and Hibiscus leaves, followed by warm steam and a fresh botanical root mask.",
+    image: "assets/images/Hair Care/Herbal Hair Pack.jpg",
+    description: "A soothing natural herbal mask prepared with freshly blended botanical extracts including Amla, Brahmi, Bhringraj, and Hibiscus. Deeply conditions the hair follicles, cools excess scalp heat, and restores natural softness and luster.",
     benefits: [
-      "Strengthens hair roots from deep within follicles",
-      "Prevents premature graying and restores natural luster",
-      "Hydrates brittle, chemically treated, or frizzy hair",
-      "Relieves scalp stress and tension headaches"
+      "Fresh Herbal Scalp Pack",
+      "Follicle Conditioning",
+      "Gentle Herbal Wash"
     ],
-    doshaFocus: "Tridoshic Hair Care",
-    recommendedFor: "Dry, damaged, split ends, color-treated hair"
+    doshaFocus: "Pitta & Vata Scalp Relief",
+    recommendedFor: "Scalp heat, dryness, lack of hair shine, follicle weakness"
   },
   {
     id: "hair-02",
     categoryId: "hair-care",
     categoryName: "Hair Care",
-    name: "Siroabhyanga Traditional Scalp Therapy",
-    subtitle: "Warm Herbal Oil Head, Neck & Shoulder Therapy",
-    duration: "45 Mins",
-    priceMUR: 2100,
-    priceUSD: 47,
-    badge: "Stress Buster",
+    name: "Keshavardhini (Hair Strengthening)",
+    subtitle: "Intensive Ayurvedic Scalp Therapy & Marma Stimulation",
+    duration: "60 Minutes",
+    priceMUR: 1800,
+    priceUSD: 40,
+    badge: "Hair Strengthening",
     requiresDoctorConsultation: false,
-    image: "assets/images/thalapothichil.jpg",
-    description: "A focused, revitalizing head and neck massage targeting cranial marma pressure points with specialized warm Ayurvedic herbal oils, releasing chronic mental strain and eye fatigue.",
+    image: "assets/images/Hair Care/Keshavardhini - Hair Strengthening.jpg",
+    description: "An intensive Ayurvedic restorative therapy combining therapeutic Shiro Abhyangam (warm medicated oil head massage) with targeted Marma point stimulation and a potent hair strengthening herbal pack to control hair fall and stimulate healthy growth.",
     benefits: [
-      "Instantly relieves mental fatigue and digital eye strain",
-      "Promotes deep, sound sleep and tranquil dreams",
-      "Stimulates hair growth by boosting scalp circulation",
-      "Loosens tight neck and upper shoulder muscles"
+      "Shiro Abhyangam (Head Massage)",
+      "Hair Strengthening Pack",
+      "Warm Medicated Herbal Oils",
+      "Marma Scalp Stimulation"
     ],
-    doshaFocus: "Vata & Pitta Calming",
-    recommendedFor: "Computer workers, frequent headaches, scalp tension, insomnia"
-  },
-  {
-    id: "hair-03",
-    categoryId: "hair-care",
-    categoryName: "Hair Care",
-    name: "Bhringraj Anti-Hair Fall Therapy",
-    subtitle: "Intensive Botanical Treatment for Thinning Hair",
-    duration: "75 Mins",
-    priceMUR: 2900,
-    priceUSD: 65,
-    badge: "Hair Growth",
-    requiresDoctorConsultation: false,
-    image: "assets/images/facial.jpg",
-    description: "Bhringraj, known in Ayurveda as the 'Ruler of Hair', is combined with Methi (Fenugreek), Shikakai, and Jatamansi oils to reactivate dormant hair follicles and curb excessive shedding.",
-    benefits: [
-      "Significantly slows and stops excessive hair shedding",
-      "Stimulates new follicle growth and increases hair density",
-      "Strengthens the hair shaft against breakage",
-      "Balances scalp sebum and clears follicle blockages"
-    ],
-    doshaFocus: "Pitta Balance",
-    recommendedFor: "Thinning hair, post-stress hair loss, receding hairline"
-  },
-  {
-    id: "hair-04",
-    categoryId: "hair-care",
-    categoryName: "Hair Care",
-    name: "Neem & Tea Tree Dandruff Clarifying Care",
-    subtitle: "Anti-Microbial Scalp Exfoliation & Balancing Pack",
-    duration: "60 Mins",
-    priceMUR: 2400,
-    priceUSD: 53,
-    badge: "Scalp Health",
-    requiresDoctorConsultation: false,
-    image: "assets/images/facial.jpg",
-    description: "An intensive scalp purifying therapy formulated with fresh Neem extract, Tea Tree oil, Lemon peel, and camphor to combat stubborn dandruff, scalp itchiness, and flakiness.",
-    benefits: [
-      "Eliminates fungal and microbial causes of dandruff",
-      "Relieves chronic scalp itching and redness instantly",
-      "Gently exfoliates dead skin flakes from hair roots",
-      "Restores balanced scalp microflora"
-    ],
-    doshaFocus: "Kapha & Pitta Clarifying",
-    recommendedFor: "Dandruff, itchy scalp, seborrhea, flaky scalp"
+    doshaFocus: "Tridoshic Hair Rejuvenation",
+    recommendedFor: "Hair fall, thinning hair, scalp stress, follicle strengthening"
   },
 
   // =========================================================================
@@ -2137,67 +2092,111 @@ const TREATMENTS_DATA = [
     id: "handfoot-01",
     categoryId: "hand-foot-care",
     categoryName: "Hand & Foot Care",
-    name: "Padabhyanga Deluxe Foot Reflex Ritual",
-    subtitle: "Ayurvedic Foot Massage with Warm Kansa Bowl",
-    duration: "60 Mins",
-    priceMUR: 2300,
-    priceUSD: 51,
-    badge: "Ultimate Relaxation",
+    name: "Pedicure & Manicure",
+    subtitle: "Complete Dual Holistic Grooming Package",
+    duration: "90 Minutes",
+    priceMUR: 1800,
+    priceUSD: 40,
+    badge: "Full Grooming",
     requiresDoctorConsultation: false,
-    image: "assets/images/hero.jpg",
-    description: "Begins with a warm botanical foot bath infused with Epsom salts and fresh petals, followed by an intricate reflexology massage on Marma points using a traditional pure Kansa bronze bowl.",
+    image: "assets/images/Hand and Foot Care/Pedicure & Manicure.jpg",
+    description: "A complete holistic grooming package for both hands and feet. Combines nail shaping, gentle cuticle care, exfoliating herbal scrubs, and a deeply relaxing pressure massage for soft, revitalized skin.",
     benefits: [
-      "Draws excess body heat (Pitta) through soles of feet",
-      "Relieves tired, aching feet, plantar strain & swollen ankles",
-      "Promotes deep, restful sleep and soothes anxiety",
-      "Softens cracked heels and restores supple skin"
+      "Classic Manicure",
+      "Full Pedicure",
+      "Herbal Exfoliation",
+      "Hand & Foot Massage"
     ],
-    doshaFocus: "Pitta & Vata Calming",
-    recommendedFor: "Tired legs, travelers, standing workers, high body heat"
+    doshaFocus: "Complete Hand & Foot Care",
+    recommendedFor: "Total nail care, callus removal, hand & foot relaxation, special events"
   },
   {
     id: "handfoot-02",
     categoryId: "hand-foot-care",
     categoryName: "Hand & Foot Care",
-    name: "Hastabhyanga Royal Hand Treatment",
-    subtitle: "Nourishing Herbal Hand & Arm Therapy",
-    duration: "45 Mins",
-    priceMUR: 1900,
-    priceUSD: 42,
-    badge: "Nourishing",
+    name: "Pedicure",
+    subtitle: "Essential Botanical Foot Exfoliation & Massage",
+    duration: "60 Minutes",
+    priceMUR: 1440,
+    priceUSD: 32,
+    badge: "Foot Wellness",
     requiresDoctorConsultation: false,
-    image: "assets/images/facial.jpg",
-    description: "An indulgent treatment for hard-working hands. Includes an exfoliation with almond-saffron scrub, warm herbal compress, Marma point hand massage, and an intensely hydrating shea-ghee balm.",
+    image: "assets/images/Hand and Foot Care/Pedicure.jpg",
+    description: "An essential foot treatment designed to cleanse, exfoliate dry calluses, shape toenails, and relieve tension in tired soles through an invigorating herbal soak and soothing foot massage.",
     benefits: [
-      "Relieves repetitive strain and wrist tendon tension",
-      "Deeply hydrates dry hands and cuticle beds",
-      "Fades sun spots and hyperpigmentation on hands",
-      "Leaves hands velvet soft and pain-free"
+      "Herbal Foot Soak",
+      "Dead Skin Scrub",
+      "Nail & Cuticle Care",
+      "Soothing Foot Massage"
     ],
-    doshaFocus: "Vata Pacifying",
-    recommendedFor: "Typists, artisans, dry cracked hands, wrist stiffness"
+    doshaFocus: "Pitta & Vata Soothing",
+    recommendedFor: "Tired feet, rough soles, callus reduction, daily nail maintenance"
   },
   {
     id: "handfoot-03",
     categoryId: "hand-foot-care",
     categoryName: "Hand & Foot Care",
-    name: "Botanical Ayurvedic Spa Pedicure & Manicure",
-    subtitle: "Full Nail Grooming with Pure Herbal Infusions",
-    duration: "75 Mins",
-    priceMUR: 2800,
-    priceUSD: 62,
-    badge: "Full Pampering",
+    name: "Manicure",
+    subtitle: "Quick Hand Care, Botanical Scrub & Hydrating Massage",
+    duration: "30 Minutes",
+    priceMUR: 600,
+    priceUSD: 13,
+    badge: "Hand Care",
     requiresDoctorConsultation: false,
-    image: "assets/images/facial.jpg",
-    description: "Complete holistic grooming for both hands and feet using natural chemical-free products. Includes herbal soaking, cuticle care, natural scrubbing, clay mask, and Marma point massage.",
+    image: "assets/images/Hand and Foot Care/Manicure.jpg",
+    description: "A quick yet thorough hand care ritual focusing on precise nail shaping, cuticle nourishment, botanical exfoliation, and a hydrating hand massage to leave your hands neat and smooth.",
     benefits: [
-      "Complete aesthetic and therapeutic nail and skin care",
-      "Deeply cleanses and purifies nail beds and heels",
-      "Improves blood circulation in extremities",
-      "Leaves nails naturally polished and radiant"
+      "Nail Shaping & Buffing",
+      "Cuticle Conditioning",
+      "Herbal Hand Scrub",
+      "Hydrating Massage"
     ],
-    doshaFocus: "Complete Care",
-    recommendedFor: "Full grooming, special occasions, routine self-care"
+    doshaFocus: "Vata Nourishing",
+    recommendedFor: "Dry cuticles, dull nails, hand tension, express grooming"
+  },
+  {
+    id: "handfoot-04",
+    categoryId: "hand-foot-care",
+    categoryName: "Hand & Foot Care",
+    name: "Royal Pedicure",
+    subtitle: "Indulgent Floral Bath, Extended Reflexology & Callus Therapy",
+    duration: "60 Minutes",
+    priceMUR: 1800,
+    priceUSD: 40,
+    badge: "Royal Luxury",
+    requiresDoctorConsultation: false,
+    image: "assets/images/Hand and Foot Care/Royal Pedicure.jpg",
+    description: "An indulgent luxury foot therapy with fragrant floral baths, essential oil scrubs, intensive callus smoothing, and an extended Ayurvedic reflexology massage along the calves and soles.",
+    benefits: [
+      "Floral Rose Petal Soak",
+      "Aromatic Herbal Scrub",
+      "Intensive Callus Care",
+      "Royal Calf & Foot Massage"
+    ],
+    doshaFocus: "Pitta Cooling & Calming",
+    recommendedFor: "Calf tension, deep foot stress, severe dry heels, luxurious pampering"
+  },
+  {
+    id: "handfoot-05",
+    categoryId: "hand-foot-care",
+    categoryName: "Hand & Foot Care",
+    name: "Paraffin Foot Spa",
+    subtitle: "Deep Thermal Paraffin Wax Wrap & Heel Repair",
+    duration: "90 Minutes",
+    priceMUR: 2160,
+    priceUSD: 48,
+    badge: "Intensive Repair",
+    requiresDoctorConsultation: false,
+    image: "assets/images/Hand and Foot Care/Paraffin Foot Spa.jpg",
+    description: "A deeply therapeutic thermal treatment enveloping feet in warm paraffin wax. Locks in deep moisture, eases joint stiffness, repairs cracked heels, and stimulates circulation with reflexology.",
+    benefits: [
+      "Herbal Foot Exfoliation",
+      "Warm Paraffin Wax Wrap",
+      "Intensive Heel Repair",
+      "Reflexology Massage"
+    ],
+    doshaFocus: "Vata Pacifying & Warming",
+    recommendedFor: "Cracked heels, stiff foot joints, intense dryness, circulation boost"
   }
 ];
 

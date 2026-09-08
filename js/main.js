@@ -152,6 +152,34 @@ document.addEventListener('DOMContentLoaded', () => {
       `;
     }
 
+    // Check if category is Body Care
+    if (currentCategory === 'body-care' && filtered.length > 0) {
+      treatmentsGrid.innerHTML = renderBodyCareExperience(filtered[0]);
+
+      // Attach open modal listeners
+      treatmentsGrid.querySelectorAll('.open-booking-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const id = btn.dataset.id;
+          openBookingModalWithTreatment(id);
+        });
+      });
+      return;
+    }
+
+    // Check if category is Hair Care
+    if (currentCategory === 'hair-care' && filtered.length > 0) {
+      treatmentsGrid.innerHTML = renderHairCareExperience(filtered);
+
+      // Attach open modal listeners
+      treatmentsGrid.querySelectorAll('.open-booking-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const id = btn.dataset.id;
+          openBookingModalWithTreatment(id);
+        });
+      });
+      return;
+    }
+
     const cardsHtml = filtered.map(treatment => {
       const price = formatPrice(treatment.priceMUR, treatment.priceUSD);
       const isDoctorConsult = treatment.requiresDoctorConsultation !== false;
@@ -167,71 +195,116 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const whatsappUrl = `https://wa.me/${WHATSAPP_PHONE}?text=${whatsappText}`;
 
-      const consultButtonLabel = "Consult Doctor";
-      const consultButtonIcon = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>`;
+      // If Classical Ayurveda (requires doctor consultation)
+      if (isDoctorConsult) {
+        const consultButtonLabel = "Consult Doctor";
+        const consultButtonIcon = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>`;
+        const doctorConsultTag = `
+          <div class="doctor-consult-tag">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+            Done after Doctor Consultation
+          </div>`;
 
-      const doctorConsultTag = isDoctorConsult
-        ? `<div class="doctor-consult-tag">
-             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
-             Done after Doctor Consultation
-           </div>`
-        : '';
+        return `
+          <article class="treatment-card" data-id="${treatment.id}">
+            <div class="treatment-image-header">
+              <img src="${treatment.image}" alt="${treatment.name}" loading="lazy">
+              <span class="treatment-badge">${treatment.badge}</span>
+              <span class="treatment-cat-tag">${treatment.categoryName}</span>
+            </div>
+
+            <div class="treatment-body">
+              <div class="treatment-header-row">
+                <div>
+                  <h3 class="treatment-name">${treatment.name}</h3>
+                  <div class="treatment-subtitle">${treatment.subtitle}</div>
+                </div>
+                <div class="treatment-pricing">
+                  <div class="price-main">${price.main}</div>
+                  <div class="price-alt">${price.alt}</div>
+                </div>
+              </div>
+
+              <div class="treatment-meta">
+                <span class="treatment-meta-item">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                  ${treatment.duration}
+                </span>
+                <span class="treatment-meta-item">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                  ${treatment.doshaFocus}
+                </span>
+              </div>
+
+              ${doctorConsultTag}
+
+              <p class="treatment-desc">${treatment.description}</p>
+
+              <ul class="treatment-benefits">
+                ${treatment.benefits.slice(0, 3).map(b => `
+                  <li>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    <span>${b}</span>
+                  </li>
+                `).join('')}
+              </ul>
+
+              <div class="treatment-actions">
+                <button class="btn btn-consult-doctor btn-sm open-booking-btn" data-id="${treatment.id}">
+                  ${consultButtonIcon}
+                  ${consultButtonLabel}
+                </button>
+                
+                <a href="${whatsappUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp btn-sm" title="Instant WhatsApp Message">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.669-.699c.969.539 1.95.82 2.791.82h.001c3.181 0 5.767-2.586 5.768-5.766 0-3.18-2.586-5.766-5.769-5.766zm3.364 8.232c-.141.398-.711.758-1.011.808-.282.046-.649.074-1.898-.444-1.597-.662-2.617-2.28-2.696-2.385-.078-.106-.646-.86-.646-1.637 0-.778.406-1.16.55-1.314.143-.155.313-.194.417-.194.104 0 .208.001.3.006.096.004.225-.037.352.268.13.312.443 1.077.482 1.156.039.078.065.17.013.273-.052.104-.078.169-.156.26-.078.091-.164.204-.235.274-.078.078-.16.163-.069.319.091.156.404.667.868 1.079.596.53 1.098.694 1.254.772.156.078.247.065.338-.039.091-.104.391-.455.495-.611.104-.156.208-.13.349-.078.143.052.908.428 1.064.506.156.078.26.117.299.182.039.065.039.377-.102.775z"></path></svg>
+                  WhatsApp Instant
+                </a>
+              </div>
+            </div>
+          </article>
+        `;
+      }
+
+      // Spa / Beauty / Face / Hand-Foot Cards (matching exact brochure layout)
+      const includesTitle = currentCategory === 'hand-foot-care' ? 'PACKAGE INCLUDES:' : 'TREATMENT INCLUDES:';
 
       return `
         <article class="treatment-card" data-id="${treatment.id}">
           <div class="treatment-image-header">
             <img src="${treatment.image}" alt="${treatment.name}" loading="lazy">
-            <span class="treatment-badge">${treatment.badge}</span>
-            <span class="treatment-cat-tag">${treatment.categoryName}</span>
+            <span class="treatment-duration-pill-top">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              ${treatment.duration}
+            </span>
           </div>
 
           <div class="treatment-body">
-            <div class="treatment-header-row">
-              <div>
-                <h3 class="treatment-name">${treatment.name}</h3>
-                <div class="treatment-subtitle">
-                  ${treatment.subtitle}
+            <div class="treatment-card-center-head">
+              <h3 class="treatment-name">${treatment.name}</h3>
+              <div class="treatment-card-duration-gold">Duration: ${treatment.duration}</div>
+            </div>
+
+            <p class="treatment-desc" style="text-align: center;">${treatment.description}</p>
+
+            ${treatment.benefits && treatment.benefits.length > 0 ? `
+              <div class="treatment-includes-box">
+                <div class="treatment-includes-title">${includesTitle}</div>
+                <div class="treatment-pills-wrap">
+                  ${treatment.benefits.map(b => `<span class="treatment-pill-tag">${b}</span>`).join('')}
                 </div>
               </div>
-              <div class="treatment-pricing">
-                <div class="price-main">${price.main}</div>
-                <div class="price-alt">${price.alt}</div>
-              </div>
-            </div>
+            ` : ''}
 
-            <div class="treatment-meta">
-              <span class="treatment-meta-item">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-                ${treatment.duration}
-              </span>
-              <span class="treatment-meta-item">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
-                ${treatment.doshaFocus}
-              </span>
-            </div>
-
-            ${doctorConsultTag}
-
-            <p class="treatment-desc">${treatment.description}</p>
-
-            <ul class="treatment-benefits">
-              ${treatment.benefits.slice(0, 3).map(b => `
-                <li>
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  <span>${b}</span>
-                </li>
-              `).join('')}
-            </ul>
+            <div class="treatment-card-bottom-price">${price.main}</div>
 
             <div class="treatment-actions">
-              <button class="btn btn-consult-doctor btn-sm open-booking-btn" data-id="${treatment.id}">
-                ${consultButtonIcon}
-                ${consultButtonLabel}
+              <button class="btn btn-primary-dark btn-sm open-booking-btn" data-id="${treatment.id}">
+                BOOK NOW
               </button>
               
-              <a href="${whatsappUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp btn-sm" title="Instant WhatsApp Message">
+              <a href="${whatsappUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp-outline btn-sm" title="Instant WhatsApp Message">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.669-.699c.969.539 1.95.82 2.791.82h.001c3.181 0 5.767-2.586 5.768-5.766 0-3.18-2.586-5.766-5.769-5.766zm3.364 8.232c-.141.398-.711.758-1.011.808-.282.046-.649.074-1.898-.444-1.597-.662-2.617-2.28-2.696-2.385-.078-.106-.646-.86-.646-1.637 0-.778.406-1.16.55-1.314.143-.155.313-.194.417-.194.104 0 .208.001.3.006.096.004.225-.037.352.268.13.312.443 1.077.482 1.156.039.078.065.17.013.273-.052.104-.078.169-.156.26-.078.091-.164.204-.235.274-.078.078-.16.163-.069.319.091.156.404.667.868 1.079.596.53 1.098.694 1.254.772.156.078.247.065.338-.039.091-.104.391-.455.495-.611.104-.156.208-.13.349-.078.143.052.908.428 1.064.506.156.078.26.117.299.182.039.065.039.377-.102.775z"></path></svg>
-                WhatsApp Instant
+                WHATSAPP
               </a>
             </div>
           </div>
@@ -248,6 +321,238 @@ document.addEventListener('DOMContentLoaded', () => {
         openBookingModalWithTreatment(id);
       });
     });
+  }
+
+  // =========================================================================
+  // Body Care Custom Luxury Experience Renderer
+  // =========================================================================
+  function renderBodyCareExperience(treatment) {
+    const price = formatPrice(treatment.priceMUR, treatment.priceUSD);
+    const whatsappText = encodeURIComponent(
+      `Namaste Ayuryoga International! 🙏\n\nI would like to enquire / book the signature *Herbal Body Scrub* therapy:\n\n🌿 *Treatment:* ${treatment.name}\n📂 *Category:* Body Care\n⏱️ *Duration:* ${treatment.duration}\n💰 *Price:* ${getWhatsAppPriceString(treatment.priceMUR, treatment.priceUSD)}\n\nPlease let me know available slots. Thank you!`
+    );
+    const whatsappUrl = `https://wa.me/${WHATSAPP_PHONE}?text=${whatsappText}`;
+
+    return `
+      <div class="body-care-luxury-container">
+        <!-- 1. HERO SHOWCASE CARD -->
+        <div class="body-care-hero-card">
+          <div class="body-care-hero-media">
+            <img src="${treatment.image}" alt="${treatment.name}" class="body-care-hero-img">
+            <div class="body-care-hero-badge">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="#dfbe7d" stroke="#dfbe7d"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              <span>★ Signature Full Body Ritual</span>
+            </div>
+            <div class="body-care-hero-duration">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              <span>Duration: ${treatment.duration}</span>
+            </div>
+          </div>
+
+          <div class="body-care-hero-content">
+            <div class="body-care-pill-tag">TRADITIONAL UDVARTHANAM-INSPIRED THERAPY</div>
+            <h2 class="body-care-hero-title">${treatment.name}</h2>
+            
+            <div class="body-care-pricing-strip">
+              <div class="body-care-price-block">
+                <div class="body-care-price-val">${price.main}</div>
+                <div class="body-care-price-lbl">FULL TREATMENT PRICE</div>
+              </div>
+              <div class="body-care-price-divider"></div>
+              <div class="body-care-duration-block">
+                <div class="body-care-duration-val">${treatment.duration}</div>
+                <div class="body-care-duration-lbl">TREATMENT DURATION</div>
+              </div>
+            </div>
+
+            <p class="body-care-hero-desc">
+              Our signature <strong>Herbal Body Scrub</strong> is an invigorating Ayurvedic polishing ritual that combines finely powdered therapeutic herbs, precious sandalwood, and cold-pressed botanical oils. Performed using rhythmic upward strokes (<em>Udvarthanam</em>), it gently buffs away dull surface cells, stimulates lymphatic microcirculation, releases trapped metabolic toxins, and restores velvety softness and radiant suppleness to every inch of your skin.
+            </p>
+
+            <div class="body-care-hero-actions">
+              <button class="btn btn-primary-dark open-booking-btn body-care-btn" data-id="${treatment.id}">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                BOOK APPOINTMENT
+              </button>
+              <a href="${whatsappUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp-outline body-care-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.669-.699c.969.539 1.95.82 2.791.82h.001c3.181 0 5.767-2.586 5.768-5.766 0-3.18-2.586-5.766-5.769-5.766zm3.364 8.232c-.141.398-.711.758-1.011.808-.282.046-.649.074-1.898-.444-1.597-.662-2.617-2.28-2.696-2.385-.078-.106-.646-.86-.646-1.637 0-.778.406-1.16.55-1.314.143-.155.313-.194.417-.194.104 0 .208.001.3.006.096.004.225-.037.352.268.13.312.443 1.077.482 1.156.039.078.065.17.013.273-.052.104-.078.169-.156.26-.078.091-.164.204-.235.274-.078.078-.16.163-.069.319.091.156.404.667.868 1.079.596.53 1.098.694 1.254.772.156.078.247.065.338-.039.091-.104.391-.455.495-.611.104-.156.208-.13.349-.078.143.052.908.428 1.064.506.156.078.26.117.299.182.039.065.039.377-.102.775z"></path></svg>
+                WHATSAPP US
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. THE RITUAL EXPERIENCE -->
+        <div class="body-care-section">
+          <div class="body-care-section-header">
+            <div class="body-care-sub-heading">THE RITUAL EXPERIENCE</div>
+            <h3 class="body-care-main-heading">Your 4-Step Body Polishing Journey</h3>
+            <p class="body-care-section-desc">Every phase of our Herbal Body Scrub is designed to maximize cellular turnover, detoxify pores, and induce profound relaxation.</p>
+          </div>
+
+          <div class="body-care-steps-grid">
+            <div class="body-care-step-card">
+              <div class="body-care-step-number">01</div>
+              <h4 class="body-care-step-title">Herbal Oil Anointing</h4>
+              <p class="body-care-step-desc">Light application of warm, dosha-specific medicated oils to soften the epidermis and prepare skin tissues for exfoliation.</p>
+            </div>
+
+            <div class="body-care-step-card">
+              <div class="body-care-step-number">02</div>
+              <h4 class="body-care-step-title">Botanical Scrub Blend</h4>
+              <p class="body-care-step-desc">Application of freshly compounded medicinal herbs, Triphala, and micro-fine grains customized to your skin constitution.</p>
+            </div>
+
+            <div class="body-care-step-card">
+              <div class="body-care-step-number">03</div>
+              <h4 class="body-care-step-title">Rhythmic Udvarthanam</h4>
+              <p class="body-care-step-desc">Dynamic upward friction massage strokes stimulate lymphatic drainage, tone subcutaneous tissues, and smooth skin texture.</p>
+            </div>
+
+            <div class="body-care-step-card">
+              <div class="body-care-step-number">04</div>
+              <h4 class="body-care-step-title">Warm Rinse & Hydration</h4>
+              <p class="body-care-step-desc">Soothing aromatic rinse followed by a nourishing botanical lotion to seal in moisture and impart an all-day golden glow.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. NATURAL FORMULATION -->
+        <div class="body-care-section">
+          <div class="body-care-section-header">
+            <div class="body-care-sub-heading">NATURAL FORMULATION</div>
+            <h3 class="body-care-main-heading">Pure Ayurvedic Botanicals</h3>
+            <p class="body-care-section-desc">Formulated with 100% natural, ethically sourced herbs with zero artificial microbeads, sulfates, or chemical preservatives.</p>
+          </div>
+
+          <div class="body-care-botanicals-grid">
+            <div class="body-care-botanical-card">
+              <h4 class="body-care-botanical-name">Red Sandalwood</h4>
+              <div class="body-care-botanical-sanskrit">Raktachandana</div>
+              <p class="body-care-botanical-desc">Soothes irritated skin, cools internal body heat, and evens out pigmentation and sun tan.</p>
+            </div>
+
+            <div class="body-care-botanical-card">
+              <h4 class="body-care-botanical-name">Triphala Extract</h4>
+              <div class="body-care-botanical-sanskrit">Amalaki, Bibhitaki & Haritaki</div>
+              <p class="body-care-botanical-desc">Rich in natural antioxidants and Vitamin C to detoxify pores and neutralize free radicals.</p>
+            </div>
+
+            <div class="body-care-botanical-card">
+              <h4 class="body-care-botanical-name">Vetiver Roots</h4>
+              <div class="body-care-botanical-sanskrit">Ushira</div>
+              <p class="body-care-botanical-desc">Imparts a deeply calming earthy aroma while refining skin texture and boosting microcirculation.</p>
+            </div>
+
+            <div class="body-care-botanical-card">
+              <h4 class="body-care-botanical-name">Organic Gram Flour</h4>
+              <div class="body-care-botanical-sanskrit">Chanaka Choornam</div>
+              <p class="body-care-botanical-desc">Gently sloughs off dead cells and excess sebum without stripping the skin's protective lipid barrier.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. HOLISTIC BENEFITS -->
+        <div class="body-care-section">
+          <div class="body-care-section-header">
+            <h3 class="body-care-main-heading">Holistic Benefits of Body Polishing</h3>
+            <p class="body-care-section-desc">Regular Ayurvedic body exfoliation does more than smooth the surface — it enhances metabolic health and promotes deep physical vitality.</p>
+          </div>
+
+          <div class="body-care-benefits-grid">
+            <div class="body-care-benefit-card">
+              <div class="body-care-benefit-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              </div>
+              <h4 class="body-care-benefit-title">Lymphatic Drainage</h4>
+              <p class="body-care-benefit-desc">Upward rhythmic friction stimulates lymph flow, reducing fluid retention and heavy limbs.</p>
+            </div>
+
+            <div class="body-care-benefit-card">
+              <div class="body-care-benefit-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+              </div>
+              <h4 class="body-care-benefit-title">Silky Smooth Skin</h4>
+              <p class="body-care-benefit-desc">Instantly removes dry flakiness, rough patches, and keratosis, leaving skin touchably soft.</p>
+            </div>
+
+            <div class="body-care-benefit-card">
+              <div class="body-care-benefit-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="M4.93 4.93l1.41 1.41"></path><path d="M17.66 17.66l1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="M6.34 17.66l-1.41 1.41"></path><path d="M19.07 4.93l-1.41 1.41"></path></svg>
+              </div>
+              <h4 class="body-care-benefit-title">Deep Detoxification</h4>
+              <p class="body-care-benefit-desc">Opens clogged sweat glands and pores, assisting the body in natural metabolic waste elimination.</p>
+            </div>
+
+            <div class="body-care-benefit-card">
+              <div class="body-care-benefit-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+              </div>
+              <h4 class="body-care-benefit-title">Radiant Natural Glow</h4>
+              <p class="body-care-benefit-desc">Enhances blood circulation to the skin surface, imparting a youthful, healthy radiance.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  // =========================================================================
+  // Hair Care Dedicated Horizontal Experience Renderer
+  // =========================================================================
+  function renderHairCareExperience(treatments) {
+    return `
+      <div class="hair-care-container">
+        ${treatments.map(treatment => {
+          const price = formatPrice(treatment.priceMUR, treatment.priceUSD);
+          const whatsappText = encodeURIComponent(
+            `Namaste Ayuryoga International! 🙏\n\nI would like to enquire / book the *${treatment.name}* therapy:\n\n🌿 *Treatment:* ${treatment.name}\n📂 *Category:* Hair Care\n⏱️ *Duration:* ${treatment.duration}\n💰 *Price:* ${getWhatsAppPriceString(treatment.priceMUR, treatment.priceUSD)}\n\nPlease let me know available slots. Thank you!`
+          );
+          const whatsappUrl = `https://wa.me/${WHATSAPP_PHONE}?text=${whatsappText}`;
+
+          return `
+            <div class="hair-care-card" data-id="${treatment.id}">
+              <div class="hair-care-media">
+                <img src="${treatment.image}" alt="${treatment.name}" class="hair-care-img">
+                <div class="hair-care-duration-badge">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                  <span>${treatment.duration}</span>
+                </div>
+              </div>
+
+              <div class="hair-care-content">
+                <div class="hair-care-header">
+                  <h3 class="hair-care-title">${treatment.name}</h3>
+                  <div class="hair-care-duration-text">Duration: ${treatment.duration}</div>
+                </div>
+
+                <p class="hair-care-desc">${treatment.description}</p>
+
+                <div class="hair-care-includes">
+                  <div class="hair-care-includes-label">PACKAGE INCLUDES:</div>
+                  <div class="hair-care-pills">
+                    ${treatment.benefits.map(b => `<span class="hair-care-pill">${b}</span>`).join('')}
+                  </div>
+                </div>
+
+                <div class="hair-care-footer">
+                  <div class="hair-care-price">${price.main}</div>
+                  <div class="hair-care-actions">
+                    <button class="btn btn-primary-dark open-booking-btn hair-care-action-btn" data-id="${treatment.id}">
+                      BOOK NOW
+                    </button>
+                    <a href="${whatsappUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp-outline hair-care-action-btn">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.669-.699c.969.539 1.95.82 2.791.82h.001c3.181 0 5.767-2.586 5.768-5.766 0-3.18-2.586-5.766-5.769-5.766zm3.364 8.232c-.141.398-.711.758-1.011.808-.282.046-.649.074-1.898-.444-1.597-.662-2.617-2.28-2.696-2.385-.078-.106-.646-.86-.646-1.637 0-.778.406-1.16.55-1.314.143-.155.313-.194.417-.194.104 0 .208.001.3.006.096.004.225-.037.352.268.13.312.443 1.077.482 1.156.039.078.065.17.013.273-.052.104-.078.169-.156.26-.078.091-.164.204-.235.274-.078.078-.16.163-.069.319.091.156.404.667.868 1.079.596.53 1.098.694 1.254.772.156.078.247.065.338-.039.091-.104.391-.455.495-.611.104-.156.208-.13.349-.078.143.052.908.428 1.064.506.156.078.26.117.299.182.039.065.039.377-.102.775z"></path></svg>
+                      WHATSAPP
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          `;
+        }).join('')}
+      </div>
+    `;
   }
 
   // =========================================================================
