@@ -1729,7 +1729,7 @@ const TREATMENTS_DATA = [
     "priceUSD": 8,
     "badge": "Pore Detox & Cleanse",
     "requiresDoctorConsultation": false,
-    "image": "assets/images/Wellness/Steam (Herbal Swedana).jpg",
+    "image": "assets/images/Wellness/Steam - Herbal Swedana.jpg",
     "description": "Traditional Ayurvedic medicated herbal steam chamber therapy that dilates bodily channels, opens pores, and expels deep-seated metabolic toxins.",
     "benefits": [
       "Medicated Steam Chamber",
@@ -1751,7 +1751,7 @@ const TREATMENTS_DATA = [
     "priceUSD": 60,
     "badge": "Stress & Anxiety Relief",
     "requiresDoctorConsultation": false,
-    "image": "assets/images/Wellness/Divya Dhara (Antistress Therapy).jpg",
+    "image": "assets/images/Wellness/Divya Dhara - Antistress Therapy.jpg",
     "description": "Heavenly therapeutic ritual combining an invigorating whole-body herbal massage with continuous warm herbal decoction stream along the forehead.",
     "benefits": [
       "Divya Abhyangam",
@@ -1883,7 +1883,7 @@ const TREATMENTS_DATA = [
     "priceUSD": 60,
     "badge": "Deep Sleep & Mental Calm",
     "requiresDoctorConsultation": false,
-    "image": "assets/images/Wellness/Manasamitram (Abhyanga + Dhara).jpg",
+    "image": "assets/images/Wellness/Manasamitram - Abhyanga + Dhara.jpg",
     "description": "Deeply calming therapy combining warm medicated oil body massage with a continuous gentle stream of herb-infused warm milk over the third eye.",
     "benefits": [
       "Warm Oil Abhyangam",
@@ -1905,7 +1905,7 @@ const TREATMENTS_DATA = [
     "priceUSD": 80,
     "badge": "Master 4-in-1 Journey",
     "requiresDoctorConsultation": false,
-    "image": "assets/images/Wellness/Ayur Soukya (Complete Package).jpg",
+    "image": "assets/images/Wellness/Ayur Soukya - Complete Package.jpg",
     "description": "Master Ayurvedic wellness package featuring 4 powerful modalities: Abhyangam body massage, warm herbal Kizhi, soothing Dhara, and detoxifying steam bath.",
     "benefits": [
       "Abhyangam Massage",
@@ -1927,7 +1927,7 @@ const TREATMENTS_DATA = [
     "priceUSD": 40,
     "badge": "Tranquil Mind Reset",
     "requiresDoctorConsultation": false,
-    "image": "assets/images/Wellness/Manasanthi (Anti Stress Therapy).jpg",
+    "image": "assets/images/Wellness/Manasanthi - Anti Stress Therapy.jpg",
     "description": "Tranquil mental rejuvenation therapy combining restorative Shiro Abhyangam head massage with gentle Ksheeradhara medicated herbal milk streaming.",
     "benefits": [
       "Herbal Head Massage",
@@ -1971,7 +1971,7 @@ const TREATMENTS_DATA = [
     "priceUSD": 40,
     "badge": "Radiant Skin Glow",
     "requiresDoctorConsultation": false,
-    "image": "assets/images/Wellness/Mukhakanti (Ayurvedic Facial).jpg",
+    "image": "assets/images/Wellness/Mukhakanti - Ayurvedic Facial.jpg",
     "description": "Radiance-boosting facial therapy featuring gentle herbal cleansing, steam, Marma acupressure facial massage, and botanical glow-enhancing Lepam.",
     "benefits": [
       "Herbal Cleanse & Exfoliation",
@@ -2081,7 +2081,7 @@ const TREATMENTS_DATA = [
     "priceUSD": 40,
     "badge": "Chronic Pain Relief",
     "requiresDoctorConsultation": false,
-    "image": "assets/images/Wellness/Rujahari (Pain Relieving Massage).jpg",
+    "image": "assets/images/Wellness/Rujahari - Pain Relieving Massage.jpg",
     "description": "Specialized therapeutic massage utilizing pain-relieving herbal oils and targeted pressure techniques to ease chronic joint aches and muscular stiffness.",
     "benefits": [
       "Pain-Relieving Herbal Oils",
@@ -2103,7 +2103,7 @@ const TREATMENTS_DATA = [
     "priceUSD": 40,
     "badge": "Relaxation & Steam Detox",
     "requiresDoctorConsultation": false,
-    "image": "assets/images/Wellness/Ayur Relax (Abhyangam + Steam).jpg",
+    "image": "assets/images/Wellness/Ayur Relax - Abhyangam + Steam.jpg",
     "description": "A harmonious combination of classical Abhyanga body massage followed by an aromatic herbal steam bath to eliminate toxins and ease bodily tension.",
     "benefits": [
       "Full-Body Abhyangam",
@@ -2147,7 +2147,7 @@ const TREATMENTS_DATA = [
     "priceUSD": 40,
     "badge": "Upper Body & Foot Care",
     "requiresDoctorConsultation": false,
-    "image": "assets/images/Wellness/Head, Neck, Shoulder & Foot Reflexology.jpg",
+    "image": "assets/images/Wellness/Head - Neck - Shoulder & Foot Reflexology.jpg",
     "description": "Comprehensive upper body and reflexology treatment targeting stress-holding zones in the scalp, neck, shoulders, and vital pressure points in the feet.",
     "benefits": [
       "Shiro Scalp Massage",
@@ -2169,7 +2169,7 @@ const TREATMENTS_DATA = [
     "priceUSD": 60,
     "badge": "Burnout Recovery",
     "requiresDoctorConsultation": false,
-    "image": "assets/images/Wellness/Manasamithra (Antistress Therapy).jpg",
+    "image": "assets/images/Wellness/Manasamithra - Antistress Therapy.jpg",
     "description": "Calming ritual designed to alleviate mental burnout, featuring nurturing whole-body oil therapy combined with soothing continuous forehead herbal oil stream.",
     "benefits": [
       "Anti-Stress Abhyangam",
