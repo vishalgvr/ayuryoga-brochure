@@ -1725,6 +1725,347 @@ button {
 }
 
 /* ==========================================================================
+   Location Selection & Location Picker Styles
+   ========================================================================== */
+
+/* Top bar interactive button reset */
+button.top-whatsapp-link {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-family: inherit;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-gold-light);
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+button.top-whatsapp-link:hover {
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+/* 1. Location Radio Cards inside Booking Modal */
+.location-form-group {
+  margin-bottom: 22px;
+}
+
+.location-radio-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.location-radio-card {
+  position: relative;
+  background: #fbf9f4;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 14px 12px;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.location-radio-card:hover {
+  border-color: var(--color-gold);
+  background: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.location-radio-card.active {
+  border-color: var(--color-gold);
+  background: linear-gradient(145deg, #ffffff 0%, #f6efe2 100%);
+  box-shadow: 0 4px 14px rgba(197, 160, 89, 0.25);
+}
+
+.location-radio-card.active::after {
+  content: '✓';
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 18px;
+  height: 18px;
+  background: var(--color-primary-dark);
+  color: var(--color-gold-light);
+  border-radius: 50%;
+  font-size: 0.65rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.location-radio-input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.loc-card-badge {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+  color: var(--color-gold-dark);
+  margin-bottom: 4px;
+}
+
+.loc-card-name {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  margin-bottom: 2px;
+}
+
+.loc-card-detail {
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+/* 2. WhatsApp Instant Location Picker Modal */
+.location-picker-modal-card {
+  max-width: 580px;
+}
+
+.location-picker-body {
+  padding: 24px 28px 28px;
+}
+
+.location-treatment-preview {
+  background: #fbf9f4;
+  border-left: 4px solid var(--color-gold);
+  border-radius: var(--radius-md);
+  padding: 14px 18px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  animation: fadeIn 0.3s ease;
+}
+
+.location-treatment-preview-info h5 {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  color: var(--color-primary-dark);
+  margin-bottom: 2px;
+}
+
+.location-treatment-preview-info p {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+.location-treatment-preview-price {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  flex-shrink: 0;
+  text-align: right;
+}
+
+.location-options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.location-option-item {
+  background: var(--color-white);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  cursor: pointer;
+  transition: var(--transition);
+  text-align: left;
+  width: 100%;
+}
+
+.location-option-item:hover {
+  border-color: var(--color-gold);
+  background: #fdfbf7;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(197, 160, 89, 0.18);
+}
+
+.location-option-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.location-option-icon {
+  font-size: 2rem;
+  width: 48px;
+  height: 48px;
+  background: var(--color-sand);
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 1px solid rgba(197, 160, 89, 0.3);
+}
+
+.location-option-title {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  margin-bottom: 2px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.location-option-badge {
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  padding: 2px 8px;
+  background: rgba(197, 160, 89, 0.15);
+  color: var(--color-primary-dark);
+  border-radius: var(--radius-full);
+  font-weight: 600;
+}
+
+.location-option-desc {
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
+  line-height: 1.35;
+  margin-bottom: 4px;
+}
+
+.location-option-phone {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--color-gold-dark);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.location-option-cta {
+  flex-shrink: 0;
+}
+
+.btn-location-whatsapp {
+  background: #25d366;
+  color: #ffffff;
+  padding: 10px 18px;
+  border-radius: var(--radius-full);
+  font-weight: 700;
+  font-size: 0.86rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: none;
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.25);
+  transition: var(--transition);
+}
+
+.location-option-item:hover .btn-location-whatsapp {
+  background: #1ebc59;
+  transform: scale(1.04);
+  box-shadow: 0 6px 16px rgba(37, 211, 102, 0.35);
+}
+
+.location-picker-footer-note {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid var(--color-border-light);
+  font-size: 0.8rem;
+  color: var(--color-text-light);
+  line-height: 1.4;
+}
+
+.location-picker-footer-note svg {
+  color: var(--color-gold);
+  flex-shrink: 0;
+}
+
+/* 3. Floating WhatsApp Concierge Location Buttons */
+.whatsapp-chat-bubble {
+  min-width: 290px;
+  max-width: 340px;
+}
+
+.bubble-location-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.bubble-loc-btn {
+  background: #fbf9f4;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  cursor: pointer;
+  transition: var(--transition);
+  text-align: left;
+  width: 100%;
+  font-family: inherit;
+}
+
+.bubble-loc-btn:hover {
+  background: #ffffff;
+  border-color: var(--color-gold);
+  transform: translateX(3px);
+  box-shadow: var(--shadow-sm);
+}
+
+.bubble-loc-icon {
+  font-size: 1.25rem;
+}
+
+.bubble-loc-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.bubble-loc-info strong {
+  font-size: 0.86rem;
+  color: var(--color-primary-dark);
+}
+
+.bubble-loc-info small {
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+}
+
+.bubble-loc-arrow {
+  color: #25d366;
+  font-weight: 800;
+  font-size: 0.9rem;
+}
+
+/* ==========================================================================
    Responsive Breakpoints
    ========================================================================== */
 
@@ -1774,6 +2115,20 @@ button {
   }
   .modal-grid-2 {
     grid-template-columns: 1fr;
+  }
+  .location-radio-grid {
+    grid-template-columns: 1fr;
+  }
+  .location-option-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .location-option-cta {
+    width: 100%;
+  }
+  .btn-location-whatsapp {
+    width: 100%;
+    justify-content: center;
   }
 }
 

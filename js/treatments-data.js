@@ -6,6 +6,46 @@
 
 const WHATSAPP_PHONE = "23058074009";
 
+const AYURYOGA_LOCATIONS = [
+  {
+    id: "moka",
+    name: "Moka",
+    fullName: "Ayuryoga Sanctuary - Moka (Main Centre)",
+    badge: "Main Sanctuary & Hospital",
+    phone: "23058074009",
+    displayPhone: "+230 5807 4009",
+    address: "Moka, Mauritius",
+    icon: "🌿",
+    highlight: "Ayurvedic Inpatient, Panchakarma & Research Centre",
+    hours: "08:00 AM – 08:00 PM",
+    isDefault: true
+  },
+  {
+    id: "grand-baie",
+    name: "Grand Baie",
+    fullName: "Ayuryoga Sanctuary - Grand Baie",
+    badge: "North Coastal Centre",
+    phone: "23059429564",
+    displayPhone: "+230 5942 9564",
+    address: "Grand Baie, Mauritius",
+    icon: "🌊",
+    highlight: "Holistic Wellness Spa, Beauty Rituals & Doctor Consultation",
+    hours: "08:00 AM – 08:00 PM"
+  },
+  {
+    id: "curepipe",
+    name: "Curepipe",
+    fullName: "Ayuryoga Sanctuary - Curepipe",
+    badge: "Central Highlands Centre",
+    phone: "23058857888",
+    displayPhone: "+230 5885 7888",
+    address: "Curepipe, Mauritius",
+    icon: "🍃",
+    highlight: "Classical Ayurvedic Therapies & Herbal Wellness Centre",
+    hours: "08:00 AM – 08:00 PM"
+  }
+];
+
 const THERAPY_CATEGORIES = [
   { id: "ayurveda", name: "Ayurveda", icon: "flower-lotus" },
   { id: "wellness", name: "Wellness", icon: "heart-pulse" },
@@ -31,7 +71,7 @@ const TREATMENTS_DATA = [
     priceUSD: 50,
     badge: "Doctor Prescribed",
     requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Abhyangam + Njavarakizhi  - Without Oil.jpg",
+    image: "assets/images/Ayurveda/Abhyangam + Njavarakizhi  - Without Oil.webp",
     description: "An intensive rejuvenating therapy combining full body Abhyangam massage followed by Njavarakizhi, where warm boluses of medicinal red rice cooked in milk and herbal decoction are applied across the body to rebuild tissues and soothe nerves.",
     benefits: [
       "Deeply nourishes and strengthens muscular tissues and joints",
@@ -53,7 +93,7 @@ const TREATMENTS_DATA = [
     priceUSD: 40,
     badge: "Detox & Relief",
     requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Abhyangam + Bhashpa Sweda - Without Oil.jpg",
+    image: "assets/images/Ayurveda/Abhyangam + Bhashpa Sweda - Without Oil.webp",
     description: "A comprehensive detoxification therapy pairing full body therapeutic Abhyangam with Bashpa Sweda (herbal steam box). The warm herbal vapors open micro-channels (Srotas), flushing deep-seated toxins through perspiration.",
     benefits: [
       "Eliminates accumulated cellular endotoxins (Ama)",
@@ -75,7 +115,7 @@ const TREATMENTS_DATA = [
     priceUSD: 32,
     badge: "Classical Care",
     requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Abhyangam Treatment Without Oil.jpg",
+    image: "assets/images/Ayurveda/Abhyangam Treatment Without Oil.webp",
     description: "A specialized 45-minute clinical Abhyangam session tailored by our Vaidya to target focal areas of tension and stiffness, stimulating vital Marma energy points to restore systemic equilibrium.",
     benefits: [
       "Restores musculoskeletal flexibility and joint mobility",
@@ -97,7 +137,7 @@ const TREATMENTS_DATA = [
     priceUSD: 27,
     badge: "Core Therapy",
     requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Abhyangam.jpg",
+    image: "assets/images/Ayurveda/Abhyangam.webp",
     description: "The cornerstone of Ayurvedic daily health regimens. Rhythmic, therapeutic stroking along biological energy meridians to balance all three doshas and nourish bodily tissues.",
     benefits: [
       "Promotes lymphatic drainage and enhances circulation",
@@ -119,7 +159,7 @@ const TREATMENTS_DATA = [
     priceUSD: 44,
     badge: "Pain & Stiffness",
     requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Naranga Kizhi.jpg",
+    image: "assets/images/Ayurveda/Naranga Kizhi.webp",
     description: "A specialized therapeutic fomentation where fresh lemons, medicated powders, garlic, and rock salt are bundled in cotton pouches, heated in herbal oil, and rhythmically applied to alleviate acute pain and swelling.",
     benefits: [
       "Remarkably reduces localized inflammation, edema, and sprains",
@@ -141,7 +181,7 @@ const TREATMENTS_DATA = [
     priceUSD: 11,
     badge: "Panchakarma",
     requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Virechanam.jpg",
+    image: "assets/images/Ayurveda/Virechanam.webp",
     description: "One of the five classical Panchakarma purification procedures. Administered with doctor-prescribed herbal purgatives to eliminate vitiated Pitta dosha and cleanse the liver, gallbladder, and small intestine.",
     benefits: [
       "Flushes accumulated Pitta toxins from liver and GI tract",
@@ -163,7 +203,7 @@ const TREATMENTS_DATA = [
     priceUSD: 6,
     badge: "Panchakarma Prep",
     requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Snehapanam.jpg",
+    image: "assets/images/Ayurveda/Snehapanam.webp",
     description: "The oral intake of increasing doses of medicated herbal ghee (Ghritam) on an empty stomach under strict Vaidya supervision. Mobilizes deep cellular toxins to the gut for elimination in Panchakarma.",
     benefits: [
       "Prepares deep tissues for systemic Panchakarma detox",
@@ -185,7 +225,7 @@ const TREATMENTS_DATA = [
     priceUSD: 23,
     badge: "Mental Calming",
     requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Thala Pothichil.jpg",
+    image: "assets/images/Ayurveda/Thala Pothichil.webp",
     description: "A traditional Kerala Ayurvedic therapy where the head is covered with a thick medicinal paste made of Amla, Brahmi, and herbs processed in medicated buttermilk, covered with banana leaves.",
     benefits: [
       "Profoundly calms mental tension, anxiety, and hypertension",
@@ -207,7 +247,7 @@ const TREATMENTS_DATA = [
     priceUSD: 60,
     badge: "Deep Cooling",
     requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Thakradhara - Head and Body.jpg",
+    image: "assets/images/Ayurveda/Thakradhara - Head and Body.webp",
     description: "A soothing, cooling stream of specially fermented buttermilk medicated with Musta and Amla rhythmically poured over the third eye forehead chakra and across the entire body.",
     benefits: [
       "Highly effective for stress-induced skin conditions like psoriasis",
@@ -229,7 +269,7 @@ const TREATMENTS_DATA = [
     priceUSD: 20,
     badge: "Neurological Care",
     requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Thalam.jpg",
+    image: "assets/images/Ayurveda/Thalam.webp",
     description: "A focused therapeutic application where specialized herbal pastes and medicated oils are retained on the vertex (Bregma) of the skull, held in place by a medicinal herbal binding.",
     benefits: [
       "Nourishes the cranial nerves and brain tissues",
@@ -251,7 +291,7 @@ const TREATMENTS_DATA = [
     priceUSD: 11,
     badge: "Ophthalmic Care",
     requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Nethra Sekam.jpg",
+    image: "assets/images/Ayurveda/Nethra Sekam.webp",
     description: "A continuous, gentle pouring of lukewarm medicated herbal extracts (such as Triphala Kwatha) over closed and open eyelids to purify ocular channels and relieve inflammation.",
     benefits: [
       "Instantly relieves burning sensations, redness, and itching in eyes",
@@ -273,7 +313,7 @@ const TREATMENTS_DATA = [
     priceUSD: 213,
     badge: "Intensive Eye Care",
     requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Nethra Tharpanam.jpg",
+    image: "assets/images/Ayurveda/Nethra Tharpanam.webp",
     description: "The gold standard of Ayurvedic eye care. A circular dough dam of black gram is formed around the eyes and filled with pure medicated Triphala Ghrita ghee, bathing the cornea and optical nerves.",
     benefits: [
       "Deeply rejuvenates optical nerves and strengthens vision",
@@ -295,7 +335,7 @@ const TREATMENTS_DATA = [
     priceUSD: 8,
     badge: "Oral & Throat Care",
     requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Kabalam.jpg",
+    image: "assets/images/Ayurveda/Kabalam.webp",
     description: "A specialized clinical oral retention and swishing procedure using medicated decoctions, oils, and herbal extracts to detoxify oral cavity, strengthen gums, and heal throat irritation.",
     benefits: [
       "Strengthens gums, prevents gingivitis and tooth sensitivity",
@@ -317,7 +357,7 @@ const TREATMENTS_DATA = [
     priceUSD: 13,
     badge: "ENT Care",
     requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Karnapooranam.jpg",
+    image: "assets/images/Ayurveda/Karnapooranam.webp",
     description: "Gentle filling of the ear canal with warm medicated herbal oil followed by localized steam and acupressure massage around the mastoid and jaw area.",
     benefits: [
       "Relieves tinnitus (ringing in the ears) and ear congestion",
@@ -339,7 +379,7 @@ const TREATMENTS_DATA = [
     priceUSD: 8,
     badge: "Reflexology Care",
     requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Padabhyangam.jpg",
+    image: "assets/images/Ayurveda/Padabhyangam.webp",
     description: "A focused foot massage using warm medicated oils and Kansa bronze bowl on key marma points that connect to all major organs and nervous channels.",
     benefits: [
       "Draws excess body heat and stress downward",
@@ -361,7 +401,7 @@ const TREATMENTS_DATA = [
     priceUSD: 21,
     badge: "Stress Release",
     requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Siroabhyangam.jpg",
+    image: "assets/images/Ayurveda/Siroabhyangam.webp",
     description: "Warm Ayurvedic oils infused with Brahmi and Bhringraj applied to head, neck, and upper spine with rhythmic Marma point stimulation to dissolve physical and mental stress.",
     benefits: [
       "Instantly relieves tension headaches and neck stiffness",
@@ -383,7 +423,7 @@ const TREATMENTS_DATA = [
     priceUSD: 9,
     badge: "Steam Detox",
     requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Bashpa Sweda.jpg",
+    image: "assets/images/Ayurveda/Bashpa Sweda.webp",
     description: "A session inside an Ayurvedic herbal steam chamber where boiling medicinal plant leaves release therapeutic vapors that dilate pores and liquefy deep bodily toxins.",
     benefits: [
       "Assists in rapid toxin release through perspiration",
@@ -405,7 +445,7 @@ const TREATMENTS_DATA = [
     priceUSD: 17,
     badge: "Targeted Relief",
     requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Pichu.jpg",
+    image: "assets/images/Ayurveda/Pichu.webp",
     description: "A thick sterile cotton pad soaked in warm medicated herbal oil is placed continuously on the head crown, spine, or affected joint, replenished continuously with warm oil.",
     benefits: [
       "Highly effective for localized nerve inflammation and pain",
@@ -427,7 +467,7 @@ const TREATMENTS_DATA = [
     priceUSD: 23,
     badge: "Joint & Tendon Care",
     requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Upanaham.jpg",
+    image: "assets/images/Ayurveda/Upanaham.webp",
     description: "Application of a warm medicinal paste of herbs, oils, and rock salt to the inflamed joint, wrapped with herbal medicinal leaves (e.g. Calotropis / Castor) and cotton bandages to generate therapeutic heat.",
     benefits: [
       "Provides dramatic relief in chronic joint swelling and effusion",
@@ -449,7 +489,7 @@ const TREATMENTS_DATA = [
     priceUSD: 23,
     badge: "Skin & Joint Care",
     requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Lepanam.jpg",
+    image: "assets/images/Ayurveda/Lepanam.webp",
     description: "Application of a specialized blend of fresh herbal paste applied over the affected area, left until almost dry to draw out localized toxins, reduce inflammation, or heal skin disorders.",
     benefits: [
       "Rapidly subsides localized burning sensation and pain",
@@ -471,7 +511,7 @@ const TREATMENTS_DATA = [
     priceUSD: 16,
     badge: "Targeted Clinical",
     requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Specialized Therapy on Affected Area.jpg",
+    image: "assets/images/Ayurveda/Specialized Therapy on Affected Area.webp",
     description: "A focused, doctor-prescribed customized therapy specifically addressing a focal pain point, injured muscle group, or post-surgical recovery area using tailored herbal modalities.",
     benefits: [
       "Tailored specifically to your precise clinical diagnosis",
@@ -493,7 +533,7 @@ const TREATMENTS_DATA = [
     priceUSD: 53,
     badge: "Panchakarma Master",
     requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Kashaya Basthi.jpg",
+    image: "assets/images/Ayurveda/Kashaya Basthi.webp",
     description: "Regarded as the master Panchakarma therapy for all Vata disorders. An intricately formulated emulsion of herbal decoctions, honey, rock salt, paste, and oil administered rectally to cleanse colon and entire body.",
     benefits: [
       "Eradicates systemic Vata disorders from its primary seat (colon)",
@@ -515,7 +555,7 @@ const TREATMENTS_DATA = [
     priceUSD: 21,
     badge: "Cervical & Neck Care",
     requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Greeva Vasthi.jpg",
+    image: "assets/images/Ayurveda/Greeva Vasthi.webp",
     description: "A dam made of herbal dough placed at the back of the neck over cervical vertebrae, filled with warm medicated herbal oil to deeply nourish discs, nerves, and neck muscles.",
     benefits: [
       "Substantially relieves cervical spondylosis and neck stiffness",
@@ -537,7 +577,7 @@ const TREATMENTS_DATA = [
     priceUSD: 8,
     badge: "Respiratory Care",
     requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Dhoomapanam.jpg",
+    image: "assets/images/Ayurveda/Dhoomapanam.webp",
     description: "Inhalation of therapeutic smoke prepared from burning medicinal herbal sticks through nostrils/mouth and exhaled through mouth to cleanse the cranial sinuses and respiratory tract.",
     benefits: [
       "Clears heavy phlegm, sinus congestion, and nasal blockages",
@@ -559,7 +599,7 @@ const TREATMENTS_DATA = [
     priceUSD: 11,
     badge: "Panchakarma",
     requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Sneha Basthi.jpg",
+    image: "assets/images/Ayurveda/Sneha Basthi.webp",
     description: "Administration of a small volume of warm medicated herbal oil into the colon to nourish internal organs, lubricate bones/joints, and pacify chronic Vata imbalances.",
     benefits: [
       "Lubricates internal tissues, spine, and joints from within",
@@ -581,7 +621,7 @@ const TREATMENTS_DATA = [
     priceUSD: 20,
     badge: "Neurological Vitality",
     requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Siro Vasthi.jpg",
+    image: "assets/images/Ayurveda/Siro Vasthi.webp",
     description: "A tall leather cap is fitted securely around the patient's head and filled with warm medicated herbal oil, retained for a prescribed duration to treat severe neurological conditions.",
     benefits: [
       "Premier therapy for facial palsy, trigeminal neuralgia, and stroke recovery",
@@ -603,7 +643,7 @@ const TREATMENTS_DATA = [
     priceUSD: 53,
     badge: "Metabolic & Slimming",
     requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Udwarthanam.jpg",
+    image: "assets/images/Ayurveda/Udwarthanam.webp",
     description: "An invigorating therapeutic upward massage using warm dry herbal powders and minerals that creates friction, breaks down subcutaneous fat, stimulates metabolism, and tones skin.",
     benefits: [
       "Assists in healthy weight loss and breaks down cellulite",
@@ -625,7 +665,7 @@ const TREATMENTS_DATA = [
     priceUSD: 21,
     badge: "Panchakarma Ocular/ENT",
     requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Nasyam.jpg",
+    image: "assets/images/Ayurveda/Nasyam.webp",
     description: "Facial steam and acupressure followed by precise instillation of medicated herbal drops (Anu Thailam) into the nostrils. The nose is considered the doorway to the brain (Shiras).",
     benefits: [
       "Clears blocked sinuses, prevents recurrent migraines and rhinitis",
@@ -647,7 +687,7 @@ const TREATMENTS_DATA = [
     priceUSD: 11,
     badge: "Targeted Steam Jet",
     requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Nadee Sweda.jpg",
+    image: "assets/images/Ayurveda/Nadee Sweda.webp",
     description: "Application of a localized stream of medicated herbal vapor through a specialized tube directed precisely onto stiff joints, spine, or affected muscle groups.",
     benefits: [
       "Instantly relieves severe focal joint stiffness and muscle knots",
@@ -669,7 +709,7 @@ const TREATMENTS_DATA = [
     priceUSD: 13,
     badge: "Pain & Mobility",
     requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Pinda Swedanam.jpg",
+    image: "assets/images/Ayurveda/Pinda Swedanam.webp",
     description: "Application of warm cloth boluses packed with medicinal herbs and processed in herbal decoctions systematically massaged over the body to induce therapeutic perspiration.",
     benefits: [
       "Relieves muscular tension, cramps, and chronic body aches",
@@ -691,7 +731,7 @@ const TREATMENTS_DATA = [
     priceUSD: 24,
     badge: "Stress & Cooling",
     requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Shirodhara Without Oil.jpg",
+    image: "assets/images/Ayurveda/Shirodhara Without Oil.webp",
     description: "A continuous flow of cooling herbal decoctions (Kashayam) poured rhythmically across the forehead to calm heated Pitta dosha and quiet an overactive mind.",
     benefits: [
       "Soothes intense mental fatigue, anger, and anxiety",
@@ -713,7 +753,7 @@ const TREATMENTS_DATA = [
     priceUSD: 40,
     badge: "Cooling & Sleep",
     requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Ksheeradhara - Head Only.jpg",
+    image: "assets/images/Ayurveda/Ksheeradhara - Head Only.webp",
     description: "A continuous stream of warm or cool medicated milk infused with herbs like Bala, Chandana, and Usheera poured rhythmically over the forehead to deeply nourish cranial nerves.",
     benefits: [
       "Supreme therapy for severe insomnia and mental anxiety",
@@ -735,7 +775,7 @@ const TREATMENTS_DATA = [
     priceUSD: 56,
     badge: "Signature Rejuvenation",
     requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Sirodhara With Oil.jpg",
+    image: "assets/images/Ayurveda/Sirodhara With Oil.webp",
     description: "The premier classical Ayurvedic therapy. A continuous, steady stream of warm herbalized medicated oil poured gently over the third eye center to recalibrate the central nervous system.",
     benefits: [
       "Relieves deep mental anxiety, chronic stress, and depressive mood",
@@ -757,7 +797,7 @@ const TREATMENTS_DATA = [
     priceUSD: 24,
     badge: "Royal Body Stream",
     requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Pizhichil or Snehadhara Without Oil.jpg",
+    image: "assets/images/Ayurveda/Pizhichil or Snehadhara Without Oil.webp",
     description: "A continuous cascade of warm medicated herbal decoctions poured systematically across the entire body accompanied by gentle synchronous massage.",
     benefits: [
       "Detoxifies the skin and stimulates cellular regeneration",
@@ -779,7 +819,7 @@ const TREATMENTS_DATA = [
     priceUSD: 42,
     badge: "Anti-Inflammatory",
     requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Dhanyamla Dhara.jpg",
+    image: "assets/images/Ayurveda/Dhanyamla Dhara.webp",
     description: "A warm, continuous stream of specially fermented cereal and medicinal plant liquid (Dhanyamla) poured over the body to break down inflammation and toxins.",
     benefits: [
       "Remarkable anti-inflammatory therapy for rheumatoid arthritis and gout",
@@ -801,7 +841,7 @@ const TREATMENTS_DATA = [
     priceUSD: 20,
     badge: "Targeted Reservoir",
     requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Vasthi on Affected Area.jpg",
+    image: "assets/images/Ayurveda/Vasthi on Affected Area.webp",
     description: "A dough reservoir formed over any specifically affected joint, muscle group, or spinal level, filled with warm medicated herbal oil and maintained at optimal temperature.",
     benefits: [
       "Provides intense localized lubrication and deep tissue healing",
@@ -823,7 +863,7 @@ const TREATMENTS_DATA = [
     priceUSD: 20,
     badge: "Spine & Sciatica",
     requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Kati Vasti.jpg",
+    image: "assets/images/Ayurveda/Kati Vasti.webp",
     description: "A classical spinal therapy where a ring of black gram dough is positioned over the lumbosacral region and filled with warm medicated herbal oil (Sahacharadi / Mahanarayana).",
     benefits: [
       "Substantially relieves acute & chronic lower back pain and stiffness",
@@ -845,7 +885,7 @@ const TREATMENTS_DATA = [
     priceUSD: 20,
     badge: "Knee & Joint Care",
     requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Janu Vasti.jpg",
+    image: "assets/images/Ayurveda/Janu Vasti.webp",
     description: "A therapeutic reservoir of herbal dough formed around one or both knee joints, bathed in warm medicated herbal oils to regenerate synovial fluid and rebuild cartilage.",
     benefits: [
       "Profoundly relieves osteoarthritis of knee joints and crepitus (cracking)",
@@ -867,7 +907,7 @@ const TREATMENTS_DATA = [
     priceUSD: 32,
     badge: "Stiffness Relief",
     requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Abhyangam + Podikizhi Treatment  - Without Oil.jpg",
+    image: "assets/images/Ayurveda/Abhyangam + Podikizhi Treatment  - Without Oil.webp",
     description: "A dual therapeutic session featuring full body Abhyangam followed by Podikizhi fomentation using warm herbal powders bundled in cloth to dissolve deep-seated tension.",
     benefits: [
       "Effectively melts stubborn muscular knots and stiffness",
@@ -889,7 +929,7 @@ const TREATMENTS_DATA = [
     priceUSD: 35,
     badge: "Joint Mobility",
     requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Ela Kizhi.jpg",
+    image: "assets/images/Ayurveda/Ela Kizhi.webp",
     description: "Warm cloth poultices packed with freshly harvested medicinal leaves (Eranda, Nirgundi, Arka) and herbal powders dipped in medicated oils and systematically applied to the body.",
     benefits: [
       "Relieves severe back pain, arthritis, and sciatica",
@@ -911,7 +951,7 @@ const TREATMENTS_DATA = [
     priceUSD: 40,
     badge: "Panchakarma Detox",
     requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Vamanam - Panchakarma.jpg",
+    image: "assets/images/Ayurveda/Vamanam - Panchakarma.webp",
     description: "A classical Panchakarma procedure performed after thorough preparatory internal oleation (Snehana) and steam (Swedana) to eliminate excess Kapha toxins from the upper digestive and respiratory tracts.",
     benefits: [
       "Root-level cure for chronic asthma, bronchitis, and allergies",
@@ -933,7 +973,7 @@ const TREATMENTS_DATA = [
     priceUSD: 40,
     badge: "Muscular Relief",
     requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Podi Kizhi.jpg",
+    image: "assets/images/Ayurveda/Podi Kizhi.webp",
     description: "Finely powdered medicinal herbs like Kolakulathadi, Devadaru, and Vacha bundled in cotton cloths, heated in medicated oil, and pressed rhythmically over affected areas.",
     benefits: [
       "Relieves chronic pain, numbness, and joint stiffness",
@@ -955,7 +995,7 @@ const TREATMENTS_DATA = [
     priceUSD: 19,
     badge: "Targeted Dhara",
     requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Ekanga Dhara.jpg",
+    image: "assets/images/Ayurveda/Ekanga Dhara.webp",
     description: "A continuous warm stream of medicated herbal oils or decoctions directed specifically onto a single affected joint, limb, or localized region to accelerate healing.",
     benefits: [
       "Focused recovery for single joint or ligament injuries",
@@ -977,7 +1017,7 @@ const TREATMENTS_DATA = [
     priceUSD: 40,
     badge: "Full Body Cooling",
     requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Thakradhara - Head and Body.jpg",
+    image: "assets/images/Ayurveda/Thakradhara - Head and Body.webp",
     description: "A continuous flow of medicated buttermilk infused with Musta and Amla rhythmically poured over the entire body by trained therapists.",
     benefits: [
       "Profound cooling and anti-inflammatory action for full body",
@@ -999,7 +1039,7 @@ const TREATMENTS_DATA = [
     priceUSD: 32,
     badge: "Skin & Detox",
     requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Kashaya Dhara.jpg",
+    image: "assets/images/Ayurveda/Kashaya Dhara.webp",
     description: "A continuous rhythmic pouring of warm medicated herbal decoctions over the entire body, customized with specific botanical formulas based on clinical diagnosis.",
     benefits: [
       "Purifies skin layers and eliminates deep toxic residues",
@@ -1021,7 +1061,7 @@ const TREATMENTS_DATA = [
     priceUSD: 40,
     badge: "Deep Hydration",
     requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Ksheera Dhara Full Body.jpg",
+    image: "assets/images/Ayurveda/Ksheera Dhara Full Body.webp",
     description: "A luxurious cascade of warm cow's milk infused with precious healing herbs like Bala, Ashwagandha, and Sandalwood poured systematically across the entire body.",
     benefits: [
       "Intensely nourishes and repairs dry, dehydrated, or sun-damaged skin",
@@ -1043,7 +1083,7 @@ const TREATMENTS_DATA = [
     priceUSD: 40,
     badge: "Insomnia & Scalp",
     requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Thakradhara - Head Only.jpg",
+    image: "assets/images/Ayurveda/Thakradhara - Head Only.webp",
     description: "Medicated herbal buttermilk poured gently in an oscillating stream over the forehead. Uniquely cooling and soothing for cranial nerves and scalp.",
     benefits: [
       "Relieves chronic insomnia, stress, and tension headaches",
@@ -1065,7 +1105,7 @@ const TREATMENTS_DATA = [
     priceUSD: 48,
     badge: "Tissue Strengthening",
     requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Mamsa Kizhi.jpg",
+    image: "assets/images/Ayurveda/Mamsa Kizhi.webp",
     description: "A highly specialized classical Ayurvedic therapy where processed medicinal meat extract, herbs, and oils are bundled in poultices and applied to severely wasted muscles.",
     benefits: [
       "Premier therapy for muscle wasting, muscular dystrophy, and paralysis",
@@ -1087,7 +1127,7 @@ const TREATMENTS_DATA = [
     priceUSD: 40,
     badge: "Rejuvenation",
     requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Navara Kizhi.jpg",
+    image: "assets/images/Ayurveda/Navara Kizhi.webp",
     description: "A celebrated Ayurvedic rejuvenation ritual using boluses of special 60-day red rice (Shashtika Shali) cooked in medicinal root decoctions and milk, massaged rhythmically.",
     benefits: [
       "Strengthens nerves, muscles, and lubricates all body joints",
@@ -1109,7 +1149,7 @@ const TREATMENTS_DATA = [
     priceUSD: 35,
     badge: "Herbal Glow",
     requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Mukhakanti.jpg",
+    image: "assets/images/Ayurveda/Mukhakanti.webp",
     description: "A classical facial protocol featuring herbal steam, Marma point face and neck massage with Kumkumadi saffron oil, finished with a fresh bespoke herbal lepana mask.",
     benefits: [
       "Firms facial muscles, improves elasticity, and de-puffs eyes",
@@ -1131,7 +1171,7 @@ const TREATMENTS_DATA = [
     priceUSD: 40,
     badge: "Edema & Sprains",
     requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Manal Kizhi.jpg",
+    image: "assets/images/Ayurveda/Manal Kizhi.webp",
     description: "A dry heat fomentation therapy (Ruksha Sweda) where purified, medicated sea/river sand is heated in a dry pan, bundled in cloth, and applied to swollen, water-logged joints.",
     benefits: [
       "Rapidly absorbs excess localized edema and joint fluid retention",
@@ -1153,7 +1193,7 @@ const TREATMENTS_DATA = [
     priceUSD: 13,
     badge: "Eye Health",
     requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Nethra Sekam.jpg",
+    image: "assets/images/Ayurveda/Nethra Sekam.webp",
     description: "A soothing ophthalmic cleansing ritual using sterilized fresh Triphala and Rose floral infusions to flush ocular pathways and relieve irritation.",
     benefits: [
       "Flushes out dust, pollutants, and toxic debris from eyes",
@@ -1175,7 +1215,7 @@ const TREATMENTS_DATA = [
     priceUSD: 19,
     badge: "Area Focus",
     requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Sthanika Abhyangam.jpg",
+    image: "assets/images/Ayurveda/Sthanika Abhyangam.webp",
     description: "A focused massage directed specifically at a single anatomical region (such as lower back, neck, shoulder, or calf) using warm medicated oils.",
     benefits: [
       "Concentrated therapy for specific muscular aches and tightness",
@@ -1197,7 +1237,7 @@ const TREATMENTS_DATA = [
     priceUSD: 21,
     badge: "Targeted Relief",
     requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Sthanika Abhyangam + Podikizhi.jpg",
+    image: "assets/images/Ayurveda/Sthanika Abhyangam + Podikizhi.webp",
     description: "Combines targeted localized massage with warm herbal powder bolus fomentation for enhanced penetration and faster relief from acute localized pain.",
     benefits: [
       "Rapidly breaks down localized tension and inflammation",
@@ -1219,7 +1259,7 @@ const TREATMENTS_DATA = [
     priceUSD: 20,
     badge: "Specialized Clinical",
     requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Agnikarma Cautery.jpg",
+    image: "assets/images/Ayurveda/Agnikarma Cautery.webp",
     description: "A highly specialized classical Ayurvedic para-surgical procedure using a heated Shalaka (metallic probe) applied precisely to specific tender points to relieve intractable pain instantly.",
     benefits: [
       "Provides instant, dramatic pain relief in chronic conditions",
@@ -1241,7 +1281,7 @@ const TREATMENTS_DATA = [
     priceUSD: 40,
     badge: "Specialized Clinical",
     requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Niragni Agnikarma.jpg",
+    image: "assets/images/Ayurveda/Niragni Agnikarma.webp",
     description: "An extensive Agnikarma session addressing multiple joint sites or chronic tendon networks under doctor supervision for profound musculoskeletal pain elimination.",
     benefits: [
       "Comprehensive treatment for multiple severe pain points",
@@ -1263,7 +1303,7 @@ const TREATMENTS_DATA = [
     priceUSD: 48,
     badge: "4-Hand Harmony",
     requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Synchronized Massage - 4 Hands.jpg",
+    image: "assets/images/Ayurveda/Synchronized Massage - 4 Hands.webp",
     description: "Two experienced therapists work in perfect, mirror-image synchronicity across your body, delivering seamless rhythmic strokes with warm medicated herbal oil.",
     benefits: [
       "Synchronous bilateral stimulation balances both brain hemispheres",
@@ -1285,7 +1325,7 @@ const TREATMENTS_DATA = [
     priceUSD: 53,
     badge: "4-Hand Harmony",
     requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Synchronized Massage - 4 Hands.jpg",
+    image: "assets/images/Ayurveda/Synchronized Massage - 4 Hands.webp",
     description: "A full 60-minute 4-hand massage choreography. Two therapists simultaneously glide across energy meridians with tailored warm herbal oils.",
     benefits: [
       "Deeply relaxes every major muscle group simultaneously",
@@ -1307,7 +1347,7 @@ const TREATMENTS_DATA = [
     priceUSD: 61,
     badge: "Ultimate Royal",
     requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Synchronized Massage - 4 Hands.jpg",
+    image: "assets/images/Ayurveda/Synchronized Massage - 4 Hands.webp",
     description: "The ultimate royal Ayurvedic massage indulgence. 90 minutes of uninterrupted, perfectly synchronized four-hand strokes covering head, spine, limbs, and Marma centers.",
     benefits: [
       "The pinnacle of classical Ayurvedic body rejuvenation",
@@ -1329,7 +1369,7 @@ const TREATMENTS_DATA = [
     priceUSD: 21,
     badge: "Ophthalmic Care",
     requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Akshi Tarpanam.jpg",
+    image: "assets/images/Ayurveda/Akshi Tarpanam.webp",
     description: "Purified herbal ghee (Triphala Ghrita) retained in a dough dam over the eyes, allowing the medicinal properties to permeate deep into the ocular tissues and optic nerves.",
     benefits: [
       "Nourishes optic nerves and clarifies visual perception",
@@ -1351,7 +1391,7 @@ const TREATMENTS_DATA = [
     priceUSD: 40,
     badge: "Senior Vitality",
     requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Vayasthapana.jpg",
+    image: "assets/images/Ayurveda/Vayasthapana.webp",
     description: "A specialized geriatric therapy designed to nourish aging tissues (Rasayanas), lubricate degenerative joints, boost immunity, and support cognitive vitality in adults 55 and above.",
     benefits: [
       "Strengthens fragile bones, degenerative joints, and muscles",
@@ -1373,7 +1413,7 @@ const TREATMENTS_DATA = [
     priceUSD: 48,
     badge: "Spine Protocol",
     requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Abhyangam - Podi Kizhi - Kati Vasti - Without Oil.jpg",
+    image: "assets/images/Ayurveda/Abhyangam - Podi Kizhi - Kati Vasti - Without Oil.webp",
     description: "An intensive triple-therapy session combining full body Abhyangam, herbal powder bolus fomentation (Podikizhi), and localized medicated oil reservoir (Kati Vasti) over lower spine.",
     benefits: [
       "Comprehensive, all-in-one therapy for severe lower back pain",
@@ -1395,7 +1435,7 @@ const TREATMENTS_DATA = [
     priceUSD: 48,
     badge: "Deep Balance",
     requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Abhyangam - Podi Kizhi - Sneha Basti - Without Oil.jpg",
+    image: "assets/images/Ayurveda/Abhyangam - Podi Kizhi - Sneha Basti - Without Oil.webp",
     description: "A synergistic combination of external body therapies (Abhyangam & Podikizhi) with internal Panchakarma oleation enema (Sneha Basti) for complete Vata pacification.",
     benefits: [
       "Addresses Vata imbalances both externally and internally",
@@ -1417,7 +1457,7 @@ const TREATMENTS_DATA = [
     priceUSD: 48,
     badge: "Comprehensive Detox",
     requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Abhyangam - Podi Kizhi and Bashpa Sweda - Without Oil.jpg",
+    image: "assets/images/Ayurveda/Abhyangam - Podi Kizhi and Bashpa Sweda - Without Oil.webp",
     description: "A complete 3-stage detoxification ritual: rhythmic body massage, warm herbal powder poultice therapy, followed by full body herbal steam box fomentation.",
     benefits: [
       "Maximum release of stored bodily toxins and metabolic waste",
@@ -1439,7 +1479,7 @@ const TREATMENTS_DATA = [
     priceUSD: 48,
     badge: "Knee Protocol",
     requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Abhyangam - Podi Kizhi - Janu Basti - Without Oil.jpg",
+    image: "assets/images/Ayurveda/Abhyangam - Podi Kizhi - Janu Basti - Without Oil.webp",
     description: "An intensive therapy combining full body massage, herbal bolus fomentation, and a dedicated medicated oil reservoir (Janu Vasti) over both knee joints.",
     benefits: [
       "Deep relief for chronic knee osteoarthritis and cartilage wear",
@@ -1461,7 +1501,7 @@ const TREATMENTS_DATA = [
     priceUSD: 53,
     badge: "Mind & Body Rest",
     requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Abhyangam and Shirodhara - Without Oil.jpg",
+    image: "assets/images/Ayurveda/Abhyangam and Shirodhara - Without Oil.webp",
     description: "A 2-hour dual master therapy pairing comprehensive full body Abhyangam with continuous forehead herbal decoction Shirodhara for complete mind-body renewal.",
     benefits: [
       "Dissolves both deep physical muscular tension and mental static",
@@ -1483,7 +1523,7 @@ const TREATMENTS_DATA = [
     priceUSD: 45,
     badge: "Inflammation Relief",
     requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Podi Kizhi and Lepam.jpg",
+    image: "assets/images/Ayurveda/Podi Kizhi and Lepam.webp",
     description: "An intensive dual anti-inflammatory therapy combining warm medicinal herbal powder poultice fomentation followed by topical application of a customized herbal paste.",
     benefits: [
       "Quickly draws out localized heat, swelling, and acute pain",
@@ -1505,7 +1545,7 @@ const TREATMENTS_DATA = [
     priceUSD: 53,
     badge: "Total Spine Care",
     requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Abhyangam - Podi Kizhi - Kati Vasti and Greeva Vasthi - Without Oil.jpg",
+    image: "assets/images/Ayurveda/Abhyangam - Podi Kizhi - Kati Vasti and Greeva Vasthi - Without Oil.webp",
     description: "The supreme Ayurvedic spinal care protocol. Combines full body Abhyangam, Podikizhi, and simultaneous medicated oil reservoirs on both cervical neck (Greeva) and lumbar spine (Kati).",
     benefits: [
       "Complete restorative care for the entire vertebral spinal column",
@@ -1527,7 +1567,7 @@ const TREATMENTS_DATA = [
     priceUSD: 80,
     badge: "Supreme Rejuvenation",
     requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Abhyangam + Shirodhara with Oil.jpg",
+    image: "assets/images/Ayurveda/Abhyangam + Shirodhara with Oil.webp",
     description: "The royal signature Ayurvedic combination. Full body warm dosha-specific herbal oil Abhyangam followed by continuous streaming of warm medicated oil on the third eye chakra.",
     benefits: [
       "The definitive classical Ayurvedic mind and body rejuvenation experience",
@@ -1553,7 +1593,7 @@ const TREATMENTS_DATA = [
     "priceUSD": 60,
     "badge": "Vital Energy Awakening",
     "requiresDoctorConsultation": false,
-    "image": "assets/images/Wellness/Navajeevan.jpg",
+    "image": "assets/images/Wellness/Navajeevan.webp",
     "description": "Restorative renewal therapy formulated to awaken vital energy (Prana), ease chronic fatigue, and balance the three Doshas through synchronized bodywork.",
     "benefits": [
       "Prana-Awakening Abhyanga",
@@ -1575,7 +1615,7 @@ const TREATMENTS_DATA = [
     "priceUSD": 40,
     "badge": "Exfoliation & Glow",
     "requiresDoctorConsultation": false,
-    "image": "assets/images/Wellness/Ayurvedic Body Scrub Local.jpg",
+    "image": "assets/images/Wellness/Ayurvedic Body Scrub Local.webp",
     "description": "Exfoliating full-body ritual using freshly blended local herbs, grains, and botanical oils (Udvarthanam) to refine skin texture and stimulate lymphatic drainage.",
     "benefits": [
       "Botanical Herbal Scrub",
@@ -1597,7 +1637,7 @@ const TREATMENTS_DATA = [
     "priceUSD": 32,
     "badge": "Joint & Muscle Relief",
     "requiresDoctorConsultation": false,
-    "image": "assets/images/Wellness/Avikizhi.jpg",
+    "image": "assets/images/Wellness/Avikizhi.webp",
     "description": "Classical thermal therapy using heated cloth boluses packed with medicated herbal powders, applied systematically to relieve localized swelling and pain.",
     "benefits": [
       "Medicated Herbal Bolus",
@@ -1619,7 +1659,7 @@ const TREATMENTS_DATA = [
     "priceUSD": 48,
     "badge": "Deep Meditative Calm",
     "requiresDoctorConsultation": false,
-    "image": "assets/images/Wellness/Shirodhara with Oil.jpg",
+    "image": "assets/images/Wellness/Shirodhara with Oil.webp",
     "description": "Iconic Ayurvedic therapy where a steady, rhythmic stream of warm medicated oil is gently poured across the forehead, inducing deep meditative stillness.",
     "benefits": [
       "Warm Medicated Oil Stream",
@@ -1641,7 +1681,7 @@ const TREATMENTS_DATA = [
     "priceUSD": 21,
     "badge": "Mind-Body Alignment",
     "requiresDoctorConsultation": false,
-    "image": "assets/images/Wellness/Pranayama & Meditation Guidance.jpg",
+    "image": "assets/images/Wellness/Pranayama & Meditation Guidance.webp",
     "description": "Guided one-on-one session on Ayurvedic breathing techniques (Pranayama) and mindful meditation to calm the mind, expand lung capacity, and reduce stress.",
     "benefits": [
       "Personalized Breathwork",
@@ -1663,7 +1703,7 @@ const TREATMENTS_DATA = [
     "priceUSD": 21,
     "badge": "Acute Stiffness Relief",
     "requiresDoctorConsultation": false,
-    "image": "assets/images/Wellness/Sthanika Naranga Kizhi.jpg",
+    "image": "assets/images/Wellness/Sthanika Naranga Kizhi.webp",
     "description": "Targeted local fomentation using freshly sliced medicinal lemons, garlic, and herbal powders fried in herbal oil to rapidly relieve acute joint stiffness.",
     "benefits": [
       "Fresh Citrus & Herb Bolus",
@@ -1685,7 +1725,7 @@ const TREATMENTS_DATA = [
     "priceUSD": 21,
     "badge": "Instant Pain Relief",
     "requiresDoctorConsultation": false,
-    "image": "assets/images/Wellness/Sthanika Podikizhi.jpg",
+    "image": "assets/images/Wellness/Sthanika Podikizhi.webp",
     "description": "Localized dry thermal therapy using warm herbal powder bundles to treat localized back, neck, or knee pain, reducing inflammation and stiffness.",
     "benefits": [
       "Warm Herbal Powder Pouch",
@@ -1707,7 +1747,7 @@ const TREATMENTS_DATA = [
     "priceUSD": 60,
     "badge": "Royal Luxury Pampering",
     "requiresDoctorConsultation": false,
-    "image": "assets/images/Wellness/Aishwarya.jpg",
+    "image": "assets/images/Wellness/Aishwarya.webp",
     "description": "Regal Ayurvedic pampering ritual combining a full-body nourishing Abhyanga massage with an opulent royal botanical facial for complete radiance.",
     "benefits": [
       "Royal Abhyanga Massage",
@@ -1729,7 +1769,7 @@ const TREATMENTS_DATA = [
     "priceUSD": 8,
     "badge": "Pore Detox & Cleanse",
     "requiresDoctorConsultation": false,
-    "image": "assets/images/Wellness/Steam - Herbal Swedana.jpg",
+    "image": "assets/images/Wellness/Steam - Herbal Swedana.webp",
     "description": "Traditional Ayurvedic medicated herbal steam chamber therapy that dilates bodily channels, opens pores, and expels deep-seated metabolic toxins.",
     "benefits": [
       "Medicated Steam Chamber",
@@ -1751,7 +1791,7 @@ const TREATMENTS_DATA = [
     "priceUSD": 60,
     "badge": "Stress & Anxiety Relief",
     "requiresDoctorConsultation": false,
-    "image": "assets/images/Wellness/Divya Dhara - Antistress Therapy.jpg",
+    "image": "assets/images/Wellness/Divya Dhara - Antistress Therapy.webp",
     "description": "Heavenly therapeutic ritual combining an invigorating whole-body herbal massage with continuous warm herbal decoction stream along the forehead.",
     "benefits": [
       "Divya Abhyangam",
@@ -1773,7 +1813,7 @@ const TREATMENTS_DATA = [
     "priceUSD": 40,
     "badge": "Joint & Back Care",
     "requiresDoctorConsultation": false,
-    "image": "assets/images/Wellness/Abhyangam + Kizhi.jpg",
+    "image": "assets/images/Wellness/Abhyangam + Kizhi.webp",
     "description": "Powerful restorative duo combining rhythmic full-body Abhyangam followed by warm herbal bundle (Kizhi) fomentation to relieve deep joint and back discomfort.",
     "benefits": [
       "Full Abhyangam Massage",
@@ -1795,7 +1835,7 @@ const TREATMENTS_DATA = [
     "priceUSD": 21,
     "badge": "Hand Moisture & Care",
     "requiresDoctorConsultation": false,
-    "image": "assets/images/Wellness/Manicure Paraffin.jpg",
+    "image": "assets/images/Wellness/Manicure Paraffin.webp",
     "description": "Deeply moisturizing thermal hand therapy with organic nail grooming, gentle scrub, and a warm paraffin wax wrap to soften dry skin and soothe joints.",
     "benefits": [
       "Organic Hand Scrub",
@@ -1817,7 +1857,7 @@ const TREATMENTS_DATA = [
     "priceUSD": 60,
     "badge": "Complete Body & Face Revival",
     "requiresDoctorConsultation": false,
-    "image": "assets/images/Wellness/Deep Tissue Massage and Facial.jpg",
+    "image": "assets/images/Wellness/Deep Tissue Massage and Facial.webp",
     "description": "Balanced dual treatment combining intensive muscle-releasing deep tissue therapy with a revitalizing Ayurvedic botanical facial for glowing complexion.",
     "benefits": [
       "Deep Tissue Bodywork",
@@ -1839,7 +1879,7 @@ const TREATMENTS_DATA = [
     "priceUSD": 27,
     "badge": "Leg & Foot Revitalization",
     "requiresDoctorConsultation": false,
-    "image": "assets/images/Wellness/Padamruta.jpg",
+    "image": "assets/images/Wellness/Padamruta.webp",
     "description": "Focused lower-body therapy featuring a soothing hip-to-toe herbal oil massage and warm botanical pouch treatment to relieve tired legs and feet.",
     "benefits": [
       "Hip-to-Toe Massage",
@@ -1861,7 +1901,7 @@ const TREATMENTS_DATA = [
     "priceUSD": 60,
     "badge": "Ultimate Triad Renewal",
     "requiresDoctorConsultation": false,
-    "image": "assets/images/Wellness/Sanjeevani.jpg",
+    "image": "assets/images/Wellness/Sanjeevani.webp",
     "description": "Ultimate revitalizing triad combining warm Abhyangam massage, hot herbal pouch fermentation (Kizhi), and soothing medicated milk streaming (Ksheeradhara).",
     "benefits": [
       "Full-Body Abhyanga",
@@ -1883,7 +1923,7 @@ const TREATMENTS_DATA = [
     "priceUSD": 60,
     "badge": "Deep Sleep & Mental Calm",
     "requiresDoctorConsultation": false,
-    "image": "assets/images/Wellness/Manasamitram - Abhyanga + Dhara.jpg",
+    "image": "assets/images/Wellness/Manasamitram - Abhyanga + Dhara.webp",
     "description": "Deeply calming therapy combining warm medicated oil body massage with a continuous gentle stream of herb-infused warm milk over the third eye.",
     "benefits": [
       "Warm Oil Abhyangam",
@@ -1905,7 +1945,7 @@ const TREATMENTS_DATA = [
     "priceUSD": 80,
     "badge": "Master 4-in-1 Journey",
     "requiresDoctorConsultation": false,
-    "image": "assets/images/Wellness/Ayur Soukya - Complete Package.jpg",
+    "image": "assets/images/Wellness/Ayur Soukya - Complete Package.webp",
     "description": "Master Ayurvedic wellness package featuring 4 powerful modalities: Abhyangam body massage, warm herbal Kizhi, soothing Dhara, and detoxifying steam bath.",
     "benefits": [
       "Abhyangam Massage",
@@ -1927,7 +1967,7 @@ const TREATMENTS_DATA = [
     "priceUSD": 40,
     "badge": "Tranquil Mind Reset",
     "requiresDoctorConsultation": false,
-    "image": "assets/images/Wellness/Manasanthi - Anti Stress Therapy.jpg",
+    "image": "assets/images/Wellness/Manasanthi - Anti Stress Therapy.webp",
     "description": "Tranquil mental rejuvenation therapy combining restorative Shiro Abhyangam head massage with gentle Ksheeradhara medicated herbal milk streaming.",
     "benefits": [
       "Herbal Head Massage",
@@ -1949,7 +1989,7 @@ const TREATMENTS_DATA = [
     "priceUSD": 80,
     "badge": "2-Hour Sensory Revival",
     "requiresDoctorConsultation": false,
-    "image": "assets/images/Wellness/Punarjeeva (Sensory Rejuvenation).jpg",
+    "image": "assets/images/Wellness/Punarjeeva (Sensory Rejuvenation).webp",
     "description": "Complete two-hour sensory revival package incorporating synchronized Abhyangam, warm Kizhi compresses, and revitalizing herbal facial care for whole-body vitality.",
     "benefits": [
       "2-Hour Complete Journey",
@@ -1971,7 +2011,7 @@ const TREATMENTS_DATA = [
     "priceUSD": 40,
     "badge": "Radiant Skin Glow",
     "requiresDoctorConsultation": false,
-    "image": "assets/images/Wellness/Mukhakanti - Ayurvedic Facial.jpg",
+    "image": "assets/images/Wellness/Mukhakanti - Ayurvedic Facial.webp",
     "description": "Radiance-boosting facial therapy featuring gentle herbal cleansing, steam, Marma acupressure facial massage, and botanical glow-enhancing Lepam.",
     "benefits": [
       "Herbal Cleanse & Exfoliation",
@@ -1993,7 +2033,7 @@ const TREATMENTS_DATA = [
     "priceUSD": 40,
     "badge": "Classic Relaxation",
     "requiresDoctorConsultation": false,
-    "image": "assets/images/Wellness/Swedish Massage.jpg",
+    "image": "assets/images/Wellness/Swedish Massage.webp",
     "description": "Classic European wellness massage using long flowing effleurage, gentle kneading, and rhythmic friction to enhance circulation and release muscular stress.",
     "benefits": [
       "Flowing Effleurage",
@@ -2015,7 +2055,7 @@ const TREATMENTS_DATA = [
     "priceUSD": 60,
     "badge": "Ultimate Stress Buster",
     "requiresDoctorConsultation": false,
-    "image": "assets/images/Wellness/Ayurvedic Nirvana - Stress Buster.jpg",
+    "image": "assets/images/Wellness/Ayurvedic Nirvana - Stress Buster.webp",
     "description": "Blissful multi-therapy session pairing full-body Abhyanga with Shirodhara and warm herbal compresses to dissolve accumulated nervous exhaustion.",
     "benefits": [
       "Full-Body Abhyanga",
@@ -2037,7 +2077,7 @@ const TREATMENTS_DATA = [
     "priceUSD": 40,
     "badge": "Deep Muscle Release",
     "requiresDoctorConsultation": false,
-    "image": "assets/images/Wellness/Bamboo Massage.jpg",
+    "image": "assets/images/Wellness/Bamboo Massage.webp",
     "description": "Innovative deep-tissue technique using warm, smooth organic bamboo stalks to roll and knead tight muscle groups, relieving stubborn stiffness.",
     "benefits": [
       "Warm Bamboo Rollers",
@@ -2059,7 +2099,7 @@ const TREATMENTS_DATA = [
     "priceUSD": 32,
     "badge": "Express Abhyangam",
     "requiresDoctorConsultation": false,
-    "image": "assets/images/Wellness/Abhyangam Wellness Massage.jpg",
+    "image": "assets/images/Wellness/Abhyangam Wellness Massage.webp",
     "description": "Traditional full-body synchronized rhythmic massage with warm medicated oils to improve circulation, relieve muscle fatigue, and promote profound relaxation.",
     "benefits": [
       "Warm Oil Abhyangam",
@@ -2081,7 +2121,7 @@ const TREATMENTS_DATA = [
     "priceUSD": 40,
     "badge": "Chronic Pain Relief",
     "requiresDoctorConsultation": false,
-    "image": "assets/images/Wellness/Rujahari - Pain Relieving Massage.jpg",
+    "image": "assets/images/Wellness/Rujahari - Pain Relieving Massage.webp",
     "description": "Specialized therapeutic massage utilizing pain-relieving herbal oils and targeted pressure techniques to ease chronic joint aches and muscular stiffness.",
     "benefits": [
       "Pain-Relieving Herbal Oils",
@@ -2103,7 +2143,7 @@ const TREATMENTS_DATA = [
     "priceUSD": 40,
     "badge": "Relaxation & Steam Detox",
     "requiresDoctorConsultation": false,
-    "image": "assets/images/Wellness/Ayur Relax - Abhyangam + Steam.jpg",
+    "image": "assets/images/Wellness/Ayur Relax - Abhyangam + Steam.webp",
     "description": "A harmonious combination of classical Abhyanga body massage followed by an aromatic herbal steam bath to eliminate toxins and ease bodily tension.",
     "benefits": [
       "Full-Body Abhyangam",
@@ -2125,7 +2165,7 @@ const TREATMENTS_DATA = [
     "priceUSD": 40,
     "badge": "Trigger Point Therapy",
     "requiresDoctorConsultation": false,
-    "image": "assets/images/Wellness/Deep Tissue Massage.jpg",
+    "image": "assets/images/Wellness/Deep Tissue Massage.webp",
     "description": "Intense therapeutic massage focusing on deeper layers of muscle and connective tissue to release chronic knotting, adhesions, and postural tension.",
     "benefits": [
       "Targeted Deep Pressure",
@@ -2147,7 +2187,7 @@ const TREATMENTS_DATA = [
     "priceUSD": 40,
     "badge": "Upper Body & Foot Care",
     "requiresDoctorConsultation": false,
-    "image": "assets/images/Wellness/Head - Neck - Shoulder & Foot Reflexology.jpg",
+    "image": "assets/images/Wellness/Head - Neck - Shoulder & Foot Reflexology.webp",
     "description": "Comprehensive upper body and reflexology treatment targeting stress-holding zones in the scalp, neck, shoulders, and vital pressure points in the feet.",
     "benefits": [
       "Shiro Scalp Massage",
@@ -2169,7 +2209,7 @@ const TREATMENTS_DATA = [
     "priceUSD": 60,
     "badge": "Burnout Recovery",
     "requiresDoctorConsultation": false,
-    "image": "assets/images/Wellness/Manasamithra - Antistress Therapy.jpg",
+    "image": "assets/images/Wellness/Manasamithra - Antistress Therapy.webp",
     "description": "Calming ritual designed to alleviate mental burnout, featuring nurturing whole-body oil therapy combined with soothing continuous forehead herbal oil stream.",
     "benefits": [
       "Anti-Stress Abhyangam",
@@ -2191,7 +2231,7 @@ const TREATMENTS_DATA = [
     "priceUSD": 32,
     "badge": "Acupressure Reflexology",
     "requiresDoctorConsultation": false,
-    "image": "assets/images/Wellness/Reflexology Massage.jpg",
+    "image": "assets/images/Wellness/Reflexology Massage.webp",
     "description": "Ancient reflex zone therapy applying precise thumb and finger pressure to reflex points on the soles to restore full-body energetic equilibrium.",
     "benefits": [
       "Herbal Foot Cleansing",
@@ -2213,7 +2253,7 @@ const TREATMENTS_DATA = [
     "priceUSD": 40,
     "badge": "Aromatherapy Bliss",
     "requiresDoctorConsultation": false,
-    "image": "assets/images/Wellness/Aroma Therapy.jpg",
+    "image": "assets/images/Wellness/Aroma Therapy.webp",
     "description": "Gentle, rhythmic wellness massage infused with therapeutic pure essential oils to harmonize mood, relieve anxiety, and deeply hydrate the skin.",
     "benefits": [
       "Botanical Essential Oils",
@@ -2235,7 +2275,7 @@ const TREATMENTS_DATA = [
     "priceUSD": 40,
     "badge": "Basalt Thermotherapy",
     "requiresDoctorConsultation": false,
-    "image": "assets/images/Wellness/Stone Massage.jpg",
+    "image": "assets/images/Wellness/Stone Massage.webp",
     "description": "Luxurious thermotherapy using smooth heated basalt stones placed on key energy centers to melt stubborn muscular tightness and induce deep relaxation.",
     "benefits": [
       "Heated Basalt Stones",
@@ -2261,7 +2301,7 @@ const TREATMENTS_DATA = [
     priceUSD: 33,
     badge: "Purifying & Detox",
     requiresDoctorConsultation: false,
-    image: "assets/images/Beauty Care/Panchagavya Facial.jpg",
+    image: "assets/images/Beauty Care/Panchagavya Facial.webp",
     description: "Sacred Ayurvedic purifying therapy formulated with classical botanical ingredients to clear blemishes, balance natural sebum, and detoxify congested facial pores.",
     benefits: [
       "Deep Pore Cleansing & Sebum Balance",
@@ -2283,7 +2323,7 @@ const TREATMENTS_DATA = [
     priceUSD: 27,
     badge: "Hair & Scalp",
     requiresDoctorConsultation: false,
-    image: "assets/images/Beauty Care/Herbal Hair Pack.jpg",
+    image: "assets/images/Beauty Care/Herbal Hair Pack.webp",
     description: "A soothing natural herbal mask prepared with freshly blended botanical extracts including Amla, Brahmi, Bhringraj, and Hibiscus. Deeply conditions the hair follicles and restores natural luster.",
     benefits: [
       "Fresh Herbal Scalp Pack Application",
@@ -2305,7 +2345,7 @@ const TREATMENTS_DATA = [
     priceUSD: 33,
     badge: "Royal Radiance",
     requiresDoctorConsultation: false,
-    image: "assets/images/Beauty Care/Njavara Facial.jpg",
+    image: "assets/images/Beauty Care/Njavara Facial.webp",
     description: "Classical royal Ayurvedic facial using medicated Njavara rice cooked in herbal milk to deeply nourish tissues, improve skin elasticity, and restore youthful radiance.",
     benefits: [
       "Njavara Rice Compress Fomentation",
@@ -2327,7 +2367,7 @@ const TREATMENTS_DATA = [
     priceUSD: 47,
     badge: "Clarifying & Relief",
     requiresDoctorConsultation: false,
-    image: "assets/images/Beauty Care/Back Facial.jpg",
+    image: "assets/images/Beauty Care/Back Facial.webp",
     description: "Comprehensive clarifying therapy for the back that includes deep exfoliation, warm herbal steam, gentle pore cleansing, detoxifying clay mask, and tension-melting back massage.",
     benefits: [
       "Deep Exfoliation Back Scrub",
@@ -2353,7 +2393,7 @@ const TREATMENTS_DATA = [
     priceUSD: 33,
     badge: "Royal Rejuvenation",
     requiresDoctorConsultation: false,
-    image: "assets/images/Face Care/Njavara Facial.jpg",
+    image: "assets/images/Face Care/Njavara Facial.webp",
     description: "Classical royal Ayurvedic facial using medicated Njavara rice cooked in herbal milk to deeply nourish tissues and restore youthful radiance.",
     benefits: [
       "Njavara Rice Compress",
@@ -2375,7 +2415,7 @@ const TREATMENTS_DATA = [
     priceUSD: 33,
     badge: "Botanical Purifying",
     requiresDoctorConsultation: false,
-    image: "assets/images/Face Care/Panchagavya Facial.jpg",
+    image: "assets/images/Face Care/Panchagavya Facial.webp",
     description: "Sacred Ayurvedic purifying therapy formulated with classical botanical ingredients to clear blemishes, balance natural sebum, and detoxify congested facial pores.",
     benefits: [
       "Deep Pore Cleansing",
@@ -2397,7 +2437,7 @@ const TREATMENTS_DATA = [
     priceUSD: 33,
     badge: "Cooling Radiance",
     requiresDoctorConsultation: false,
-    image: "assets/images/Face Care/Red Sandal Facial.jpg",
+    image: "assets/images/Face Care/Red Sandal Facial.webp",
     description: "Opulent cooling therapy enriched with pure red sandalwood to soothe inflammation, minimize sun tanning, and restore an even, luminous complexion.",
     benefits: [
       "Red Sandalwood Infusion",
@@ -2419,7 +2459,7 @@ const TREATMENTS_DATA = [
     priceUSD: 33,
     badge: "Purifying Care",
     requiresDoctorConsultation: false,
-    image: "assets/images/Face Care/Deep Cleansing Facial.jpg",
+    image: "assets/images/Face Care/Deep Cleansing Facial.webp",
     description: "Intensive purifying treatment combining gentle steam, herbal exfoliation, and therapeutic clay masks to eliminate pollutants and refresh dull tired skin.",
     benefits: [
       "Steam & Gentle Extraction",
@@ -2441,7 +2481,7 @@ const TREATMENTS_DATA = [
     priceUSD: 33,
     badge: "Age-Defying",
     requiresDoctorConsultation: false,
-    image: "assets/images/Face Care/Anti-Aging Facial.jpg",
+    image: "assets/images/Face Care/Anti-Aging Facial.webp",
     description: "Restorative age-defying ritual infused with Kumkumadi oils and firming Marma massage to boost natural collagen synthesis and soften fine lines.",
     benefits: [
       "Firming Marma Massage",
@@ -2463,7 +2503,7 @@ const TREATMENTS_DATA = [
     priceUSD: 33,
     badge: "Radiance & Glow",
     requiresDoctorConsultation: false,
-    image: "assets/images/Face Care/Brightening Facial.jpg",
+    image: "assets/images/Face Care/Brightening Facial.webp",
     description: "Glow-enhancing facial rich in saffron, turmeric, and natural antioxidants to fade dark spots and unveil vibrant, translucent, radiant facial skin.",
     benefits: [
       "Saffron & Turmeric Scrub",
@@ -2485,7 +2525,7 @@ const TREATMENTS_DATA = [
     priceUSD: 40,
     badge: "Complexion Clearing",
     requiresDoctorConsultation: false,
-    image: "assets/images/Face Care/Manjishta Facial.jpg",
+    image: "assets/images/Face Care/Manjishta Facial.webp",
     description: "Targeted complexion-clearing facial utilizing potent Manjistha roots to purify blood toxins, soothe persistent redness, and impart a crystal-clear natural tone.",
     benefits: [
       "Manjistha Herbal Cleanser",
@@ -2507,7 +2547,7 @@ const TREATMENTS_DATA = [
     priceUSD: 40,
     badge: "Texture Refining",
     requiresDoctorConsultation: false,
-    image: "assets/images/Face Care/Eladi Facial.jpg",
+    image: "assets/images/Face Care/Eladi Facial.webp",
     description: "Ancient Ayurvedic beauty ritual with Eladi Choornam and aromatic herbs to refine skin texture, combat environmental pollution, and balance moisture.",
     benefits: [
       "Eladi Choornam Exfoliation",
@@ -2529,7 +2569,7 @@ const TREATMENTS_DATA = [
     priceUSD: 40,
     badge: "Golden Radiance",
     requiresDoctorConsultation: false,
-    image: "assets/images/Face Care/Nalpamaradi Facial.jpg",
+    image: "assets/images/Face Care/Nalpamaradi Facial.webp",
     description: "Luxurious skin-brightening therapy formulated with sacred Nalpamaradi barks and turmeric to repair sun damage and illuminate your natural golden glow.",
     benefits: [
       "Nalpamaradi Oil Infusion",
@@ -2551,7 +2591,7 @@ const TREATMENTS_DATA = [
     priceUSD: 2,
     badge: "Express Shaping",
     requiresDoctorConsultation: false,
-    image: "assets/images/Face Care/Threading.jpg",
+    image: "assets/images/Face Care/Threading.webp",
     description: "Precise, gentle organic cotton thread facial hair removal for perfectly sculpted eyebrows, upper lip, or chin, finished with cooling aloe.",
     benefits: [
       "Organic Cotton Threading",
@@ -2576,7 +2616,7 @@ const TREATMENTS_DATA = [
     priceUSD: 44,
     badge: "Signature Full Body Ritual",
     requiresDoctorConsultation: false,
-    image: "assets/images/Body Care/Herbal Body Scrub.jpg",
+    image: "assets/images/Body Care/Herbal Body Scrub.webp",
     description: "Our signature Herbal Body Scrub is an invigorating Ayurvedic polishing ritual that combines finely powdered therapeutic herbs, precious sandalwood, and cold-pressed botanical oils. Performed using rhythmic upward strokes (Udvarthanam), it gently buffs away dull surface cells, stimulates lymphatic microcirculation, releases trapped metabolic toxins, and restores velvety softness and radiant suppleness to every inch of your skin.",
     benefits: [
       "Herbal Oil Anointing",
@@ -2668,7 +2708,7 @@ const TREATMENTS_DATA = [
     priceUSD: 27,
     badge: "Scalp Nourishment",
     requiresDoctorConsultation: false,
-    image: "assets/images/Hair Care/Herbal Hair Pack.jpg",
+    image: "assets/images/Hair Care/Herbal Hair Pack.webp",
     description: "A soothing natural herbal mask prepared with freshly blended botanical extracts including Amla, Brahmi, Bhringraj, and Hibiscus. Deeply conditions the hair follicles, cools excess scalp heat, and restores natural softness and luster.",
     benefits: [
       "Fresh Herbal Scalp Pack",
@@ -2689,7 +2729,7 @@ const TREATMENTS_DATA = [
     priceUSD: 40,
     badge: "Hair Strengthening",
     requiresDoctorConsultation: false,
-    image: "assets/images/Hair Care/Keshavardhini - Hair Strengthening.jpg",
+    image: "assets/images/Hair Care/Keshavardhini - Hair Strengthening.webp",
     description: "An intensive Ayurvedic restorative therapy combining therapeutic Shiro Abhyangam (warm medicated oil head massage) with targeted Marma point stimulation and a potent hair strengthening herbal pack to control hair fall and stimulate healthy growth.",
     benefits: [
       "Shiro Abhyangam (Head Massage)",
@@ -2715,7 +2755,7 @@ const TREATMENTS_DATA = [
     priceUSD: 40,
     badge: "Full Grooming",
     requiresDoctorConsultation: false,
-    image: "assets/images/Hand and Foot Care/Pedicure & Manicure.jpg",
+    image: "assets/images/Hand and Foot Care/Pedicure & Manicure.webp",
     description: "A complete holistic grooming package for both hands and feet. Combines nail shaping, gentle cuticle care, exfoliating herbal scrubs, and a deeply relaxing pressure massage for soft, revitalized skin.",
     benefits: [
       "Classic Manicure",
@@ -2737,7 +2777,7 @@ const TREATMENTS_DATA = [
     priceUSD: 32,
     badge: "Foot Wellness",
     requiresDoctorConsultation: false,
-    image: "assets/images/Hand and Foot Care/Pedicure.jpg",
+    image: "assets/images/Hand and Foot Care/Pedicure.webp",
     description: "An essential foot treatment designed to cleanse, exfoliate dry calluses, shape toenails, and relieve tension in tired soles through an invigorating herbal soak and soothing foot massage.",
     benefits: [
       "Herbal Foot Soak",
@@ -2759,7 +2799,7 @@ const TREATMENTS_DATA = [
     priceUSD: 13,
     badge: "Hand Care",
     requiresDoctorConsultation: false,
-    image: "assets/images/Hand and Foot Care/Manicure.jpg",
+    image: "assets/images/Hand and Foot Care/Manicure.webp",
     description: "A quick yet thorough hand care ritual focusing on precise nail shaping, cuticle nourishment, botanical exfoliation, and a hydrating hand massage to leave your hands neat and smooth.",
     benefits: [
       "Nail Shaping & Buffing",
@@ -2781,7 +2821,7 @@ const TREATMENTS_DATA = [
     priceUSD: 40,
     badge: "Royal Luxury",
     requiresDoctorConsultation: false,
-    image: "assets/images/Hand and Foot Care/Royal Pedicure.jpg",
+    image: "assets/images/Hand and Foot Care/Royal Pedicure.webp",
     description: "An indulgent luxury foot therapy with fragrant floral baths, essential oil scrubs, intensive callus smoothing, and an extended Ayurvedic reflexology massage along the calves and soles.",
     benefits: [
       "Floral Rose Petal Soak",
@@ -2803,7 +2843,7 @@ const TREATMENTS_DATA = [
     priceUSD: 48,
     badge: "Intensive Repair",
     requiresDoctorConsultation: false,
-    image: "assets/images/Hand and Foot Care/Paraffin Foot Spa.jpg",
+    image: "assets/images/Hand and Foot Care/Paraffin Foot Spa.webp",
     description: "A deeply therapeutic thermal treatment enveloping feet in warm paraffin wax. Locks in deep moisture, eases joint stiffness, repairs cracked heels, and stimulates circulation with reflexology.",
     benefits: [
       "Herbal Foot Exfoliation",

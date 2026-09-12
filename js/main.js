@@ -1,7 +1,7 @@
 /**
  * Ayuryoga International - Therapies Brochure Application
- * Dedicated Therapies Catalog & WhatsApp Integration
- * WhatsApp Concierge Number: +23058074009
+ * Dedicated Therapies Catalog, Multi-Location & WhatsApp Integration
+ * Supported Sanctuaries: Moka, Grand Baie, Curepipe
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -10,6 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
   let searchQuery = '';
   let currentCurrency = 'MUR'; // 'MUR' or 'USD'
   const exchangeRateUSD = 45; // 1 USD ~ 45 MUR
+  let selectedBookingLocationId = 'moka';
+  let pendingWhatsAppTreatment = null;
 
   // DOM Elements
   const treatmentsGrid = document.getElementById('treatmentsGrid');
@@ -18,18 +20,26 @@ document.addEventListener('DOMContentLoaded', () => {
   const searchClearBtn = document.getElementById('searchClearBtn');
   const currencyBtns = document.querySelectorAll('.currency-btn');
 
-  // Modal Elements
+  // Booking Modal Elements
   const bookingModal = document.getElementById('bookingModal');
   const modalCloseBtn = document.getElementById('modalCloseBtn');
   const bookingForm = document.getElementById('bookingForm');
+  const bookingLocationGrid = document.getElementById('bookingLocationGrid');
   const bookingModalCategorySelect = document.getElementById('modalCategorySelect');
   const bookingModalTreatmentSelect = document.getElementById('modalTreatmentSelect');
   const modalSummaryBox = document.getElementById('modalSummaryBox');
   const bookingSuccessBox = document.getElementById('bookingSuccessBox');
   const sendWhatsAppBookingBtn = document.getElementById('sendWhatsAppBookingBtn');
+  const sendWhatsAppBookingBtnText = document.getElementById('sendWhatsAppBookingBtnText');
   const modalTitleEl = document.getElementById('modalTitle');
   const modalSubtitleEl = document.getElementById('modalSubtitle');
   const modalSubmitBtn = document.getElementById('modalSubmitBtn');
+
+  // Location Picker Modal Elements (for WhatsApp Instant)
+  const locationPickerModal = document.getElementById('locationPickerModal');
+  const locationModalCloseBtn = document.getElementById('locationModalCloseBtn');
+  const locationOptionsList = document.getElementById('locationOptionsList');
+  const locationPickerTreatmentPreview = document.getElementById('locationPickerTreatmentPreview');
 
   // Floating WhatsApp Widget
   const floatingBubble = document.getElementById('whatsappChatBubble');
@@ -43,9 +53,10 @@ document.addEventListener('DOMContentLoaded', () => {
   setupEventListeners();
   initFloatingWhatsApp();
   setupBookingModalDropdowns();
+  initLocationPickerModal();
 
   // =========================================================================
-  // 1. Currency Formatting Helper
+  // 1. Currency & Formatting Helpers
   // =========================================================================
   function formatPrice(murAmount, usdAmount) {
     if (currentCurrency === 'USD') {
@@ -65,6 +76,10 @@ document.addEventListener('DOMContentLoaded', () => {
     return currentCurrency === 'USD' 
       ? `$${usdAmount} USD (Rs ${murAmount.toLocaleString()})`
       : `Rs ${murAmount.toLocaleString()} ($${usdAmount} USD)`;
+  }
+
+  function getLocationById(id) {
+    return AYURYOGA_LOCATIONS.find(loc => loc.id === id) || AYURYOGA_LOCATIONS[0];
   }
 
   // =========================================================================
@@ -145,8 +160,8 @@ document.addEventListener('DOMContentLoaded', () => {
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
           </div>
           <div class="banner-content">
-            <h4>Doctor Consultation Included</h4>
-            <p>Classical Ayurvedic therapies are administered following a personalized health consultation with our resident Ayurvedic Vaidya (Doctor) to prescribe the exact medicated herbal oils, decoctions, and techniques tailored to your body constitution (Prakriti).</p>
+            <h4>Doctor Consultation Included • Available in Moka, Grand Baie & Curepipe</h4>
+            <p>Classical Ayurvedic therapies are administered following a personalized health consultation with our resident Ayurvedic Vaidya (Doctor) at our Moka, Grand Baie, or Curepipe sanctuaries to prescribe the exact medicated herbal oils and techniques tailored to your body constitution (Prakriti).</p>
           </div>
         </div>
       `;
@@ -155,45 +170,20 @@ document.addEventListener('DOMContentLoaded', () => {
     // Check if category is Body Care
     if (currentCategory === 'body-care' && filtered.length > 0) {
       treatmentsGrid.innerHTML = renderBodyCareExperience(filtered[0]);
-
-      // Attach open modal listeners
-      treatmentsGrid.querySelectorAll('.open-booking-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-          const id = btn.dataset.id;
-          openBookingModalWithTreatment(id);
-        });
-      });
+      attachCardActionListeners();
       return;
     }
 
     // Check if category is Hair Care
     if (currentCategory === 'hair-care' && filtered.length > 0) {
       treatmentsGrid.innerHTML = renderHairCareExperience(filtered);
-
-      // Attach open modal listeners
-      treatmentsGrid.querySelectorAll('.open-booking-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-          const id = btn.dataset.id;
-          openBookingModalWithTreatment(id);
-        });
-      });
+      attachCardActionListeners();
       return;
     }
 
     const cardsHtml = filtered.map(treatment => {
       const price = formatPrice(treatment.priceMUR, treatment.priceUSD);
       const isDoctorConsult = treatment.requiresDoctorConsultation !== false;
-
-      // WhatsApp text
-      const whatsappText = isDoctorConsult
-        ? encodeURIComponent(
-            `Namaste Ayuryoga International! 🙏\n\nI would like to request a *Doctor Consultation & Appointment* for the following therapy:\n\n🌿 *Treatment:* ${treatment.name}\n📂 *Category:* ${treatment.categoryName}\n⏱️ *Duration:* ${treatment.duration}\n💰 *Price:* ${getWhatsAppPriceString(treatment.priceMUR, treatment.priceUSD)}\n🩺 *Note:* Required Doctor Consultation\n\nPlease let me know available slots with the Ayurvedic Doctor. Thank you!`
-          )
-        : encodeURIComponent(
-            `Namaste Ayuryoga International! 🙏\n\nI would like to enquire / book the following therapy:\n\n🌿 *Treatment:* ${treatment.name}\n📂 *Category:* ${treatment.categoryName}\n⏱️ *Duration:* ${treatment.duration}\n💰 *Price:* ${getWhatsAppPriceString(treatment.priceMUR, treatment.priceUSD)}\n\nPlease let me know available slots. Thank you!`
-          );
-
-      const whatsappUrl = `https://wa.me/${WHATSAPP_PHONE}?text=${whatsappText}`;
 
       // If Classical Ayurveda (requires doctor consultation)
       if (isDoctorConsult) {
@@ -202,7 +192,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const doctorConsultTag = `
           <div class="doctor-consult-tag">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
-            Done after Doctor Consultation
+            Doctor Consultation Included
           </div>`;
 
         return `
@@ -250,15 +240,15 @@ document.addEventListener('DOMContentLoaded', () => {
               </ul>
 
               <div class="treatment-actions">
-                <button class="btn btn-consult-doctor btn-sm open-booking-btn" data-id="${treatment.id}">
+                <button type="button" class="btn btn-consult-doctor btn-sm open-booking-btn" data-id="${treatment.id}">
                   ${consultButtonIcon}
                   ${consultButtonLabel}
                 </button>
                 
-                <a href="${whatsappUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp btn-sm" title="Instant WhatsApp Message">
+                <button type="button" class="btn btn-whatsapp btn-sm trigger-treatment-whatsapp" data-id="${treatment.id}" title="Select Location & Instant WhatsApp">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.669-.699c.969.539 1.95.82 2.791.82h.001c3.181 0 5.767-2.586 5.768-5.766 0-3.18-2.586-5.766-5.769-5.766zm3.364 8.232c-.141.398-.711.758-1.011.808-.282.046-.649.074-1.898-.444-1.597-.662-2.617-2.28-2.696-2.385-.078-.106-.646-.86-.646-1.637 0-.778.406-1.16.55-1.314.143-.155.313-.194.417-.194.104 0 .208.001.3.006.096.004.225-.037.352.268.13.312.443 1.077.482 1.156.039.078.065.17.013.273-.052.104-.078.169-.156.26-.078.091-.164.204-.235.274-.078.078-.16.163-.069.319.091.156.404.667.868 1.079.596.53 1.098.694 1.254.772.156.078.247.065.338-.039.091-.104.391-.455.495-.611.104-.156.208-.13.349-.078.143.052.908.428 1.064.506.156.078.26.117.299.182.039.065.039.377-.102.775z"></path></svg>
                   WhatsApp Instant
-                </a>
+                </button>
               </div>
             </div>
           </article>
@@ -298,14 +288,14 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="treatment-card-bottom-price">${price.main}</div>
 
             <div class="treatment-actions">
-              <button class="btn btn-primary-dark btn-sm open-booking-btn" data-id="${treatment.id}">
+              <button type="button" class="btn btn-primary-dark btn-sm open-booking-btn" data-id="${treatment.id}">
                 BOOK NOW
               </button>
               
-              <a href="${whatsappUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp-outline btn-sm" title="Instant WhatsApp Message">
+              <button type="button" class="btn btn-whatsapp-outline btn-sm trigger-treatment-whatsapp" data-id="${treatment.id}" title="Select Location & WhatsApp">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.669-.699c.969.539 1.95.82 2.791.82h.001c3.181 0 5.767-2.586 5.768-5.766 0-3.18-2.586-5.766-5.769-5.766zm3.364 8.232c-.141.398-.711.758-1.011.808-.282.046-.649.074-1.898-.444-1.597-.662-2.617-2.28-2.696-2.385-.078-.106-.646-.86-.646-1.637 0-.778.406-1.16.55-1.314.143-.155.313-.194.417-.194.104 0 .208.001.3.006.096.004.225-.037.352.268.13.312.443 1.077.482 1.156.039.078.065.17.013.273-.052.104-.078.169-.156.26-.078.091-.164.204-.235.274-.078.078-.16.163-.069.319.091.156.404.667.868 1.079.596.53 1.098.694 1.254.772.156.078.247.065.338-.039.091-.104.391-.455.495-.611.104-.156.208-.13.349-.078.143.052.908.428 1.064.506.156.078.26.117.299.182.039.065.039.377-.102.775z"></path></svg>
                 WHATSAPP
-              </a>
+              </button>
             </div>
           </div>
         </article>
@@ -313,12 +303,25 @@ document.addEventListener('DOMContentLoaded', () => {
     }).join('');
 
     treatmentsGrid.innerHTML = categoryNoticeHtml + `<div class="treatments-grid-inner">${cardsHtml}</div>`;
+    attachCardActionListeners();
+  }
 
-    // Attach open modal listeners
+  function attachCardActionListeners() {
+    if (!treatmentsGrid) return;
+
+    // Attach open booking modal listeners
     treatmentsGrid.querySelectorAll('.open-booking-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         const id = btn.dataset.id;
         openBookingModalWithTreatment(id);
+      });
+    });
+
+    // Attach open location picker WhatsApp modal listeners
+    treatmentsGrid.querySelectorAll('.trigger-treatment-whatsapp').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.dataset.id;
+        openLocationPickerModal(id);
       });
     });
   }
@@ -328,10 +331,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // =========================================================================
   function renderBodyCareExperience(treatment) {
     const price = formatPrice(treatment.priceMUR, treatment.priceUSD);
-    const whatsappText = encodeURIComponent(
-      `Namaste Ayuryoga International! 🙏\n\nI would like to enquire / book the signature *Herbal Body Scrub* therapy:\n\n🌿 *Treatment:* ${treatment.name}\n📂 *Category:* Body Care\n⏱️ *Duration:* ${treatment.duration}\n💰 *Price:* ${getWhatsAppPriceString(treatment.priceMUR, treatment.priceUSD)}\n\nPlease let me know available slots. Thank you!`
-    );
-    const whatsappUrl = `https://wa.me/${WHATSAPP_PHONE}?text=${whatsappText}`;
 
     return `
       <div class="body-care-luxury-container">
@@ -370,14 +369,14 @@ document.addEventListener('DOMContentLoaded', () => {
             </p>
 
             <div class="body-care-hero-actions">
-              <button class="btn btn-primary-dark open-booking-btn body-care-btn" data-id="${treatment.id}">
+              <button type="button" class="btn btn-primary-dark open-booking-btn body-care-btn" data-id="${treatment.id}">
                 <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
                 BOOK APPOINTMENT
               </button>
-              <a href="${whatsappUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp-outline body-care-btn">
+              <button type="button" class="btn btn-whatsapp-outline body-care-btn trigger-treatment-whatsapp" data-id="${treatment.id}">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.669-.699c.969.539 1.95.82 2.791.82h.001c3.181 0 5.767-2.586 5.768-5.766 0-3.18-2.586-5.766-5.769-5.766zm3.364 8.232c-.141.398-.711.758-1.011.808-.282.046-.649.074-1.898-.444-1.597-.662-2.617-2.28-2.696-2.385-.078-.106-.646-.86-.646-1.637 0-.778.406-1.16.55-1.314.143-.155.313-.194.417-.194.104 0 .208.001.3.006.096.004.225-.037.352.268.13.312.443 1.077.482 1.156.039.078.065.17.013.273-.052.104-.078.169-.156.26-.078.091-.164.204-.235.274-.078.078-.16.163-.069.319.091.156.404.667.868 1.079.596.53 1.098.694 1.254.772.156.078.247.065.338-.039.091-.104.391-.455.495-.611.104-.156.208-.13.349-.078.143.052.908.428 1.064.506.156.078.26.117.299.182.039.065.039.377-.102.775z"></path></svg>
                 WHATSAPP US
-              </a>
+              </button>
             </div>
           </div>
         </div>
@@ -505,10 +504,6 @@ document.addEventListener('DOMContentLoaded', () => {
       <div class="hair-care-container">
         ${treatments.map(treatment => {
           const price = formatPrice(treatment.priceMUR, treatment.priceUSD);
-          const whatsappText = encodeURIComponent(
-            `Namaste Ayuryoga International! 🙏\n\nI would like to enquire / book the *${treatment.name}* therapy:\n\n🌿 *Treatment:* ${treatment.name}\n📂 *Category:* Hair Care\n⏱️ *Duration:* ${treatment.duration}\n💰 *Price:* ${getWhatsAppPriceString(treatment.priceMUR, treatment.priceUSD)}\n\nPlease let me know available slots. Thank you!`
-          );
-          const whatsappUrl = `https://wa.me/${WHATSAPP_PHONE}?text=${whatsappText}`;
 
           return `
             <div class="hair-care-card" data-id="${treatment.id}">
@@ -538,13 +533,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="hair-care-footer">
                   <div class="hair-care-price">${price.main}</div>
                   <div class="hair-care-actions">
-                    <button class="btn btn-primary-dark open-booking-btn hair-care-action-btn" data-id="${treatment.id}">
+                    <button type="button" class="btn btn-primary-dark open-booking-btn hair-care-action-btn" data-id="${treatment.id}">
                       BOOK NOW
                     </button>
-                    <a href="${whatsappUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp-outline hair-care-action-btn">
+                    <button type="button" class="btn btn-whatsapp-outline hair-care-action-btn trigger-treatment-whatsapp" data-id="${treatment.id}">
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.669-.699c.969.539 1.95.82 2.791.82h.001c3.181 0 5.767-2.586 5.768-5.766 0-3.18-2.586-5.766-5.769-5.766zm3.364 8.232c-.141.398-.711.758-1.011.808-.282.046-.649.074-1.898-.444-1.597-.662-2.617-2.28-2.696-2.385-.078-.106-.646-.86-.646-1.637 0-.778.406-1.16.55-1.314.143-.155.313-.194.417-.194.104 0 .208.001.3.006.096.004.225-.037.352.268.13.312.443 1.077.482 1.156.039.078.065.17.013.273-.052.104-.078.169-.156.26-.078.091-.164.204-.235.274-.078.078-.16.163-.069.319.091.156.404.667.868 1.079.596.53 1.098.694 1.254.772.156.078.247.065.338-.039.091-.104.391-.455.495-.611.104-.156.208-.13.349-.078.143.052.908.428 1.064.506.156.078.26.117.299.182.039.065.039.377-.102.775z"></path></svg>
                       WHATSAPP
-                    </a>
+                    </button>
                   </div>
                 </div>
               </div>
@@ -601,13 +596,30 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
-    // Modal Close
+    // General Location Picker triggers across page
+    document.querySelectorAll('.trigger-location-picker').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        openLocationPickerModal(null);
+      });
+    });
+
+    // Modal Close buttons
     if (modalCloseBtn) {
       modalCloseBtn.addEventListener('click', closeBookingModal);
     }
     if (bookingModal) {
       bookingModal.addEventListener('click', (e) => {
         if (e.target === bookingModal) closeBookingModal();
+      });
+    }
+
+    if (locationModalCloseBtn) {
+      locationModalCloseBtn.addEventListener('click', closeLocationPickerModal);
+    }
+    if (locationPickerModal) {
+      locationPickerModal.addEventListener('click', (e) => {
+        if (e.target === locationPickerModal) closeLocationPickerModal();
       });
     }
 
@@ -618,12 +630,26 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // =========================================================================
-  // 5. Booking / Consultation Modal Logic
+  // 5. Booking / Doctor Consultation Modal Logic
   // =========================================================================
   function setupBookingModalDropdowns() {
     if (!bookingModalCategorySelect || !bookingModalTreatmentSelect) return;
 
-    // Populate Categories
+    // 1. Setup Location Selection Radios
+    if (bookingLocationGrid) {
+      bookingLocationGrid.querySelectorAll('.location-radio-card').forEach(card => {
+        card.addEventListener('click', () => {
+          bookingLocationGrid.querySelectorAll('.location-radio-card').forEach(c => c.classList.remove('active'));
+          card.classList.add('active');
+          const radioInput = card.querySelector('input[type="radio"]');
+          if (radioInput) radioInput.checked = true;
+          selectedBookingLocationId = card.dataset.location;
+          updateModalSummary();
+        });
+      });
+    }
+
+    // 2. Populate Categories
     bookingModalCategorySelect.innerHTML = `
       <option value="">-- Choose Category --</option>
       ${THERAPY_CATEGORIES.map(c => `
@@ -631,7 +657,7 @@ document.addEventListener('DOMContentLoaded', () => {
       `).join('')}
     `;
 
-    // Populate All Treatments initially
+    // 3. Populate All Treatments initially
     populateTreatmentsDropdown();
 
     // On Category Change, Filter Treatments
@@ -705,6 +731,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const treatmentId = bookingModalTreatmentSelect ? bookingModalTreatmentSelect.value : '';
     const treatment = TREATMENTS_DATA.find(t => t.id === treatmentId);
+    const location = getLocationById(selectedBookingLocationId);
 
     if (treatment) {
       const price = formatPrice(treatment.priceMUR, treatment.priceUSD);
@@ -712,27 +739,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (modalTitleEl) {
         modalTitleEl.textContent = isDoctorConsult
-          ? "Schedule Doctor Consultation & Therapy"
-          : "Reserve Your Wellness Session";
+          ? `Schedule Doctor Consultation (${location.name})`
+          : `Reserve Your Wellness Session (${location.name})`;
       }
       if (modalSubtitleEl) {
         modalSubtitleEl.innerHTML = isDoctorConsult
-          ? "🩺 <em>This classical therapy is customized during a personalized consultation with our resident Ayurvedic Doctor (Vaidya).</em>"
-          : "Select your preferred date & time for your session.";
+          ? `🩺 <em>Classical therapy at Ayuryoga ${location.name} sanctuary administered following a personalized Vaidya consultation.</em>`
+          : `Select your preferred date & time for your session at Ayuryoga ${location.name}.`;
       }
       if (modalSubmitBtn) {
         modalSubmitBtn.textContent = isDoctorConsult
-          ? "Confirm & Request Doctor Consultation"
-          : "Confirm & Submit Reservation";
+          ? `Confirm & Request Doctor Consultation (${location.name})`
+          : `Confirm & Submit Reservation (${location.name})`;
       }
 
       modalSummaryBox.innerHTML = `
         <div style="flex: 1;">
+          <div style="font-size: 0.78rem; color: var(--color-gold-dark); font-weight: 700; text-transform: uppercase; margin-bottom: 2px;">
+            📍 Sanctuary: <strong>${location.name}</strong> (${location.displayPhone})
+          </div>
           <strong style="color: var(--color-primary-dark); font-size: 1.05rem;">${treatment.name}</strong>
           <div style="font-size: 0.8rem; color: var(--color-text-muted); margin-top: 2px;">
             Category: <strong>${treatment.categoryName}</strong> | Duration: <strong>${treatment.duration}</strong>
           </div>
-          ${isDoctorConsult ? `<div style="font-size: 0.76rem; color: var(--color-gold-dark); font-weight: 700; margin-top: 4px;">🩺 Includes Doctor Consultation</div>` : ''}
+          ${isDoctorConsult ? `<div style="font-size: 0.76rem; color: var(--color-gold-dark); font-weight: 700; margin-top: 4px;">🩺 Includes Vaidya Consultation</div>` : ''}
         </div>
         <div style="text-align: right; flex-shrink: 0;">
           <div style="font-size: 1.25rem; font-weight: 800; color: var(--color-primary-dark);">${price.main}</div>
@@ -742,9 +772,9 @@ document.addEventListener('DOMContentLoaded', () => {
       modalSummaryBox.style.display = 'flex';
     } else {
       modalSummaryBox.style.display = 'none';
-      if (modalTitleEl) modalTitleEl.textContent = "Schedule Doctor Consultation & Therapy";
-      if (modalSubtitleEl) modalSubtitleEl.textContent = "Select your therapy and schedule your preferred date & time.";
-      if (modalSubmitBtn) modalSubmitBtn.textContent = "Confirm & Submit Reservation";
+      if (modalTitleEl) modalTitleEl.textContent = `Schedule Doctor Consultation (${location.name})`;
+      if (modalSubtitleEl) modalSubtitleEl.textContent = `Select your therapy and schedule your preferred date & time at Ayuryoga ${location.name}.`;
+      if (modalSubmitBtn) modalSubmitBtn.textContent = `Confirm & Submit Reservation (${location.name})`;
     }
   }
 
@@ -760,6 +790,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const notes = document.getElementById('bookingNotes').value.trim();
     const treatmentId = bookingModalTreatmentSelect.value;
     const treatment = TREATMENTS_DATA.find(t => t.id === treatmentId);
+    const location = getLocationById(selectedBookingLocationId);
 
     if (!treatment) {
       alert('Please select a treatment therapy to continue.');
@@ -769,9 +800,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const isDoctorConsult = treatment.requiresDoctorConsultation !== false;
     const priceFormatted = getWhatsAppPriceString(treatment.priceMUR, treatment.priceUSD);
 
-    // Build Formatted WhatsApp Message
+    // Build Formatted WhatsApp Message targeted to specific location
     const bookingSummaryText = 
       `*🌟 NEW AYURYOGA CONSULTATION & BOOKING REQUEST 🌟*\n\n` +
+      `📍 *Preferred Sanctuary Location:* ${location.name} (${location.badge})\n` +
+      `📞 *Direct WhatsApp Line:* ${location.displayPhone}\n\n` +
       `🌿 *Therapy:* ${treatment.name}\n` +
       `📂 *Category:* ${treatment.categoryName}\n` +
       `⏱️ *Duration:* ${treatment.duration}\n` +
@@ -784,9 +817,9 @@ document.addEventListener('DOMContentLoaded', () => {
       `📱 *Phone / WhatsApp:* ${phone}\n` +
       `✉️ *Email:* ${email || 'N/A'}\n` +
       `📝 *Health Notes / Focus Area:* ${notes || 'None'}\n\n` +
-      `_Sent from Ayuryoga International Brochure Website_`;
+      `_Sent via Ayuryoga International Brochure Website (${location.name} Branch)_`;
 
-    const whatsappUrl = `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(bookingSummaryText)}`;
+    const whatsappUrl = `https://wa.me/${location.phone}?text=${encodeURIComponent(bookingSummaryText)}`;
 
     // Show Success State inside modal
     if (bookingForm) bookingForm.style.display = 'none';
@@ -796,14 +829,19 @@ document.addEventListener('DOMContentLoaded', () => {
       if (summaryDetailEl) {
         summaryDetailEl.innerHTML = `
           <div style="background: var(--color-sand); padding: 18px; border-radius: var(--radius-md); text-align: left; margin: 20px 0; border-left: 4px solid var(--color-gold);">
-            <div style="font-weight: 700; color: var(--color-primary-dark); font-size: 1.1rem; margin-bottom: 6px;">${treatment.name}</div>
+            <div style="font-weight: 700; color: var(--color-primary-dark); font-size: 1.1rem; margin-bottom: 4px;">${treatment.name}</div>
+            <div style="font-size: 0.88rem; color: var(--color-gold-dark); font-weight: 700; margin-bottom: 6px;">📍 Sanctuary: ${location.name} (${location.displayPhone})</div>
             <div style="font-size: 0.88rem; color: var(--color-text-muted);">Guest: <strong>${name}</strong> (${phone})</div>
             <div style="font-size: 0.88rem; color: var(--color-text-muted);">Schedule: <strong>${date}</strong> at <strong>${timeSlot}</strong></div>
             <div style="font-size: 0.88rem; color: var(--color-text-muted);">Duration: <strong>${treatment.duration}</strong> | Total: <strong>${priceFormatted}</strong></div>
-            ${isDoctorConsult ? `<div style="font-size: 0.85rem; color: var(--color-gold-dark); font-weight: 600; margin-top: 6px;">🩺 Consultation with Ayurvedic Vaidya scheduled before therapy</div>` : ''}
+            ${isDoctorConsult ? `<div style="font-size: 0.85rem; color: var(--color-gold-dark); font-weight: 600; margin-top: 6px;">🩺 Consultation with Ayurvedic Doctor (Vaidya) included</div>` : ''}
           </div>
         `;
       }
+    }
+
+    if (sendWhatsAppBookingBtnText) {
+      sendWhatsAppBookingBtnText.textContent = `Send Reservation to ${location.name} WhatsApp (${location.displayPhone})`;
     }
 
     if (sendWhatsAppBookingBtn) {
@@ -814,7 +852,129 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // =========================================================================
-  // 6. Floating WhatsApp Concierge Widget
+  // 6. WhatsApp Instant Location Picker Modal Logic
+  // =========================================================================
+  function initLocationPickerModal() {
+    if (!locationOptionsList) return;
+
+    locationOptionsList.innerHTML = AYURYOGA_LOCATIONS.map(loc => {
+      return `
+        <div class="location-option-item" data-location="${loc.id}">
+          <div class="location-option-left">
+            <div class="location-option-icon">${loc.icon}</div>
+            <div class="location-option-text">
+              <div class="location-option-title">
+                <span>${loc.name}</span>
+                <span class="location-option-badge">${loc.badge}</span>
+              </div>
+              <div class="location-option-desc">${loc.highlight}</div>
+              <div class="location-option-phone">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.669-.699c.969.539 1.95.82 2.791.82h.001c3.181 0 5.767-2.586 5.768-5.766 0-3.18-2.586-5.766-5.769-5.766zm3.364 8.232c-.141.398-.711.758-1.011.808-.282.046-.649.074-1.898-.444-1.597-.662-2.617-2.28-2.696-2.385-.078-.106-.646-.86-.646-1.637 0-.778.406-1.16.55-1.314.143-.155.313-.194.417-.194.104 0 .208.001.3.006.096.004.225-.037.352.268.13.312.443 1.077.482 1.156.039.078.065.17.013.273-.052.104-.078.169-.156.26-.078.091-.164.204-.235.274-.078.078-.16.163-.069.319.091.156.404.667.868 1.079.596.53 1.098.694 1.254.772.156.078.247.065.338-.039.091-.104.391-.455.495-.611.104-.156.208-.13.349-.078.143.052.908.428 1.064.506.156.078.26.117.299.182.039.065.039.377-.102.775z"></path></svg>
+                ${loc.displayPhone} • Open Daily
+              </div>
+            </div>
+          </div>
+          <div class="location-option-cta">
+            <span class="btn-location-whatsapp">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.669-.699c.969.539 1.95.82 2.791.82h.001c3.181 0 5.767-2.586 5.768-5.766 0-3.18-2.586-5.766-5.769-5.766zm3.364 8.232c-.141.398-.711.758-1.011.808-.282.046-.649.074-1.898-.444-1.597-.662-2.617-2.28-2.696-2.385-.078-.106-.646-.86-.646-1.637 0-.778.406-1.16.55-1.314.143-.155.313-.194.417-.194.104 0 .208.001.3.006.096.004.225-.037.352.268.13.312.443 1.077.482 1.156.039.078.065.17.013.273-.052.104-.078.169-.156.26-.078.091-.164.204-.235.274-.078.078-.16.163-.069.319.091.156.404.667.868 1.079.596.53 1.098.694 1.254.772.156.078.247.065.338-.039.091-.104.391-.455.495-.611.104-.156.208-.13.349-.078.143.052.908.428 1.064.506.156.078.26.117.299.182.039.065.039.377-.102.775z"></path></svg>
+              Chat with ${loc.name}
+            </span>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    // Handle clicks on location option cards
+    locationOptionsList.querySelectorAll('.location-option-item').forEach(card => {
+      card.addEventListener('click', () => {
+        const locId = card.dataset.location;
+        handleLocationWhatsAppSelection(locId);
+      });
+    });
+  }
+
+  function openLocationPickerModal(treatmentId = null) {
+    if (!locationPickerModal) return;
+
+    if (treatmentId) {
+      pendingWhatsAppTreatment = TREATMENTS_DATA.find(t => t.id === treatmentId);
+    } else {
+      pendingWhatsAppTreatment = null;
+    }
+
+    if (locationPickerTreatmentPreview) {
+      if (pendingWhatsAppTreatment) {
+        const price = formatPrice(pendingWhatsAppTreatment.priceMUR, pendingWhatsAppTreatment.priceUSD);
+        locationPickerTreatmentPreview.innerHTML = `
+          <div class="location-treatment-preview-info">
+            <h5>${pendingWhatsAppTreatment.name}</h5>
+            <p>Category: <strong>${pendingWhatsAppTreatment.categoryName}</strong> • Duration: <strong>${pendingWhatsAppTreatment.duration}</strong></p>
+          </div>
+          <div class="location-treatment-preview-price">
+            ${price.main}
+          </div>
+        `;
+        locationPickerTreatmentPreview.style.display = 'flex';
+      } else {
+        locationPickerTreatmentPreview.style.display = 'none';
+      }
+    }
+
+    locationPickerModal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLocationPickerModal() {
+    if (!locationPickerModal) return;
+    locationPickerModal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function handleLocationWhatsAppSelection(locationId) {
+    const location = getLocationById(locationId);
+    closeLocationPickerModal();
+
+    let messageText = '';
+
+    if (pendingWhatsAppTreatment) {
+      const isDoctorConsult = pendingWhatsAppTreatment.requiresDoctorConsultation !== false;
+      const priceFormatted = getWhatsAppPriceString(pendingWhatsAppTreatment.priceMUR, pendingWhatsAppTreatment.priceUSD);
+
+      if (isDoctorConsult) {
+        messageText = 
+          `Namaste Ayuryoga ${location.name} Sanctuary! 🙏\n\n` +
+          `I would like to request a *Doctor Consultation & Appointment* at your *${location.name}* centre for:\n\n` +
+          `🌿 *Treatment:* ${pendingWhatsAppTreatment.name}\n` +
+          `📂 *Category:* ${pendingWhatsAppTreatment.categoryName}\n` +
+          `⏱️ *Duration:* ${pendingWhatsAppTreatment.duration}\n` +
+          `💰 *Price:* ${priceFormatted}\n` +
+          `📍 *Sanctuary Location:* ${location.name} (${location.badge})\n\n` +
+          `Please let me know available slots with the Ayurvedic Doctor at ${location.name}. Thank you!`;
+      } else {
+        messageText = 
+          `Namaste Ayuryoga ${location.name} Sanctuary! 🙏\n\n` +
+          `I would like to enquire / book the following therapy at your *${location.name}* centre:\n\n` +
+          `🌿 *Treatment:* ${pendingWhatsAppTreatment.name}\n` +
+          `📂 *Category:* ${pendingWhatsAppTreatment.categoryName}\n` +
+          `⏱️ *Duration:* ${pendingWhatsAppTreatment.duration}\n` +
+          `💰 *Price:* ${priceFormatted}\n` +
+          `📍 *Sanctuary Location:* ${location.name} (${location.badge})\n\n` +
+          `Please let me know available slots at ${location.name}. Thank you!`;
+      }
+    } else {
+      messageText = 
+        `Namaste Ayuryoga ${location.name} Sanctuary! 🙏\n\n` +
+        `I am exploring your Classical Ayurvedic & Wellness Brochure and would like to enquire about appointments and therapies at your *${location.name}* centre.\n\n` +
+        `📍 *Centre:* ${location.name} (${location.address})\n` +
+        `Please let me know how I can schedule a consultation with your Vaidya / book a therapy session. Thank you!`;
+    }
+
+    const whatsappUrl = `https://wa.me/${location.phone}?text=${encodeURIComponent(messageText)}`;
+    window.open(whatsappUrl, '_blank');
+  }
+
+  // =========================================================================
+  // 7. Floating WhatsApp Concierge Widget
   // =========================================================================
   function initFloatingWhatsApp() {
     // Show bubble automatically after 4 seconds
@@ -829,12 +989,19 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
 
+    // Direct quick location buttons inside bubble
+    if (floatingBubble) {
+      floatingBubble.querySelectorAll('.trigger-quick-whatsapp').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const locId = btn.dataset.location;
+          handleLocationWhatsAppSelection(locId);
+        });
+      });
+    }
+
     if (floatingWhatsAppBtn) {
       floatingWhatsAppBtn.addEventListener('click', () => {
-        const defaultMsg = encodeURIComponent(
-          "Namaste Ayuryoga International! 🙏\n\nI am browsing your brochure website and would like to ask questions about doctor consultations, therapies, and appointment availability."
-        );
-        window.open(`https://wa.me/${WHATSAPP_PHONE}?text=${defaultMsg}`, '_blank');
+        openLocationPickerModal(null);
       });
     }
   }
