@@ -47,89 +47,554 @@ const AYURYOGA_LOCATIONS = [
 ];
 
 const THERAPY_CATEGORIES = [
-  { id: "ayurveda", name: "Ayurveda", icon: "flower-lotus" },
-  { id: "wellness", name: "Wellness", icon: "heart-pulse" },
-  { id: "beauty-care", name: "Beauty Care", icon: "sparkle" },
-  { id: "face-care", name: "Face Care", icon: "smile" },
-  { id: "body-care", name: "Body Care", icon: "shield-check" },
-  { id: "hair-care", name: "Hair Care", icon: "feather" },
-  { id: "hand-foot-care", name: "Hand & Foot Care", icon: "hand" }
+  { 
+    id: "ayurveda", 
+    name: "Ayurveda", 
+    icon: "flower-lotus",
+    subcategories: [
+      { id: "consultation", name: "Consultation", icon: "user-doctor" },
+      // { id: "services", name: "Services", icon: "shield-plus" }, // Temporarily hidden
+      { id: "therapies", name: "Therapies", icon: "sparkle" }
+    ]
+  },
+  { 
+    id: "wellness", 
+    name: "Wellness", 
+    icon: "heart-pulse",
+    subcategories: [
+      { id: "western", name: "Western", icon: "sparkle" },
+      { id: "ayurveda", name: "Ayurveda", icon: "flower-lotus" }
+    ]
+  },
+  { 
+    id: "beauty-care", 
+    name: "Beauty Care", 
+    icon: "sparkle",
+    subcategories: [
+      { id: "face-care", name: "Face Care", icon: "smile" },
+      { id: "body-care", name: "Body Care", icon: "shield-check" },
+      { id: "hair-care", name: "Hair Care", icon: "feather" },
+      { id: "hand-foot-care", name: "Hand & Foot Care", icon: "hand" }
+    ]
+  }
+];
+
+const AYURVEDA_CONSULTATION_CONDITIONS = [
+  {
+    name: "Shoulder Pain & Frozen Shoulder",
+    sanskrit: "Apabahuka",
+    icon: "activity",
+    image: "assets/images/Diseases/shoulder-pain-frozen-shoulder-6aaa49dd1bef3.webp",
+    desc: "Rotator cuff tendinitis, bursitis, and severe cervical-shoulder mobility restrictions."
+  },
+  {
+    name: "Stress & Mental Fatigue",
+    sanskrit: "Manasika Shrama",
+    icon: "brain",
+    image: "assets/images/Diseases/stress-mental-fatigue-6aaa49dd49046.webp",
+    desc: "Executive burnout, anxiety, chronic insomnia, and nervous system exhaustion."
+  },
+  {
+    name: "Constipation & Gut Health",
+    sanskrit: "Vibandha / Agnimandya",
+    icon: "flame",
+    image: "assets/images/Diseases/constipation-gut-health-6aaa49de2df9e.webp",
+    desc: "Sluggish bowels, IBS, hyperacidity, bloating, and metabolic Ama toxicity."
+  },
+  {
+    name: "Rheumatoid Arthritis",
+    sanskrit: "Amavata",
+    icon: "shield-alert",
+    image: "assets/images/Diseases/rheumatoid-arthritis-6aaa49e171272.webp",
+    desc: "Severe morning stiffness, joint swelling, synovial inflammation, and cartilage pain."
+  },
+  {
+    name: "Old Age Care & Longevity",
+    sanskrit: "Vayasthapana / Rasayana",
+    icon: "heart",
+    image: "assets/images/Diseases/old-age-care-longevity-6aaa49dfc09ac.webp",
+    desc: "Senior mobility, degenerative joint care, memory vitality, and whole-body stamina for 55+."
+  },
+  {
+    name: "Obesity Management",
+    sanskrit: "Sthoulya / Medoroga",
+    icon: "scale",
+    image: "assets/images/Diseases/obesity-management-6aaa49df0da10.webp",
+    desc: "Lipid metabolism imbalances, subcutaneous fat, water retention, and sluggish thyroid/Agni."
+  },
+  {
+    name: "Pain Management",
+    sanskrit: "Shoola Prashamana",
+    icon: "zap",
+    image: "assets/images/Diseases/pain-management-6aaa49dfd7e41.webp",
+    desc: "Chronic lower backache, cervical spondylosis, myalgia, ligament sprains, and sports injuries."
+  },
+  {
+    name: "Arthritis Care (Osteoarthritis)",
+    sanskrit: "Sandhigata Vata",
+    icon: "bone",
+    image: "assets/images/Diseases/arthritis-care-osteoarthritis-6aaa49ddf260a.webp",
+    desc: "Knee friction, crepitus, synovial fluid depletion, and degenerative joint wear-and-tear."
+  },
+  {
+    name: "Sciatica Pain",
+    sanskrit: "Gridhrasi",
+    icon: "navigation",
+    image: "assets/images/Diseases/sciatica-pain-6aaa49e18f9b0.webp",
+    desc: "Shooting nerve pain radiating down the leg, herniated lumbar disc, and numbness."
+  },
+  {
+    name: "Respiratory Problems & Sinusitis",
+    sanskrit: "Pranavaha Sroto Roga",
+    icon: "wind",
+    image: "assets/images/Diseases/respiratory-problems-sinusitis-6aaa49e0bb810.webp",
+    desc: "Chronic sinusitis, bronchial asthma, allergic rhinitis, and pulmonary congestion."
+  },
+  {
+    name: "Diabetics & Glycemic Control",
+    sanskrit: "Prameha / Madhumeha",
+    icon: "droplet",
+    image: "assets/images/Diseases/diabetics-glycemic-control-6aaa49ded342b.webp",
+    desc: "Metabolic sugar dysregulation, pre-diabetes, diabetic neuropathy, and sluggish vitality."
+  },
+  {
+    name: "Panchakarma Detoxification",
+    sanskrit: "Shodhana / Rasayana",
+    icon: "sparkles",
+    image: "assets/images/Diseases/panchakarma-detoxification-6aaa49e09d4e0.webp",
+    desc: "Deep cellular toxin elimination, biological Agni reset, and systemic immunity renewal."
+  },
+  {
+    name: "Gynaec Issues & Menstrual Problems",
+    sanskrit: "Stree Roga / Yonivyapad",
+    icon: "heart",
+    image: "assets/images/Diseases/Gynaec Issues & Menstrual Problems.jpg",
+    desc: "Irregular cycles, dysmenorrhea, PCOS/PCOD hormonal imbalances, pelvic congestion, and menopause care."
+  }
+];
+
+const AYURVEDA_DOCTORS = [
+  {
+    id: "doc-anoop",
+    name: "Dr. Anoop",
+    title: "Dr. Anoop (BAMS)",
+    designation: "Experienced Ayurvedic Physician & Panchakarma Specialist (Kerala)",
+    experience: "5+ Years Experience • Kerala, India",
+    image: "assets/images/doc_anoop.webp",
+    badge: "Experienced Doctor from Kerala",
+    sanctuaries: ["Moka"],
+    phone: "+230 5807 4009",
+    whatsappPhone: "23058074009",
+    specializations: [
+      "Pulse Diagnosis (Nadi Pariksha)",
+      "Panchakarma Detox & Chronic Disease Reversal",
+      "Spinal & Musculoskeletal Rehabilitation",
+      "Stress, Anxiety & Insomnia Protocols"
+    ],
+    bio: "Dr. Anoop is an experienced Ayurvedic physician from Kerala with over 5 years of classical clinical practice. Renowned for his diagnostic acumen in Nadi Pariksha (Pulse Diagnosis), Dr. Anoop designs personalized therapeutic blueprints that address root-cause constitutional imbalances, restoring cellular vitality and systemic harmony.",
+    consultationIncludes: [
+      "Comprehensive Prakriti (Body Constitution) & Dosha Evaluation",
+      "Nadi Pariksha (Traditional Radial Pulse Diagnosis)",
+      "Tailored Classical Herbal Medicines & Decoctions Prescription",
+      "Personalized Ayurvedic Diet & Dinacharya (Daily Routine) Blueprint",
+      "Targeted Panchakarma & Inpatient Treatment Recommendations"
+    ]
+  },
+  {
+    id: "doc-naveen",
+    name: "Dr. Naveen",
+    title: "Dr. Naveen (BAMS)",
+    designation: "Experienced Ayurvedic Consultant & Holistic Medicine Specialist (Kerala)",
+    experience: "4+ Years Experience • Kerala, India",
+    image: "assets/images/doc_naveen.webp",
+    badge: "Experienced Doctor from Kerala",
+    sanctuaries: ["Grand Baie"],
+    phone: "+230 5942 9564",
+    whatsappPhone: "23059429564",
+    specializations: [
+      "Rheumatoid Arthritis & Joint Pain Management",
+      "Digestive & Metabolic Disorders (Agni & Ama Therapy)",
+      "Geriatric Vitality & Healthy Aging (Vayasthapana)",
+      "Allergic & Dermatological Care"
+    ],
+    bio: "Dr. Naveen is an experienced Ayurvedic physician from Kerala with over 4 years of clinical practice, recognized for his compassionate, patient-centered care and integrative clinical therapeutics. He specializes in chronic arthritic pain resolution, gastrointestinal restoration, and restorative geriatric protocols, bringing enduring relief through authentic Kerala Ayurveda.",
+    consultationIncludes: [
+      "Holistic Clinical Health Assessment & Lifestyle Review",
+      "Musculoskeletal & Joint Mobility Analysis",
+      "Customized Herbal Remedies & Natural Pharmacology",
+      "Metabolic Gut Detox & Digestive Fire (Agni) Restoration",
+      "Long-term Preventive Health & Rejuvenation Schedule"
+    ]
+  }
+];
+
+const AYURVEDA_SERVICES = [
+  {
+    id: "serv-shoulder",
+    tag: "PAIN MANAGEMENT",
+    title: "Shoulder Pain",
+    question: "Shoulder Pain or Frozen Shoulder?",
+    highlight: "Unlock Your Frozen Shoulder with Ayurvedic Treatments",
+    lead: "Targeted Ayurvedic pain management to melt adhesions, relieve nerve compression, and restore pain-free shoulder mobility. Administered strictly after Doctor Consultation.",
+    image: "assets/images/Diseases/shoulder-pain-frozen-shoulder-6aaa49dd1bef3.webp",
+    badge: "Doctor Consultation Mandatory",
+    focus: "Frozen shoulder (Apabahuka), rotator cuff tendinitis, bursitis, cervical-shoulder stiffness",
+    description: "Our specialized Ayurvedic shoulder protocol combines deep medicinal oil pooling, rhythmic Marma point release, and hot citrus-herbal boluses (Naranga Kizhi) to dissolve calcifications, lubricate joints, and restore natural elevation and rotation without invasive injections.",
+    features: [
+      "Targeted Marma point lubrication & musculoskeletal release",
+      "Anti-inflammatory warm herbal Kizhi poultice fomentation",
+      "Restores full shoulder elevation & rotation smoothly",
+      "Herbal remedies for deep tendon and nerve rejuvenation"
+    ],
+    contacts: [
+      { location: "Moka", phone: "58074009", display: "+230 5807 4009" },
+      { location: "Grand Baie", phone: "59429564", display: "+230 5942 9564" }
+    ]
+  },
+  {
+    id: "serv-stress",
+    tag: "MENTAL WELLBEING",
+    title: "Stress",
+    question: "Struggling with Stress & Mental Fatigue?",
+    highlight: "Let Ayurveda Show You the Path to Inner Calm & Resilience",
+    lead: "Deep psychosomatic restoration, nervous system nourishment, and emotional calm through authentic Kerala Ayurveda rituals. Administered strictly after Doctor Consultation.",
+    image: "assets/images/Diseases/stress-mental-fatigue-6aaa49dd49046.webp",
+    badge: "Doctor Consultation Mandatory",
+    focus: "Chronic stress, anxiety, insomnia, executive burnout, tension headaches, cognitive exhaustion",
+    description: "Ayurveda approaches stress by calming aggravated Prana Vata and cooling excess Pitta in cranial channels. Through continuous third-eye forehead streaming (Shirodhara), cooling buttermilk cascades (Takradhara), and herbal crown masques (Thalapothichil), we guide your mind into deep tranquility.",
+    features: [
+      "Continuous third-eye Shirodhara with medicated herbal oils",
+      "Cooling Thalapothichil herbal crown masques to soothe nerves",
+      "Calms hyper-aroused nervous system and lowers cortisol",
+      "Restores restful, restorative REM sleep and emotional clarity"
+    ],
+    contacts: [
+      { location: "Moka", phone: "58074009", display: "+230 5807 4009" },
+      { location: "Grand Baie", phone: "59429564", display: "+230 5942 9564" }
+    ]
+  },
+  {
+    id: "serv-constipation",
+    tag: "GUT HEALTH & DETOX",
+    title: "Constipation",
+    question: "Need Relief from Constipation & Sluggish Bowels?",
+    highlight: "Ayurveda for Upset Stomach & Gastrointestinal Health",
+    lead: "Rebalance your digestive fire (Agni), eliminate accumulated toxic waste (Ama), and restore smooth, natural bowel regularity. Administered strictly after Doctor Consultation.",
+    image: "assets/images/Diseases/constipation-gut-health-6aaa49de2df9e.webp",
+    badge: "Doctor Consultation Mandatory",
+    focus: "Chronic constipation, sluggish bowels, IBS, acid reflux, bloating, metabolic toxicity",
+    description: "In Ayurveda, gut health is the foundation of all vitality. When digestive fire (Agni) is impaired, toxic Ama accumulates in the colon. Our clinical gastrointestinal protocols utilize doctor-prescribed herbal decoctions, gentle Panchakarma purification, and internal oleation to re-establish effortless daily elimination.",
+    features: [
+      "Root-cause gastrointestinal purification & channel detoxification",
+      "Medicated herbal Kashayams and Triphala bowel harmonizing regimens",
+      "Lubricating Sneha Basti enemas to heal chronic intestinal dryness",
+      "Personalized nutritional guidelines tailored to your metabolic constitution"
+    ],
+    contacts: [
+      { location: "Moka", phone: "58074009", display: "+230 5807 4009" },
+      { location: "Grand Baie", phone: "59429564", display: "+230 5942 9564" }
+    ]
+  },
+  {
+    id: "serv-rheumatoid",
+    tag: "RHEUMATOLOGY & JOINTS",
+    title: "Rheumatoid Arthritis",
+    question: "Suffering from Joint Swelling & Morning Stiffness?",
+    highlight: "Specialized Ayurvedic Treatments for Rheumatoid Arthritis (Amavata)",
+    lead: "Targeted clinical therapies to neutralize inflammatory Ama toxins, eliminate severe morning stiffness, and preserve joint cartilage. Administered strictly after Doctor Consultation.",
+    image: "assets/images/Diseases/rheumatoid-arthritis-6aaa49e171272.webp",
+    badge: "Doctor Consultation Mandatory",
+    focus: "Rheumatoid arthritis (Amavata), inflammatory polyarthritis, morning stiffness, joint effusions",
+    description: "Rheumatoid Arthritis requires dual action: clearing systemic metabolic Ama and pacifying localized Vata inflammation. We employ dry heated sand bolus fomentation (Manal Kizhi), anti-inflammatory herbal pastes (Lepanam), and specialized Kashaya Dhara streams to rapidly drain swelling and dissolve stiffness.",
+    features: [
+      "Purified heated sand (Manal Kizhi) dry fomentation for joint swelling",
+      "Warm medicinal herbal powder bolus (Podi Kizhi) to eliminate joint toxins",
+      "Topical herbal Lepanam wraps to rapidly extract localized inflammatory heat",
+      "Strengthens synovial cartilage, tendons, and restores pain-free movement"
+    ],
+    contacts: [
+      { location: "Moka", phone: "58074009", display: "+230 5807 4009" },
+      { location: "Grand Baie", phone: "59429564", display: "+230 5942 9564" }
+    ]
+  },
+  {
+    id: "serv-oldage",
+    tag: "GERIATRIC REJUVENATION",
+    title: "Old Age Care through Ayurveda",
+    question: "Looking for Senior Vitality, Mobility & Longevity?",
+    highlight: "Holistic Care to Restore Balance, Vitality & Mobility for Seniors",
+    lead: "Our holistic approach aims to restore balance, improve vitality, and address age-related issues such as joint pain, mobility, digestion, and mental well-being. Administered strictly after Doctor Consultation.",
+    image: "assets/images/Diseases/old-age-care-longevity-6aaa49dfc09ac.webp",
+    badge: "Doctor Consultation Mandatory",
+    focus: "Adults 55+, degenerative joint pain, muscular weakness, fatigue, memory decline, longevity",
+    description: "Classical Ayurvedic Rasayana and Vayasthapana protocols are designed specifically for senior wellness. By deeply lubricating aging joints, strengthening bone tissue (Asthi Dhatu), nourishing neurological pathways, and optimizing gentle digestion, we empower our seniors to enjoy vibrant, energetic, and independent lives.",
+    features: [
+      "Tailored Wellness Plans crafted for senior physiological needs",
+      "Joint & Mobility Care to restore safe, steady, and comfortable movement",
+      "Herbal Supplements for bone density, cardiovascular health & cognitive clarity",
+      "Panchakarma Detox to gently rebuild deep tissue resilience (Ojas)"
+    ],
+    contacts: [
+      { location: "Moka", phone: "58074009", display: "+230 5807 4009" },
+      { location: "Grand Baie", phone: "59429564", display: "+230 5942 9564" }
+    ]
+  },
+  {
+    id: "serv-obesity",
+    tag: "METABOLIC & WEIGHT RESET",
+    title: "Obesity Management",
+    question: "Struggling with Stubborn Weight & Slow Metabolism?",
+    highlight: "Ayurvedic Medoroga Protocols for Natural Fat Metabolism",
+    lead: "Accelerate lipid breakdown, clear lymphatic congestion, and balance Kapha-Medo Dhatu for sustainable, healthy weight reduction. Administered strictly after Doctor Consultation.",
+    image: "assets/images/Diseases/obesity-management-6aaa49df0da10.webp",
+    badge: "Doctor Consultation Mandatory",
+    focus: "Excess weight, sluggish metabolism, water retention, visceral fat, cellulite",
+    description: "Ayurvedic obesity management utilizes vigorous dry herbal powder massage (Udwarthanam) with triphala, musta, and kolakulathadi powders performed in upward strokes against hair follicles. Combined with medicated steam detox (Bashpa Sweda) and internal metabolic herbs, it breaks down subcutaneous fat and tones the entire body.",
+    features: [
+      "Vigorous dry herbal powder Udwarthanam for localized fat mobilization",
+      "Medicated herbal steam (Bashpa Sweda) to flush liquefied toxins",
+      "Agni-stimulating herbal Kashayams to boost basal metabolic rate",
+      "Customized Ayurvedic dietary plan for lasting weight equilibrium"
+    ],
+    contacts: [
+      { location: "Moka", phone: "58074009", display: "+230 5807 4009" },
+      { location: "Grand Baie", phone: "59429564", display: "+230 5942 9564" }
+    ]
+  },
+  {
+    id: "serv-pain",
+    tag: "PAIN REHABILITATION",
+    title: "Pain Management through Ayurveda",
+    question: "Suffering from Chronic Musculoskeletal & Spinal Pain?",
+    highlight: "Comprehensive Root-Cause Pain Relief & Tissue Healing",
+    lead: "Non-invasive, drug-free holistic pain resolution targeting chronic back pain, neck stiffness, tendonitis, and muscular spasms. Administered strictly after Doctor Consultation.",
+    image: "assets/images/Diseases/pain-management-6aaa49dfd7e41.webp",
+    badge: "Doctor Consultation Mandatory",
+    focus: "Chronic low back pain, cervical spondylosis, myalgia, ligament sprains, post-injury rehabilitation",
+    description: "Ayurvedic pain management treats localized Vata aggravation and inflammation through herbal oil reservoirs (Kati, Greeva & Janu Vasti), steaming herbal leaf boluses (Ela Kizhi), and specialized Marma stimulation. This stimulates local blood circulation, releases muscle spasms, and accelerates natural tissue healing.",
+    features: [
+      "Warm medicated herbal oil reservoirs over painful spinal segments",
+      "Steaming Ela Kizhi herbal leaf poultice fomentation for deep spasms",
+      "Marma point therapy to relieve neuro-muscular entrapments",
+      "Internal anti-inflammatory Ayurvedic Guggulu and Rasna decoctions"
+    ],
+    contacts: [
+      { location: "Moka", phone: "58074009", display: "+230 5807 4009" },
+      { location: "Grand Baie", phone: "59429564", display: "+230 5942 9564" }
+    ]
+  },
+  {
+    id: "serv-arthritis-care",
+    tag: "OSTEOARTHRITIS & JOINTS",
+    title: "Arthritis Care",
+    question: "Experiencing Knee Friction, Joint Degeneration & Stiffness?",
+    highlight: "Classical Sandhigata Vata Protocols for Cartilage & Mobility",
+    lead: "Deeply nourish depleted synovial fluid, rebuild joint cushioning, and reduce chronic knee and hip joint wear-and-tear. Administered strictly after Doctor Consultation.",
+    image: "assets/images/Diseases/arthritis-care-osteoarthritis-6aaa49ddf260a.webp",
+    badge: "Doctor Consultation Mandatory",
+    focus: "Osteoarthritis (Sandhigata Vata), knee crepitus, cartilage erosion, restricted joint flexion",
+    description: "Degenerative osteoarthritis occurs when aggravated Vata causes joint dryness and cartilage breakdown. Our clinical Arthritis Care protocol utilizes localized Janu Vasti (warm herbal oil reservoirs on knee joints), continuous medicated milk pouring (Ksheera Dhara), and Njavara rice fomentation to rebuild joint fluid, reduce friction, and eliminate pain.",
+    features: [
+      "Localized Janu Vasti warm medicinal oil retention for knee regeneration",
+      "Soothing Njavara rice milk poultices to strengthen joint ligaments",
+      "Rebuilds depleted synovial fluid and cushions aging cartilage",
+      "Restores smooth, pain-free joint bending, climbing, and walking"
+    ],
+    contacts: [
+      { location: "Moka", phone: "58074009", display: "+230 5807 4009" },
+      { location: "Grand Baie", phone: "59429564", display: "+230 5942 9564" }
+    ]
+  },
+  {
+    id: "serv-sciatica",
+    tag: "SPINE & NERVE CARE",
+    title: "Sciatica Pain",
+    question: "Shooting Nerve Pain Radiating Down Your Leg?",
+    highlight: "Specialized Gridhrasi Protocols for Sciatic Nerve Decompression",
+    lead: "Targeted Ayurvedic nerve therapy to soothe inflamed sciatic nerve roots, relieve lumbar disc compression, and restore walking ease. Administered strictly after Doctor Consultation.",
+    image: "assets/images/Diseases/sciatica-pain-6aaa49e18f9b0.webp",
+    badge: "Doctor Consultation Mandatory",
+    focus: "Sciatica (Gridhrasi), herniated lumbar discs, piriformis syndrome, radiating leg numbness",
+    description: "In Ayurveda, Sciatica is known as Gridhrasi. It causes severe shooting pain from the lower back through the buttocks down to the heel. Our clinical protocol combines localized Kati Vasti (medicated spinal oil reservoir), warm Podi Kizhi powder fomentation, and specialized herbal enemas (Sneha & Kashaya Basti) to relieve nerve pressure and regenerate nerve myelin.",
+    features: [
+      "Localized Kati Vasti oil reservoir to relieve lumbar root compression",
+      "Warm herbal powder Podikizhi fomentation to clear nerve channel blockages",
+      "Specialized Basti therapy to pacify systemic Vata and heal nerve irritation",
+      "Eliminates shooting radiating pain, tingling, and lower limb numbness"
+    ],
+    contacts: [
+      { location: "Moka", phone: "58074009", display: "+230 5807 4009" },
+      { location: "Grand Baie", phone: "59429564", display: "+230 5942 9564" }
+    ]
+  },
+  {
+    id: "serv-respiratory",
+    tag: "RESPIRATORY & SINUS",
+    title: "Respiratory Problems",
+    question: "Struggling with Sinusitis, Allergies, Bronchitis or Asthma?",
+    highlight: "Ayurvedic Pranavaha Srotas Purification & Lung Vitality",
+    lead: "Clear deep mucosal congestion, expand vital lung capacity, and soothe chronic respiratory allergies and sinus inflammation. Administered strictly after Doctor Consultation.",
+    image: "assets/images/Diseases/respiratory-problems-sinusitis-6aaa49e0bb810.webp",
+    badge: "Doctor Consultation Mandatory",
+    focus: "Chronic sinusitis (Dushta Pratishyaya), bronchial asthma (Tamaka Shwasa), allergic rhinitis, cough",
+    description: "Ayurvedic respiratory therapy purifies the Pranavaha Srotas (respiratory tract) by clearing accumulated Kapha mucus and inflammatory toxins. Through therapeutic nasal administration (Nasyam) of medicated herbal oils, medicated herbal smoke inhalation (Dhoomapanam), and herbal chest fomentation, we clear blocked sinus passages and boost respiratory immunity.",
+    features: [
+      "Therapeutic Nasyam nasal oil infusion to clear sinus and head congestion",
+      "Warm herbal chest fomentation and gentle medicated steam inhalation",
+      "Dhoomapanam medicated herbal smoking to disinfect respiratory channels",
+      "Herbal Rasayanas (such as Agastya Haritaki) to strengthen pulmonary immunity"
+    ],
+    contacts: [
+      { location: "Moka", phone: "58074009", display: "+230 5807 4009" },
+      { location: "Grand Baie", phone: "59429564", display: "+230 5942 9564" }
+    ]
+  },
+  {
+    id: "serv-diabetics",
+    tag: "METABOLIC & ENDOCRINE CARE",
+    title: "Diabetics",
+    question: "Seeking Natural Glycemic Control & Diabetic Vitality?",
+    highlight: "Classical Ayurvedic Prameha Protocols for Blood Sugar Management",
+    lead: "Comprehensive Ayurvedic protocols to enhance insulin sensitivity, purify metabolic channels (Srotas), prevent diabetic neuropathy, and restore metabolic balance. Administered strictly after Doctor Consultation.",
+    image: "assets/images/Diseases/diabetics-glycemic-control-6aaa49ded342b.webp",
+    badge: "Doctor Consultation Mandatory",
+    focus: "Type 2 Diabetes (Prameha / Madhumeha), pre-diabetes, metabolic syndrome, diabetic neuropathy, lethargy",
+    description: "In Ayurveda, diabetes is recognized as Prameha, primarily a metabolic disturbance of Kapha and Medo Dhatu (fat tissue). Our clinical diabetes care protocol combines personalized herbal Kashayams (including Nisha-Amalaki, Asanadi, and Vijaysar), channel-purifying Dhara streams, metabolic Udvarthanam, and therapeutic dietary regimens to optimize glucose metabolism and protect vital organs.",
+    features: [
+      "Customized herbal Kashayams & Nisha-Amalaki formulations for glycemic balance",
+      "Therapeutic metabolic Udvarthanam and Dhara for fat and channel cleansing",
+      "Neuropathy care and Padabhyangam to prevent micro-vascular complications",
+      "Tailored Ayurvedic Dinacharya and nutritional blueprint for sustained vitality"
+    ],
+    contacts: [
+      { location: "Moka", phone: "58074009", display: "+230 5807 4009" },
+      { location: "Grand Baie", phone: "59429564", display: "+230 5942 9564" }
+    ]
+  },
+  {
+    id: "serv-panchakarma",
+    tag: "CELLULAR DETOX & REJUVENATION",
+    title: "Panchakarma Detoxification",
+    question: "Need Deep Systemic Cleansing & Vitality Reset?",
+    highlight: "Authentic 5-Stage Classical Panchakarma Purification",
+    lead: "The supreme Ayurvedic detoxification methodology to expel deep-rooted Ama toxins, reset biological Agni, and rejuvenate cellular vitality. Administered strictly after Doctor Consultation.",
+    image: "assets/images/Diseases/panchakarma-detoxification-6aaa49e09d4e0.webp",
+    badge: "Doctor Consultation Mandatory",
+    focus: "Deep metabolic toxicity (Ama), autoimmune vulnerability, chronic fatigue, metabolic reset, longevity",
+    description: "Panchakarma is the pinnacle of classical Ayurvedic healing. Following personalized preparation (Poorvakarma) with internal ghee oleation (Snehapanam) and herbal steam (Swedana), the five classical cleansing procedures (Vamanam, Virechanam, Basti, Nasyam, and Raktamokshana) systematically dislodge and eliminate toxic waste from every cellular layer, resetting your body's self-healing intelligence.",
+    features: [
+      "Personalized 3-phase Panchakarma: Poorvakarma, Pradhanakarma & Paschatkarma",
+      "Full internal cellular oleation and medicated steam channel dilation",
+      "Doctor-monitored therapeutic purgation (Virechanam) and healing Basti enemas",
+      "Deep immunity restoration (Rasayana) and biological age reversal (Ojas)"
+    ],
+    contacts: [
+      { location: "Moka", phone: "58074009", display: "+230 5807 4009" },
+      { location: "Grand Baie", phone: "59429564", display: "+230 5942 9564" }
+    ]
+  }
+];
+
+const AYURVEDA_TERMS = [
+  {
+    category: "General Policy",
+    icon: "shield-check",
+    items: [
+      {
+        title: "Health Disclosure",
+        desc: "Guests are required to provide accurate information regarding their medical history, allergies, and physical conditions upon arrival."
+      },
+      {
+        title: "Consultation",
+        desc: "All Ayurvedic treatments are preceded by a consultation. The Chief Physician’s decision regarding the suitability of a treatment is final."
+      },
+      {
+        title: "Age Requirement",
+        desc: "Guests under 18 must be accompanied by a guardian."
+      }
+    ]
+  },
+  {
+    category: "Liability & Valuables",
+    icon: "lock",
+    items: [
+      {
+        title: "Personal Property",
+        desc: "The Centre is not responsible for the loss or damage of personal belongings. Please use the lockers or in-room safes provided."
+      },
+      {
+        title: "Physical Limits",
+        desc: "Guests participate in Yoga and Physical Therapy at their own risk. Please do not push beyond your physical comfort zone."
+      }
+    ]
+  },
+  {
+    category: "Bookings & Cancellations",
+    icon: "calendar-check",
+    items: [
+      {
+        title: "Reservations",
+        desc: "A booking is confirmed only upon receipt of the required advance deposit."
+      },
+      {
+        title: "Cancellation",
+        desc: "Cancellations made within 1 day of the arrival date."
+      },
+      {
+        title: "No-Show",
+        desc: "In case of a no-show, the total cost of the stay/treatment will be forfeited."
+      }
+    ]
+  },
+  {
+    category: "Centre Etiquette",
+    icon: "sparkles",
+    items: [
+      {
+        title: "Punctuality",
+        desc: "Please arrive 15 minutes prior to your scheduled treatment. Late arrivals may result in a shortened session to avoid inconveniencing the next guest."
+      },
+      {
+        title: "Silence Zone",
+        desc: "To maintain a healing environment, we request guests to keep noise levels to a minimum. Mobile phones must be on silent mode in all therapy and yoga areas."
+      },
+      {
+        title: "Dress Code",
+        desc: "Please use the provided clothes within the spa and treatment zones."
+      }
+    ]
+  },
+  {
+    category: "Health & Safety",
+    icon: "heart-pulse",
+    items: [
+      {
+        title: "Therapeutic Response",
+        desc: "While Ayurveda is natural, some treatments (like Panchakarma) may cause temporary “healing crises” (tiredness or mild headaches). Please report any discomfort to your therapist immediately."
+      },
+      {
+        title: "Contraindications",
+        desc: "Treatments will not be administered to guests under the influence of alcohol or drugs."
+      },
+      {
+        title: "Pregnancy",
+        desc: "Expectant mothers must inform the front desk to ensure treatments are modified for safety."
+      }
+    ]
+  }
 ];
 
 const TREATMENTS_DATA = [
   // =========================================================================
   // 1. AYURVEDA (Classical Treatments - Administered After Doctor Consultation)
+  // Sub-classified into: Abhyangam, Kizhi, Dhara, Others
   // =========================================================================
-  {
-    id: "ayur-01",
-    categoryId: "ayurveda",
-    categoryName: "Ayurveda",
-    name: "Abhyangam + Njavarakizhi (Without Oil)",
-    subtitle: "Classical Medicated Herbal Rice Poultice & Full Body Rejuvenation",
-    duration: "90 min",
-    priceMUR: 2250,
-    priceUSD: 50,
-    badge: "Doctor Prescribed",
-    requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Abhyangam + Njavarakizhi  - Without Oil.webp",
-    description: "An intensive rejuvenating therapy combining full body Abhyangam massage followed by Njavarakizhi, where warm boluses of medicinal red rice cooked in milk and herbal decoction are applied across the body to rebuild tissues and soothe nerves.",
-    benefits: [
-      "Deeply nourishes and strengthens muscular tissues and joints",
-      "Enhances skin luster, improves peripheral blood circulation",
-      "Relieves emaciation, chronic fatigue, and neurological weakness",
-      "Calms aggravated Vata dosha and promotes longevity"
-    ],
-    doshaFocus: "Vata & Pitta Pacifying",
-    recommendedFor: "Muscle wasting, joint stiffness, chronic fatigue, anti-aging"
-  },
-  {
-    id: "ayur-02",
-    categoryId: "ayurveda",
-    categoryName: "Ayurveda",
-    name: "Abhyangam + Bashpa Sweda (Without Oil)",
-    subtitle: "Therapeutic Body Therapy with Medicated Herbal Steam Bath",
-    duration: "60 min",
-    priceMUR: 1800,
-    priceUSD: 40,
-    badge: "Detox & Relief",
-    requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Abhyangam + Bhashpa Sweda - Without Oil.webp",
-    description: "A comprehensive detoxification therapy pairing full body therapeutic Abhyangam with Bashpa Sweda (herbal steam box). The warm herbal vapors open micro-channels (Srotas), flushing deep-seated toxins through perspiration.",
-    benefits: [
-      "Eliminates accumulated cellular endotoxins (Ama)",
-      "Relieves joint pain, stiffness, and body heaviness",
-      "Improves circulation and relaxes taut muscles",
-      "Promotes light and energized bodily feeling"
-    ],
-    doshaFocus: "Vata & Kapha Reduction",
-    recommendedFor: "Body stiffness, water retention, sluggish metabolism, stress"
-  },
-  {
-    id: "ayur-03",
-    categoryId: "ayurveda",
-    categoryName: "Ayurveda",
-    name: "Abhyangam Treatment (Without Oil)",
-    subtitle: "Focused Classical Ayurvedic Body Massage Protocol",
-    duration: "45 min",
-    priceMUR: 1440,
-    priceUSD: 32,
-    badge: "Classical Care",
-    requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Abhyangam Treatment Without Oil.webp",
-    description: "A specialized 45-minute clinical Abhyangam session tailored by our Vaidya to target focal areas of tension and stiffness, stimulating vital Marma energy points to restore systemic equilibrium.",
-    benefits: [
-      "Restores musculoskeletal flexibility and joint mobility",
-      "Relieves physical fatigue and everyday stress",
-      "Stimulates vital Marma energy channels",
-      "Calms nervous exhaustion and improves sleep quality"
-    ],
-    doshaFocus: "Vata Pacifying",
-    recommendedFor: "General fatigue, mild joint ache, stress, posture strain"
-  },
   {
     id: "ayur-04",
     categoryId: "ayurveda",
     categoryName: "Ayurveda",
+    therapyType: "abhyangam",
+    therapyTypeName: "Abhyangam",
     name: "Abhyangam",
     subtitle: "Traditional Full Body Ayurvedic Massage",
     duration: "45 min",
@@ -152,7 +617,9 @@ const TREATMENTS_DATA = [
     id: "ayur-05",
     categoryId: "ayurveda",
     categoryName: "Ayurveda",
-    name: "Naranga Kizhi (Herbal Powder & Lemon Poultice)",
+    therapyType: "kizhi",
+    therapyTypeName: "Kizhi",
+    name: "Naranga Kizhi",
     subtitle: "Citrus & Medicated Herb Bolus Fomentation for Acute Inflammation",
     duration: "60 min",
     priceMUR: 1990,
@@ -174,6 +641,8 @@ const TREATMENTS_DATA = [
     id: "ayur-06",
     categoryId: "ayurveda",
     categoryName: "Ayurveda",
+    therapyType: "others",
+    therapyTypeName: "Others",
     name: "Virechanam",
     subtitle: "Classical Panchakarma Therapeutic Purgation",
     duration: "15 min",
@@ -196,6 +665,8 @@ const TREATMENTS_DATA = [
     id: "ayur-07",
     categoryId: "ayurveda",
     categoryName: "Ayurveda",
+    therapyType: "others",
+    therapyTypeName: "Others",
     name: "Snehapanam",
     subtitle: "Therapeutic Medicated Ghee Internal Oleation",
     duration: "15 min",
@@ -218,6 +689,8 @@ const TREATMENTS_DATA = [
     id: "ayur-08",
     categoryId: "ayurveda",
     categoryName: "Ayurveda",
+    therapyType: "others",
+    therapyTypeName: "Others",
     name: "Thalapothichil",
     subtitle: "Cooling Medicated Herbal Paste Crown Mask (Shirolepa)",
     duration: "30 min",
@@ -240,8 +713,10 @@ const TREATMENTS_DATA = [
     id: "ayur-09",
     categoryId: "ayurveda",
     categoryName: "Ayurveda",
-    name: "Thakradhara (Head & Body)",
-    subtitle: "Continuous Medicated Buttermilk Flow Therapy",
+    therapyType: "dhara",
+    therapyTypeName: "Dhara",
+    name: "Thakradhara",
+    subtitle: "Continuous Medicated Buttermilk Flow Therapy (Head & Body)",
     duration: "90 min",
     priceMUR: 2700,
     priceUSD: 60,
@@ -262,6 +737,8 @@ const TREATMENTS_DATA = [
     id: "ayur-10",
     categoryId: "ayurveda",
     categoryName: "Ayurveda",
+    therapyType: "others",
+    therapyTypeName: "Others",
     name: "Thalam",
     subtitle: "Medicinal Herbal Crown Application for Scalp & Brain",
     duration: "30 min",
@@ -284,6 +761,8 @@ const TREATMENTS_DATA = [
     id: "ayur-11",
     categoryId: "ayurveda",
     categoryName: "Ayurveda",
+    therapyType: "others",
+    therapyTypeName: "Others",
     name: "Nethra Sekam",
     subtitle: "Medicated Decoction Eye Cleansing & Stream",
     duration: "15 min",
@@ -306,6 +785,8 @@ const TREATMENTS_DATA = [
     id: "ayur-12",
     categoryId: "ayurveda",
     categoryName: "Ayurveda",
+    therapyType: "others",
+    therapyTypeName: "Others",
     name: "Netra Tharpanam",
     subtitle: "Medicated Ghee Reservoir Rejuvenation for Eyes",
     duration: "30 min",
@@ -328,6 +809,8 @@ const TREATMENTS_DATA = [
     id: "ayur-13",
     categoryId: "ayurveda",
     categoryName: "Ayurveda",
+    therapyType: "others",
+    therapyTypeName: "Others",
     name: "Kabalam",
     subtitle: "Therapeutic Medicated Herbal Fluid Mouth Gargle",
     duration: "15 min",
@@ -350,6 +833,8 @@ const TREATMENTS_DATA = [
     id: "ayur-14",
     categoryId: "ayurveda",
     categoryName: "Ayurveda",
+    therapyType: "others",
+    therapyTypeName: "Others",
     name: "Karnapooranam",
     subtitle: "Medicated Herbal Ear Oil Pooling & Instillation",
     duration: "15 min",
@@ -372,6 +857,8 @@ const TREATMENTS_DATA = [
     id: "ayur-15",
     categoryId: "ayurveda",
     categoryName: "Ayurveda",
+    therapyType: "abhyangam",
+    therapyTypeName: "Abhyangam",
     name: "Padabhyangam",
     subtitle: "Targeted Ayurvedic Foot & Reflex Point Massage",
     duration: "15 min",
@@ -394,7 +881,9 @@ const TREATMENTS_DATA = [
     id: "ayur-16",
     categoryId: "ayurveda",
     categoryName: "Ayurveda",
-    name: "Siroabhyangam - Head, Shoulder & Back",
+    therapyType: "abhyangam",
+    therapyTypeName: "Abhyangam",
+    name: "Siroabhyangam",
     subtitle: "Therapeutic Scalp, Cervical & Upper Back Massage",
     duration: "30 min",
     priceMUR: 960,
@@ -416,7 +905,9 @@ const TREATMENTS_DATA = [
     id: "ayur-17",
     categoryId: "ayurveda",
     categoryName: "Ayurveda",
-    name: "Bashpa Sweda (Herbal Steam Bath)",
+    therapyType: "others",
+    therapyTypeName: "Others",
+    name: "Bashpa Sweda",
     subtitle: "Full Body Medicated Herbal Steam Fomentation",
     duration: "15 min",
     priceMUR: 420,
@@ -438,6 +929,8 @@ const TREATMENTS_DATA = [
     id: "ayur-18",
     categoryId: "ayurveda",
     categoryName: "Ayurveda",
+    therapyType: "others",
+    therapyTypeName: "Others",
     name: "Pichu",
     subtitle: "Medicated Oil Cotton Pad Application on Vertex / Joint",
     duration: "30 min",
@@ -460,6 +953,8 @@ const TREATMENTS_DATA = [
     id: "ayur-19",
     categoryId: "ayurveda",
     categoryName: "Ayurveda",
+    therapyType: "others",
+    therapyTypeName: "Others",
     name: "Upanaham",
     subtitle: "Warm Herbal Medicated Paste Bandage / Poultice",
     duration: "30 min",
@@ -482,6 +977,8 @@ const TREATMENTS_DATA = [
     id: "ayur-20",
     categoryId: "ayurveda",
     categoryName: "Ayurveda",
+    therapyType: "others",
+    therapyTypeName: "Others",
     name: "Lepanam",
     subtitle: "Therapeutic Topical Herbal Paste Application",
     duration: "30 min",
@@ -501,31 +998,11 @@ const TREATMENTS_DATA = [
     recommendedFor: "Inflammatory arthritis, skin rashes, sports injuries, eczema"
   },
   {
-    id: "ayur-21",
-    categoryId: "ayurveda",
-    categoryName: "Ayurveda",
-    name: "Specialized Therapy - Therapy on Affected Area",
-    subtitle: "Customized Localized Marma & Herbal Protocol",
-    duration: "30 min",
-    priceMUR: 720,
-    priceUSD: 16,
-    badge: "Targeted Clinical",
-    requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Specialized Therapy on Affected Area.webp",
-    description: "A focused, doctor-prescribed customized therapy specifically addressing a focal pain point, injured muscle group, or post-surgical recovery area using tailored herbal modalities.",
-    benefits: [
-      "Tailored specifically to your precise clinical diagnosis",
-      "Addresses acute muscle spasms, nerve impingement, or joint locks",
-      "Accelerates localized tissue regeneration",
-      "Integrates Marma activation and specialized oils"
-    ],
-    doshaFocus: "Personalized Dosha Target",
-    recommendedFor: "Focal pain, athletic injuries, specific joint restrictions"
-  },
-  {
     id: "ayur-22",
     categoryId: "ayurveda",
     categoryName: "Ayurveda",
+    therapyType: "others",
+    therapyTypeName: "Others",
     name: "Kashaya Basthi",
     subtitle: "Classical Medicated Herbal Decoction Enema Therapy",
     duration: "60 min",
@@ -548,6 +1025,8 @@ const TREATMENTS_DATA = [
     id: "ayur-23",
     categoryId: "ayurveda",
     categoryName: "Ayurveda",
+    therapyType: "others",
+    therapyTypeName: "Others",
     name: "Greeva Vasti",
     subtitle: "Warm Medicated Oil Reservoir for Cervical Neck & Spine",
     duration: "30 min",
@@ -570,6 +1049,8 @@ const TREATMENTS_DATA = [
     id: "ayur-24",
     categoryId: "ayurveda",
     categoryName: "Ayurveda",
+    therapyType: "others",
+    therapyTypeName: "Others",
     name: "Dhoomapanam",
     subtitle: "Medicated Herbal Smoke Inhalation for Respiratory Tract",
     duration: "15 min",
@@ -592,6 +1073,8 @@ const TREATMENTS_DATA = [
     id: "ayur-25",
     categoryId: "ayurveda",
     categoryName: "Ayurveda",
+    therapyType: "others",
+    therapyTypeName: "Others",
     name: "Sneha Basti",
     subtitle: "Medicated Herbal Oil Enema (Anuvasana Basti)",
     duration: "15 min",
@@ -614,6 +1097,8 @@ const TREATMENTS_DATA = [
     id: "ayur-26",
     categoryId: "ayurveda",
     categoryName: "Ayurveda",
+    therapyType: "others",
+    therapyTypeName: "Others",
     name: "Siro Vasthi",
     subtitle: "Capped Medicated Herbal Oil Pooling on Scalp",
     duration: "45 min",
@@ -636,6 +1121,8 @@ const TREATMENTS_DATA = [
     id: "ayur-27",
     categoryId: "ayurveda",
     categoryName: "Ayurveda",
+    therapyType: "others",
+    therapyTypeName: "Others",
     name: "Udwarthanam",
     subtitle: "Deep Lymphatic Dry Herbal Powder Scrub Massage",
     duration: "60 min",
@@ -658,6 +1145,8 @@ const TREATMENTS_DATA = [
     id: "ayur-28",
     categoryId: "ayurveda",
     categoryName: "Ayurveda",
+    therapyType: "others",
+    therapyTypeName: "Others",
     name: "Nasyam",
     subtitle: "Nasal Medication & Cranial Clearance (Panchakarma)",
     duration: "30 min",
@@ -680,6 +1169,8 @@ const TREATMENTS_DATA = [
     id: "ayur-29",
     categoryId: "ayurveda",
     categoryName: "Ayurveda",
+    therapyType: "others",
+    therapyTypeName: "Others",
     name: "Nadee Sweda",
     subtitle: "Targeted Tubular Herbal Steam Jet Application",
     duration: "15 min",
@@ -702,6 +1193,8 @@ const TREATMENTS_DATA = [
     id: "ayur-30",
     categoryId: "ayurveda",
     categoryName: "Ayurveda",
+    therapyType: "kizhi",
+    therapyTypeName: "Kizhi",
     name: "Pinda Swedanam",
     subtitle: "Warm Medicated Bolus Fomentation Massage",
     duration: "30 min",
@@ -721,32 +1214,12 @@ const TREATMENTS_DATA = [
     recommendedFor: "Body pain, muscular cramps, joint stiffness, physical fatigue"
   },
   {
-    id: "ayur-31",
-    categoryId: "ayurveda",
-    categoryName: "Ayurveda",
-    name: "Shirodhara (Without oil)",
-    subtitle: "Decoction / Medicated Herbal Water Stream to Forehead",
-    duration: "60 min",
-    priceMUR: 1080,
-    priceUSD: 24,
-    badge: "Stress & Cooling",
-    requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Shirodhara Without Oil.webp",
-    description: "A continuous flow of cooling herbal decoctions (Kashayam) poured rhythmically across the forehead to calm heated Pitta dosha and quiet an overactive mind.",
-    benefits: [
-      "Soothes intense mental fatigue, anger, and anxiety",
-      "Improves sleep onset and quality naturally",
-      "Alleviates tension headaches and heat sensations",
-      "Ideal for those who prefer non-oily scalp therapies"
-    ],
-    doshaFocus: "Pitta Pacifying",
-    recommendedFor: "Mental burnout, hot flashes, irritability, non-oil preference"
-  },
-  {
     id: "ayur-32",
     categoryId: "ayurveda",
     categoryName: "Ayurveda",
-    name: "Ksheeradhara (Head Only)",
+    therapyType: "dhara",
+    therapyTypeName: "Dhara",
+    name: "Ksheeradhara",
     subtitle: "Medicated Herbal Milk Continuous Stream on Forehead",
     duration: "60 min",
     priceMUR: 1800,
@@ -768,7 +1241,9 @@ const TREATMENTS_DATA = [
     id: "ayur-33",
     categoryId: "ayurveda",
     categoryName: "Ayurveda",
-    name: "Shirodhara With Oil",
+    therapyType: "dhara",
+    therapyTypeName: "Dhara",
+    name: "Shirodhara",
     subtitle: "Classical Medicated Warm Oil Continuous Stream",
     duration: "60 min",
     priceMUR: 2520,
@@ -790,8 +1265,10 @@ const TREATMENTS_DATA = [
     id: "ayur-34",
     categoryId: "ayurveda",
     categoryName: "Ayurveda",
-    name: "Pizhichil (Snehadhara) without oil",
-    subtitle: "Therapeutic Medicated Stream Body Infusion",
+    therapyType: "dhara",
+    therapyTypeName: "Dhara",
+    name: "Pizhichil",
+    subtitle: "Therapeutic Medicated Stream Body Infusion (Snehadhara)",
     duration: "45 min",
     priceMUR: 1080,
     priceUSD: 24,
@@ -812,6 +1289,8 @@ const TREATMENTS_DATA = [
     id: "ayur-35",
     categoryId: "ayurveda",
     categoryName: "Ayurveda",
+    therapyType: "dhara",
+    therapyTypeName: "Dhara",
     name: "Dhanyamla Dhara",
     subtitle: "Fermented Medicinal Cereal Decoction Stream",
     duration: "60 min",
@@ -834,6 +1313,8 @@ const TREATMENTS_DATA = [
     id: "ayur-36",
     categoryId: "ayurveda",
     categoryName: "Ayurveda",
+    therapyType: "others",
+    therapyTypeName: "Others",
     name: "Vasthi on Affected area",
     subtitle: "Localized Medicated Oil Retention Reservoir",
     duration: "45 min",
@@ -856,6 +1337,8 @@ const TREATMENTS_DATA = [
     id: "ayur-37",
     categoryId: "ayurveda",
     categoryName: "Ayurveda",
+    therapyType: "others",
+    therapyTypeName: "Others",
     name: "Kati Vasti",
     subtitle: "Warm Medicated Oil Reservoir for Lower Spine & Lumbar",
     duration: "30 min",
@@ -878,6 +1361,8 @@ const TREATMENTS_DATA = [
     id: "ayur-38",
     categoryId: "ayurveda",
     categoryName: "Ayurveda",
+    therapyType: "others",
+    therapyTypeName: "Others",
     name: "Janu Vasti",
     subtitle: "Medicated Herbal Oil Reservoir for Knee Joints",
     duration: "30 min",
@@ -897,32 +1382,12 @@ const TREATMENTS_DATA = [
     recommendedFor: "Knee osteoarthritis, knee stiffness, ligament weakness, sports strain"
   },
   {
-    id: "ayur-39",
-    categoryId: "ayurveda",
-    categoryName: "Ayurveda",
-    name: "Abhyangam + Podikizhi Treatment (Without Oil)",
-    subtitle: "Full Body Massage Combined with Herbal Powder Poultice",
-    duration: "60 min",
-    priceMUR: 1440,
-    priceUSD: 32,
-    badge: "Stiffness Relief",
-    requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Abhyangam + Podikizhi Treatment  - Without Oil.webp",
-    description: "A dual therapeutic session featuring full body Abhyangam followed by Podikizhi fomentation using warm herbal powders bundled in cloth to dissolve deep-seated tension.",
-    benefits: [
-      "Effectively melts stubborn muscular knots and stiffness",
-      "Stimulates circulation and enhances metabolic vitality",
-      "Relieves neck, shoulder, and spinal fatigue",
-      "Leaves the body feeling remarkably limber and light"
-    ],
-    doshaFocus: "Vata-Kapha Pacifying",
-    recommendedFor: "Muscular aches, frozen stiffness, posture fatigue, body heaviness"
-  },
-  {
     id: "ayur-40",
     categoryId: "ayurveda",
     categoryName: "Ayurveda",
-    name: "Ela Kizhi (Herbal Leaf Poultice)",
+    therapyType: "kizhi",
+    therapyTypeName: "Kizhi",
+    name: "Ela Kizhi",
     subtitle: "Warm Fresh Medicinal Leaves & Root Bolus Massage",
     duration: "45 min",
     priceMUR: 1560,
@@ -944,7 +1409,9 @@ const TREATMENTS_DATA = [
     id: "ayur-41",
     categoryId: "ayurveda",
     categoryName: "Ayurveda",
-    name: "Vamanam (Panchakarma)",
+    therapyType: "others",
+    therapyTypeName: "Others",
+    name: "Vamanam",
     subtitle: "Therapeutic Emesis for Kapha & Respiratory Toxins",
     duration: "90 min",
     priceMUR: 1800,
@@ -966,7 +1433,9 @@ const TREATMENTS_DATA = [
     id: "ayur-42",
     categoryId: "ayurveda",
     categoryName: "Ayurveda",
-    name: "Podikizhi (Herbal Powder Poultice)",
+    therapyType: "kizhi",
+    therapyTypeName: "Kizhi",
+    name: "Podikizhi",
     subtitle: "Warm Medicinal Herbal Powder Bolus Fomentation",
     duration: "45 min",
     priceMUR: 1800,
@@ -985,9 +1454,35 @@ const TREATMENTS_DATA = [
     recommendedFor: "Sciatica, paralysis rehabilitation, backache, muscular spasms"
   },
   {
+    id: "ayur-avikizhi",
+    categoryId: "ayurveda",
+    categoryName: "Ayurveda",
+    therapyType: "kizhi",
+    therapyTypeName: "Kizhi",
+    name: "Avikizhi",
+    subtitle: "Classical Thermal Medicated Herbal Bolus Fomentation",
+    duration: "45 min",
+    priceMUR: 1440,
+    priceUSD: 32,
+    badge: "Joint & Muscle Relief",
+    requiresDoctorConsultation: true,
+    image: "assets/images/Ayurveda/Avikizhi.webp",
+    description: "Classical thermal therapy using heated cloth boluses packed with medicated herbal powders, applied systematically to relieve localized swelling and pain.",
+    benefits: [
+      "Medicated Herbal Bolus",
+      "Therapeutic Heat",
+      "Joint & Muscle Soothing",
+      "Anti-Inflammatory Action"
+    ],
+    doshaFocus: "Vata & Kapha Pacifying",
+    recommendedFor: "Joint pain, stiffness, localized swelling, muscular soreness"
+  },
+  {
     id: "ayur-43",
     categoryId: "ayurveda",
     categoryName: "Ayurveda",
+    therapyType: "dhara",
+    therapyTypeName: "Dhara",
     name: "Ekanga Dhara",
     subtitle: "Localized Continuous Stream on Specific Limb/Joint",
     duration: "30 min",
@@ -1010,7 +1505,9 @@ const TREATMENTS_DATA = [
     id: "ayur-44",
     categoryId: "ayurveda",
     categoryName: "Ayurveda",
-    name: "Thakra Dhara (Full Body)",
+    therapyType: "dhara",
+    therapyTypeName: "Dhara",
+    name: "Thakra Dhara",
     subtitle: "Medicated Herbal Buttermilk Cascade on Entire Body",
     duration: "60 min",
     priceMUR: 1800,
@@ -1032,6 +1529,8 @@ const TREATMENTS_DATA = [
     id: "ayur-45",
     categoryId: "ayurveda",
     categoryName: "Ayurveda",
+    therapyType: "dhara",
+    therapyTypeName: "Dhara",
     name: "Kashaya Dhara",
     subtitle: "Continuous Medicated Herbal Decoction Stream",
     duration: "45 min",
@@ -1054,7 +1553,9 @@ const TREATMENTS_DATA = [
     id: "ayur-46",
     categoryId: "ayurveda",
     categoryName: "Ayurveda",
-    name: "Ksheera Dhara (Full Body)",
+    therapyType: "dhara",
+    therapyTypeName: "Dhara",
+    name: "Ksheera Dhara",
     subtitle: "Therapeutic Herbal Milk Full Body Cascade",
     duration: "60 min",
     priceMUR: 1800,
@@ -1076,7 +1577,9 @@ const TREATMENTS_DATA = [
     id: "ayur-47",
     categoryId: "ayurveda",
     categoryName: "Ayurveda",
-    name: "Thakra Dhara (Head Only)",
+    therapyType: "dhara",
+    therapyTypeName: "Dhara",
+    name: "Thakra Dhara",
     subtitle: "Medicated Buttermilk Stream on Ajna / Forehead",
     duration: "60 min",
     priceMUR: 1800,
@@ -1098,6 +1601,8 @@ const TREATMENTS_DATA = [
     id: "ayur-48",
     categoryId: "ayurveda",
     categoryName: "Ayurveda",
+    therapyType: "kizhi",
+    therapyTypeName: "Kizhi",
     name: "Mamsa Kizhi",
     subtitle: "Nourishing Meat & Herb Bolus Fomentation for Wasting",
     duration: "45 min",
@@ -1120,7 +1625,9 @@ const TREATMENTS_DATA = [
     id: "ayur-49",
     categoryId: "ayurveda",
     categoryName: "Ayurveda",
-    name: "Njavara Kizhi (Herbal Rice Poultice)",
+    therapyType: "kizhi",
+    therapyTypeName: "Kizhi",
+    name: "Njavara Kizhi",
     subtitle: "Shashtika Shali Rice Cooked in Milk & Bala Decoction",
     duration: "45 min",
     priceMUR: 1800,
@@ -1139,31 +1646,11 @@ const TREATMENTS_DATA = [
     recommendedFor: "Muscle weakness, joint degeneration, chronic fatigue, anti-aging"
   },
   {
-    id: "ayur-50",
-    categoryId: "ayurveda",
-    categoryName: "Ayurveda",
-    name: "Mukhakanti Facial",
-    subtitle: "Classical Ayurvedic Radiant Herbal Face Treatment",
-    duration: "60 min",
-    priceMUR: 1560,
-    priceUSD: 35,
-    badge: "Herbal Glow",
-    requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Mukhakanti.webp",
-    description: "A classical facial protocol featuring herbal steam, Marma point face and neck massage with Kumkumadi saffron oil, finished with a fresh bespoke herbal lepana mask.",
-    benefits: [
-      "Firms facial muscles, improves elasticity, and de-puffs eyes",
-      "Clears blemishes, hyperpigmentation, and imparts natural glow",
-      "Stimulates lymphatic drainage of facial energy centers",
-      "Protects against premature aging and environmental pollution"
-    ],
-    doshaFocus: "Tridoshic Complexion Care",
-    recommendedFor: "Dull complexion, fine lines, dark spots, daily rejuvenation"
-  },
-  {
     id: "ayur-51",
     categoryId: "ayurveda",
     categoryName: "Ayurveda",
+    therapyType: "kizhi",
+    therapyTypeName: "Kizhi",
     name: "Manal Kizhi",
     subtitle: "Heated Purified Sand Bolus Fomentation for Swelling",
     duration: "60 min",
@@ -1186,7 +1673,9 @@ const TREATMENTS_DATA = [
     id: "ayur-52",
     categoryId: "ayurveda",
     categoryName: "Ayurveda",
-    name: "Netra Sekam (Eye Wash)",
+    therapyType: "others",
+    therapyTypeName: "Others",
+    name: "Netra Sekam",
     subtitle: "Triphala Decoction Gentle Eye Irrigation & Refreshment",
     duration: "20 min",
     priceMUR: 600,
@@ -1208,6 +1697,8 @@ const TREATMENTS_DATA = [
     id: "ayur-53",
     categoryId: "ayurveda",
     categoryName: "Ayurveda",
+    therapyType: "abhyangam",
+    therapyTypeName: "Abhyangam",
     name: "Sthanika Abhyangam",
     subtitle: "Localized Targeted Ayurvedic Herbal Oil Massage",
     duration: "30 min",
@@ -1227,141 +1718,11 @@ const TREATMENTS_DATA = [
     recommendedFor: "Targeted muscle knots, neck strain, calf cramps, focal back pain"
   },
   {
-    id: "ayur-54",
-    categoryId: "ayurveda",
-    categoryName: "Ayurveda",
-    name: "Sthanika Abhyangam + Podikizhi",
-    subtitle: "Localized Massage with Warm Herbal Powder Bolus",
-    duration: "30 min",
-    priceMUR: 960,
-    priceUSD: 21,
-    badge: "Targeted Relief",
-    requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Sthanika Abhyangam + Podikizhi.webp",
-    description: "Combines targeted localized massage with warm herbal powder bolus fomentation for enhanced penetration and faster relief from acute localized pain.",
-    benefits: [
-      "Rapidly breaks down localized tension and inflammation",
-      "Relieves sciatic nerve pain, frozen shoulder, or lumbar stiffness",
-      "Combines massage strokes with dry thermal bolus benefits",
-      "Restores free movement to restricted joints"
-    ],
-    doshaFocus: "Vata-Kapha Pacifying",
-    recommendedFor: "Frozen shoulder, acute stiff neck, localized back pain, knee stiffness"
-  },
-  {
-    id: "ayur-55",
-    categoryId: "ayurveda",
-    categoryName: "Ayurveda",
-    name: "Agnikarma (Cautery) - 30 min",
-    subtitle: "Thermal Micro-Cautery for Severe Joint & Tendon Pain",
-    duration: "30 min",
-    priceMUR: 900,
-    priceUSD: 20,
-    badge: "Specialized Clinical",
-    requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Agnikarma Cautery.webp",
-    description: "A highly specialized classical Ayurvedic para-surgical procedure using a heated Shalaka (metallic probe) applied precisely to specific tender points to relieve intractable pain instantly.",
-    benefits: [
-      "Provides instant, dramatic pain relief in chronic conditions",
-      "Extremely effective for heel spurs, calcaneal spur, and plantar fasciitis",
-      "Relieves tennis elbow, trigger finger, and severe sciatica",
-      "Non-invasive, fast-acting clinical procedure performed by Vaidya"
-    ],
-    doshaFocus: "Severe Vata-Kapha Pain",
-    recommendedFor: "Calcaneal spur, plantar fasciitis, tennis elbow, chronic tendonitis"
-  },
-  {
-    id: "ayur-56",
-    categoryId: "ayurveda",
-    categoryName: "Ayurveda",
-    name: "Agnikarma (Cautery) - 60 min",
-    subtitle: "Extensive Ayurvedic Thermal Micro-Cautery Procedure",
-    duration: "60 min",
-    priceMUR: 1800,
-    priceUSD: 40,
-    badge: "Specialized Clinical",
-    requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Niragni Agnikarma.webp",
-    description: "An extensive Agnikarma session addressing multiple joint sites or chronic tendon networks under doctor supervision for profound musculoskeletal pain elimination.",
-    benefits: [
-      "Comprehensive treatment for multiple severe pain points",
-      "Prevents recurrence of chronic joint lock and tendon inflammation",
-      "Stimulates deep tissue micro-healing and collagen alignment",
-      "Performed strictly following classical surgical guidelines"
-    ],
-    doshaFocus: "Intractable Pain Neutralization",
-    recommendedFor: "Multi-joint pain, severe lumbar spondylosis, bilateral heel spurs"
-  },
-  {
-    id: "ayur-57",
-    categoryId: "ayurveda",
-    categoryName: "Ayurveda",
-    name: "Synchronized Massage (4 Hands) - 45 min",
-    subtitle: "Dual-Therapist Synchronous Medicated Oil Flow",
-    duration: "45 min",
-    priceMUR: 2160,
-    priceUSD: 48,
-    badge: "4-Hand Harmony",
-    requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Synchronized Massage - 4 Hands.webp",
-    description: "Two experienced therapists work in perfect, mirror-image synchronicity across your body, delivering seamless rhythmic strokes with warm medicated herbal oil.",
-    benefits: [
-      "Synchronous bilateral stimulation balances both brain hemispheres",
-      "Delivers double the therapeutic coverage and deep relaxation",
-      "Improves blood circulation and relieves systemic fatigue rapidly",
-      "Induces a meditative state of total sensory tranquility"
-    ],
-    doshaFocus: "Tridoshic Equilibrium",
-    recommendedFor: "High stress, nervous exhaustion, royal pampering, deep relaxation"
-  },
-  {
-    id: "ayur-58",
-    categoryId: "ayurveda",
-    categoryName: "Ayurveda",
-    name: "Synchronized Massage (4 Hands) - 60 min",
-    subtitle: "Dual-Therapist Full Body Rhythmic Herbal Oil Therapy",
-    duration: "60 min",
-    priceMUR: 2400,
-    priceUSD: 53,
-    badge: "4-Hand Harmony",
-    requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Synchronized Massage - 4 Hands.webp",
-    description: "A full 60-minute 4-hand massage choreography. Two therapists simultaneously glide across energy meridians with tailored warm herbal oils.",
-    benefits: [
-      "Deeply relaxes every major muscle group simultaneously",
-      "Improves lymphatic drainage and accelerates toxin release",
-      "Relieves chronic postural strain and mental tension",
-      "Leaves you feeling profoundly grounded and renewed"
-    ],
-    doshaFocus: "Tridoshic Harmony",
-    recommendedFor: "Corporate burnout, full body stiffness, deep restorative therapy"
-  },
-  {
-    id: "ayur-59",
-    categoryId: "ayurveda",
-    categoryName: "Ayurveda",
-    name: "Synchronized Massage (4 Hands) - 90 min",
-    subtitle: "Comprehensive 4-Hand Master Synchronized Ritual",
-    duration: "90 min",
-    priceMUR: 2760,
-    priceUSD: 61,
-    badge: "Ultimate Royal",
-    requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Synchronized Massage - 4 Hands.webp",
-    description: "The ultimate royal Ayurvedic massage indulgence. 90 minutes of uninterrupted, perfectly synchronized four-hand strokes covering head, spine, limbs, and Marma centers.",
-    benefits: [
-      "The pinnacle of classical Ayurvedic body rejuvenation",
-      "Unblocks all 72,000 Nadis (energy channels)",
-      "Eradicates deep physical exhaustion and chronic stress",
-      "Profoundly nourishes skin, muscles, and vital Ojas"
-    ],
-    doshaFocus: "Complete Tridoshic Vitality",
-    recommendedFor: "Ultimate rejuvenation, chronic exhaustion, royal luxury experience"
-  },
-  {
     id: "ayur-60",
     categoryId: "ayurveda",
     categoryName: "Ayurveda",
+    therapyType: "others",
+    therapyTypeName: "Others",
     name: "Akshi Tarpanam",
     subtitle: "Classical Medicated Ghee Eye Bath for Vision & Fatigue",
     duration: "30 min",
@@ -1380,19 +1741,77 @@ const TREATMENTS_DATA = [
     doshaFocus: "Pitta & Alochaka Pitta Balance",
     recommendedFor: "Dry eye syndrome, screen fatigue, poor vision, burning eyes"
   },
+
+  // =========================================================================
+  // 2. WELLNESS
+  // =========================================================================
+
+  // --- 120 Minutes Treatments ---
   {
-    id: "ayur-61",
-    categoryId: "ayurveda",
-    categoryName: "Ayurveda",
-    name: "Vaysthapana For 55+",
+    id: "well-17",
+    categoryId: "wellness",
+    categoryName: "Wellness",
+    subcategoryId: "ayurveda",
+    subcategoryName: "Ayurveda",
+    name: "Ayur Soukya",
+    subtitle: "Master 4-in-1 Ayurvedic Wellness Journey",
+    duration: "120 Minutes",
+    priceMUR: 3600,
+    priceUSD: 80,
+    badge: "Master 4-in-1 Journey",
+    requiresDoctorConsultation: false,
+    image: "assets/images/Wellness/Ayur Soukya - Complete Package.webp",
+    description: "Master Ayurvedic wellness package featuring 4 powerful modalities: Abhyangam body massage, warm herbal Kizhi, soothing Dhara, and detoxifying steam bath.",
+    benefits: [
+      "Abhyangam Massage",
+      "Herbal Kizhi Fermentation",
+      "Soothing Dhara Stream",
+      "Medicated Herbal Steam"
+    ],
+    doshaFocus: "Tridoshic Supreme Reset",
+    recommendedFor: "Total wellness immersion, deep tissue cleansing, supreme detoxification"
+  },
+  {
+    id: "well-19",
+    categoryId: "wellness",
+    categoryName: "Wellness",
+    subcategoryId: "ayurveda",
+    subcategoryName: "Ayurveda",
+    name: "Punarjeeva",
+    subtitle: "2-Hour Synchronized Abhyangam, Kizhi & Herbal Facial",
+    duration: "120 Minutes",
+    priceMUR: 3600,
+    priceUSD: 80,
+    badge: "2-Hour Sensory Revival",
+    requiresDoctorConsultation: false,
+    image: "assets/images/Wellness/Punarjeeva (Sensory Rejuvenation).webp",
+    description: "Complete two-hour sensory revival package incorporating synchronized Abhyangam, warm Kizhi compresses, and revitalizing herbal facial care for whole-body vitality.",
+    benefits: [
+      "2-Hour Complete Journey",
+      "Abhyangam Massage",
+      "Warm Herbal Kizhi",
+      "Rejuvenating Facial Care"
+    ],
+    doshaFocus: "Tridoshic Vitality",
+    recommendedFor: "Exhaustion, loss of luster, full body revitalisation, sensory reset"
+  },
+
+  // --- 90 Minutes Treatments ---
+  {
+    id: "well-vayasthapana",
+    categoryId: "wellness",
+    categoryName: "Wellness",
+    subcategoryId: "ayurveda",
+    subcategoryName: "Ayurveda",
+    name: "Vayasthapana (Geriatric Vitality 55+)",
     subtitle: "Geriatric Rejuvenation & Vitality Protocol for Seniors",
-    duration: "90 min",
+    duration: "90 Minutes",
     priceMUR: 1800,
     priceUSD: 40,
     badge: "Senior Vitality",
-    requiresDoctorConsultation: true,
+    requiresDoctorConsultation: false,
     image: "assets/images/Ayurveda/Vayasthapana.webp",
-    description: "A specialized geriatric therapy designed to nourish aging tissues (Rasayanas), lubricate degenerative joints, boost immunity, and support cognitive vitality in adults 55 and above.",
+    description: "A specialized geriatric therapy designed to nourish aging tissues, lubricate degenerative joints, boost immunity, and support cognitive vitality in adults 55 and above.",
     benefits: [
       "Strengthens fragile bones, degenerative joints, and muscles",
       "Improves mobility, balance, and reduces age-related stiffness",
@@ -1403,989 +1822,453 @@ const TREATMENTS_DATA = [
     recommendedFor: "Seniors 55+, degenerative joint pain, memory support, age vitality"
   },
   {
-    id: "ayur-62",
-    categoryId: "ayurveda",
-    categoryName: "Ayurveda",
-    name: "Abhyangam, Podikizhi, Kati Vasti (Without Oil)",
-    subtitle: "Triple Action Spinal & Lumbar Relief Combination",
-    duration: "90 min",
-    priceMUR: 2160,
-    priceUSD: 48,
-    badge: "Spine Protocol",
-    requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Abhyangam - Podi Kizhi - Kati Vasti - Without Oil.webp",
-    description: "An intensive triple-therapy session combining full body Abhyangam, herbal powder bolus fomentation (Podikizhi), and localized medicated oil reservoir (Kati Vasti) over lower spine.",
+    id: "well-01",
+    categoryId: "wellness",
+    categoryName: "Wellness",
+    subcategoryId: "ayurveda",
+    subcategoryName: "Ayurveda",
+    name: "Navajeevan",
+    subtitle: "Restorative Renewal & Vital Energy Awakening",
+    duration: "90 Minutes",
+    priceMUR: 2700,
+    priceUSD: 60,
+    badge: "Vital Energy Awakening",
+    requiresDoctorConsultation: false,
+    image: "assets/images/Wellness/Navajeevan.webp",
+    description: "Restorative renewal therapy formulated to awaken vital energy (Prana), ease chronic fatigue, and balance the three Doshas through synchronized bodywork.",
     benefits: [
-      "Comprehensive, all-in-one therapy for severe lower back pain",
-      "Decompresses pinched sciatica nerves and strengthens lumbar discs",
-      "Melts muscular spasms across entire back and legs",
-      "Restores fluid spine mobility and effortless posture"
-    ],
-    doshaFocus: "Vata Pacifying",
-    recommendedFor: "Severe lower back pain, lumbar disc herniation, sciatica, stiffness"
-  },
-  {
-    id: "ayur-63",
-    categoryId: "ayurveda",
-    categoryName: "Ayurveda",
-    name: "Abhyangam, Podikizhi & Sneha Basti (Without Oil)",
-    subtitle: "Integrated Musculoskeletal & Internal Vata Cleansing",
-    duration: "90 min",
-    priceMUR: 2160,
-    priceUSD: 48,
-    badge: "Deep Balance",
-    requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Abhyangam - Podi Kizhi - Sneha Basti - Without Oil.webp",
-    description: "A synergistic combination of external body therapies (Abhyangam & Podikizhi) with internal Panchakarma oleation enema (Sneha Basti) for complete Vata pacification.",
-    benefits: [
-      "Addresses Vata imbalances both externally and internally",
-      "Relieves systemic musculoskeletal stiffness and colon dryness",
-      "Promotes deep systemic cellular detoxification",
-      "Restores balanced energy, digestion, and restful sleep"
-    ],
-    doshaFocus: "Comprehensive Vata Detox",
-    recommendedFor: "Chronic joint disorders, systemic stiffness, constipation, fatigue"
-  },
-  {
-    id: "ayur-64",
-    categoryId: "ayurveda",
-    categoryName: "Ayurveda",
-    name: "Abhyangam, Podikizhi & Bhashpa Sweda (Without Oil)",
-    subtitle: "Massage, Herbal Bolus & Medicated Steam Combo",
-    duration: "90 min",
-    priceMUR: 2160,
-    priceUSD: 48,
-    badge: "Comprehensive Detox",
-    requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Abhyangam - Podi Kizhi and Bashpa Sweda - Without Oil.webp",
-    description: "A complete 3-stage detoxification ritual: rhythmic body massage, warm herbal powder poultice therapy, followed by full body herbal steam box fomentation.",
-    benefits: [
-      "Maximum release of stored bodily toxins and metabolic waste",
-      "Relieves body heaviness, water retention, and joint ache",
-      "Opens blocked micro-channels and improves skin radiance",
-      "Leaves you feeling deeply energized, light, and refreshed"
-    ],
-    doshaFocus: "Vata-Kapha Cleansing",
-    recommendedFor: "Full body stiffness, water retention, metabolic sluggishness, detox"
-  },
-  {
-    id: "ayur-65",
-    categoryId: "ayurveda",
-    categoryName: "Ayurveda",
-    name: "Abhyangam, Podikizhi, Janu Vasti (Without Oil)",
-    subtitle: "Targeted Knee Joint Regeneration & Full Body Relief",
-    duration: "90 min",
-    priceMUR: 2160,
-    priceUSD: 48,
-    badge: "Knee Protocol",
-    requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Abhyangam - Podi Kizhi - Janu Basti - Without Oil.webp",
-    description: "An intensive therapy combining full body massage, herbal bolus fomentation, and a dedicated medicated oil reservoir (Janu Vasti) over both knee joints.",
-    benefits: [
-      "Deep relief for chronic knee osteoarthritis and cartilage wear",
-      "Re-lubricates knee joint capsule and reduces cracking sounds",
-      "Relieves leg cramps, calf tightness, and hip stiffness",
-      "Significantly improves pain-free walking and mobility"
-    ],
-    doshaFocus: "Vata & Shleshaka Kapha",
-    recommendedFor: "Knee osteoarthritis, ligament strain, knee stiffness, difficulty walking"
-  },
-  {
-    id: "ayur-66",
-    categoryId: "ayurveda",
-    categoryName: "Ayurveda",
-    name: "Abhyangam & Shirodhara (Without Oil)",
-    subtitle: "2-Hour Body Balance & Deep Mind De-stress Ritual",
-    duration: "120 min",
-    priceMUR: 2400,
-    priceUSD: 53,
-    badge: "Mind & Body Rest",
-    requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Abhyangam and Shirodhara - Without Oil.webp",
-    description: "A 2-hour dual master therapy pairing comprehensive full body Abhyangam with continuous forehead herbal decoction Shirodhara for complete mind-body renewal.",
-    benefits: [
-      "Dissolves both deep physical muscular tension and mental static",
-      "Induces rapid mental calmness and cures chronic insomnia",
-      "Improves blood circulation and restores vital energy channels",
-      "Non-greasy finish ideal for busy schedules"
-    ],
-    doshaFocus: "Tridoshic Mind-Body Reset",
-    recommendedFor: "Executive burnout, chronic insomnia, severe stress, body tension"
-  },
-  {
-    id: "ayur-67",
-    categoryId: "ayurveda",
-    categoryName: "Ayurveda",
-    name: "Podikizhi & Lepam",
-    subtitle: "Fomentation Followed by Medicated Herbal Paste Wrap",
-    duration: "60 min",
-    priceMUR: 2040,
-    priceUSD: 45,
-    badge: "Inflammation Relief",
-    requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Podi Kizhi and Lepam.webp",
-    description: "An intensive dual anti-inflammatory therapy combining warm medicinal herbal powder poultice fomentation followed by topical application of a customized herbal paste.",
-    benefits: [
-      "Quickly draws out localized heat, swelling, and acute pain",
-      "Heals tendinitis, sprains, and inflammatory joint flare-ups",
-      "Promotes deep tissue healing and cellular repair",
-      "Restores normal joint function without harsh chemicals"
-    ],
-    doshaFocus: "Pitta & Kapha Inflammation",
-    recommendedFor: "Acute joint inflammation, sports injuries, tendinitis, localized swelling"
-  },
-  {
-    id: "ayur-68",
-    categoryId: "ayurveda",
-    categoryName: "Ayurveda",
-    name: "Abhyangam, Podikizhi, Kati Vasti & Greeva Vasti (Without Oil)",
-    subtitle: "Complete Spinal Axis Therapy (Neck to Lower Spine)",
-    duration: "90 min",
-    priceMUR: 2400,
-    priceUSD: 53,
-    badge: "Total Spine Care",
-    requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Abhyangam - Podi Kizhi - Kati Vasti and Greeva Vasthi - Without Oil.webp",
-    description: "The supreme Ayurvedic spinal care protocol. Combines full body Abhyangam, Podikizhi, and simultaneous medicated oil reservoirs on both cervical neck (Greeva) and lumbar spine (Kati).",
-    benefits: [
-      "Complete restorative care for the entire vertebral spinal column",
-      "Relieves cervical spondylosis, neck pain, lumbar pain, and sciatica",
-      "Decompresses spinal discs and strengthens surrounding nerve roots",
-      "Restores posture, flexibility, and eliminates radiating nerve pain"
-    ],
-    doshaFocus: "Vata Pacifying Spine Master",
-    recommendedFor: "Whole spine stiffness, chronic neck and back pain, multi-level disc issues"
-  },
-  {
-    id: "ayur-69",
-    categoryId: "ayurveda",
-    categoryName: "Ayurveda",
-    name: "Abhyangam + Shirodhara with Oil",
-    subtitle: "Warm Medicated Oil Body Massage & Continuous Shirodhara",
-    duration: "90 min",
-    priceMUR: 3600,
-    priceUSD: 80,
-    badge: "Supreme Rejuvenation",
-    requiresDoctorConsultation: true,
-    image: "assets/images/Ayurveda/Abhyangam + Shirodhara with Oil.webp",
-    description: "The royal signature Ayurvedic combination. Full body warm dosha-specific herbal oil Abhyangam followed by continuous streaming of warm medicated oil on the third eye chakra.",
-    benefits: [
-      "The definitive classical Ayurvedic mind and body rejuvenation experience",
-      "Eliminates chronic anxiety, insomnia, hypertension, and fatigue",
-      "Deeply nourishes skin, hair, joints, and nervous system",
-      "Leaves you in a profound state of blissful stillness and bliss"
-    ],
-    doshaFocus: "Tridoshic Master Rejuvenation",
-    recommendedFor: "Deep mental burnout, insomnia, chronic fatigue, royal wellness seekers"
-  },
-
-  // =========================================================================
-  // 2. WELLNESS
-  // =========================================================================
-  {
-    "id": "well-01",
-    "categoryId": "wellness",
-    "categoryName": "Wellness",
-    "name": "Navajeevan",
-    "subtitle": "Restorative Renewal & Vital Energy Awakening",
-    "duration": "90 Minutes",
-    "priceMUR": 2700,
-    "priceUSD": 60,
-    "badge": "Vital Energy Awakening",
-    "requiresDoctorConsultation": false,
-    "image": "assets/images/Wellness/Navajeevan.webp",
-    "description": "Restorative renewal therapy formulated to awaken vital energy (Prana), ease chronic fatigue, and balance the three Doshas through synchronized bodywork.",
-    "benefits": [
       "Prana-Awakening Abhyanga",
       "Herbal Pouch Stimulation",
       "Marma Energy Balancing",
       "Herbal Compress"
     ],
-    "doshaFocus": "Tridoshic Balance",
-    "recommendedFor": "Chronic fatigue, low energy, burnout, vitality restoration"
+    doshaFocus: "Tridoshic Balance",
+    recommendedFor: "Chronic fatigue, low energy, burnout, vitality restoration"
   },
   {
-    "id": "well-02",
-    "categoryId": "wellness",
-    "categoryName": "Wellness",
-    "name": "Ayurvedic Body Scrub Local",
-    "subtitle": "Exfoliating Botanical Udvarthanam & Lymphatic Glow",
-    "duration": "60 Minutes",
-    "priceMUR": 1800,
-    "priceUSD": 40,
-    "badge": "Exfoliation & Glow",
-    "requiresDoctorConsultation": false,
-    "image": "assets/images/Wellness/Ayurvedic Body Scrub Local.webp",
-    "description": "Exfoliating full-body ritual using freshly blended local herbs, grains, and botanical oils (Udvarthanam) to refine skin texture and stimulate lymphatic drainage.",
-    "benefits": [
-      "Botanical Herbal Scrub",
-      "Whole-Body Exfoliation",
-      "Lymphatic Stimulation",
-      "Nourishing Herbal Wash"
-    ],
-    "doshaFocus": "Kapha & Pitta Balancing",
-    "recommendedFor": "Dull skin, sluggish circulation, dead cell buildup, skin texture refinement"
-  },
-  {
-    "id": "well-03",
-    "categoryId": "wellness",
-    "categoryName": "Wellness",
-    "name": "Avikizhi",
-    "subtitle": "Classical Thermal Medicated Herbal Bolus Fomentation",
-    "duration": "45 Minutes",
-    "priceMUR": 1440,
-    "priceUSD": 32,
-    "badge": "Joint & Muscle Relief",
-    "requiresDoctorConsultation": false,
-    "image": "assets/images/Wellness/Avikizhi.webp",
-    "description": "Classical thermal therapy using heated cloth boluses packed with medicated herbal powders, applied systematically to relieve localized swelling and pain.",
-    "benefits": [
-      "Medicated Herbal Bolus",
-      "Therapeutic Heat",
-      "Joint & Muscle Soothing",
-      "Anti-Inflammatory Action"
-    ],
-    "doshaFocus": "Vata & Kapha Pacifying",
-    "recommendedFor": "Joint pain, stiffness, localized swelling, muscular soreness"
-  },
-  {
-    "id": "well-04",
-    "categoryId": "wellness",
-    "categoryName": "Wellness",
-    "name": "Shirodhara with Oil",
-    "subtitle": "Iconic Continuous Streaming Oil Meditative Therapy",
-    "duration": "45 Minutes",
-    "priceMUR": 2160,
-    "priceUSD": 48,
-    "badge": "Deep Meditative Calm",
-    "requiresDoctorConsultation": false,
-    "image": "assets/images/Wellness/Shirodhara with Oil.webp",
-    "description": "Iconic Ayurvedic therapy where a steady, rhythmic stream of warm medicated oil is gently poured across the forehead, inducing deep meditative stillness.",
-    "benefits": [
-      "Warm Medicated Oil Stream",
-      "Shiro Head Acupressure",
-      "Ajna Chakra Activation",
-      "Profound Nervous Calm"
-    ],
-    "doshaFocus": "Vata & Pitta Pacifying",
-    "recommendedFor": "Stress, mental fatigue, insomnia, headaches, nervous tension"
-  },
-  {
-    "id": "well-05",
-    "categoryId": "wellness",
-    "categoryName": "Wellness",
-    "name": "Pranayama & Meditation Guidance",
-    "subtitle": "One-on-One Breathwork & Mindful Stress Reduction",
-    "duration": "45 Minutes",
-    "priceMUR": 960,
-    "priceUSD": 21,
-    "badge": "Mind-Body Alignment",
-    "requiresDoctorConsultation": false,
-    "image": "assets/images/Wellness/Pranayama & Meditation Guidance.webp",
-    "description": "Guided one-on-one session on Ayurvedic breathing techniques (Pranayama) and mindful meditation to calm the mind, expand lung capacity, and reduce stress.",
-    "benefits": [
-      "Personalized Breathwork",
-      "Mindfulness Meditation",
-      "Nadi Shodhana & Bhramari",
-      "Stress Reduction Tools"
-    ],
-    "doshaFocus": "Pranic Vitality & Mental Peace",
-    "recommendedFor": "Anxiety, shallow breathing, mental restlessness, high stress lifestyles"
-  },
-  {
-    "id": "well-06",
-    "categoryId": "wellness",
-    "categoryName": "Wellness",
-    "name": "Sthanika Naranga Kizhi",
-    "subtitle": "Targeted Fresh Citrus & Herb Fomentation",
-    "duration": "30 Minutes",
-    "priceMUR": 960,
-    "priceUSD": 21,
-    "badge": "Acute Stiffness Relief",
-    "requiresDoctorConsultation": false,
-    "image": "assets/images/Wellness/Sthanika Naranga Kizhi.webp",
-    "description": "Targeted local fomentation using freshly sliced medicinal lemons, garlic, and herbal powders fried in herbal oil to rapidly relieve acute joint stiffness.",
-    "benefits": [
-      "Fresh Citrus & Herb Bolus",
-      "Targeted Hot Fomentation",
-      "Acute Stiffness Relief",
-      "Localized Joint Care"
-    ],
-    "doshaFocus": "Vata Pacifying",
-    "recommendedFor": "Acute joint stiffness, localized pain, frozen shoulder, sprains"
-  },
-  {
-    "id": "well-07",
-    "categoryId": "wellness",
-    "categoryName": "Wellness",
-    "name": "Sthanika Podikizhi",
-    "subtitle": "Localized Dry Thermal Herbal Powder Therapy",
-    "duration": "30 Minutes",
-    "priceMUR": 960,
-    "priceUSD": 21,
-    "badge": "Instant Pain Relief",
-    "requiresDoctorConsultation": false,
-    "image": "assets/images/Wellness/Sthanika Podikizhi.webp",
-    "description": "Localized dry thermal therapy using warm herbal powder bundles to treat localized back, neck, or knee pain, reducing inflammation and stiffness.",
-    "benefits": [
-      "Warm Herbal Powder Pouch",
-      "Dry Heat Therapy",
-      "Knee / Back / Neck Focus",
-      "Instant Pain Relief"
-    ],
-    "doshaFocus": "Vata & Kapha Relief",
-    "recommendedFor": "Localized back pain, neck stiffness, knee inflammation, muscle spasms"
-  },
-  {
-    "id": "well-08",
-    "categoryId": "wellness",
-    "categoryName": "Wellness",
-    "name": "Aishwarya",
-    "subtitle": "Regal Full-Body Abhyanga & Opulent Royal Facial",
-    "duration": "90 Minutes",
-    "priceMUR": 2700,
-    "priceUSD": 60,
-    "badge": "Royal Luxury Pampering",
-    "requiresDoctorConsultation": false,
-    "image": "assets/images/Wellness/Aishwarya.webp",
-    "description": "Regal Ayurvedic pampering ritual combining a full-body nourishing Abhyanga massage with an opulent royal botanical facial for complete radiance.",
-    "benefits": [
+    id: "well-08",
+    categoryId: "wellness",
+    categoryName: "Wellness",
+    subcategoryId: "ayurveda",
+    subcategoryName: "Ayurveda",
+    name: "Aishwarya",
+    subtitle: "Regal Full-Body Abhyanga & Opulent Royal Facial",
+    duration: "90 Minutes",
+    priceMUR: 2700,
+    priceUSD: 60,
+    badge: "Royal Luxury Pampering",
+    requiresDoctorConsultation: false,
+    image: "assets/images/Wellness/Aishwarya.webp",
+    description: "Regal Ayurvedic pampering ritual combining a full-body nourishing Abhyanga massage with an opulent royal botanical facial for complete radiance.",
+    benefits: [
       "Royal Abhyanga Massage",
       "Opulent Botanical Facial",
       "Marma Activation",
       "Glow & Tranquility"
     ],
-    "doshaFocus": "Tridoshic Royal Radiance",
-    "recommendedFor": "Complete pampering, total body relaxation, radiant facial glow, luxury wellness"
+    doshaFocus: "Tridoshic Royal Radiance",
+    recommendedFor: "Complete pampering, total body relaxation, radiant facial glow, luxury wellness"
   },
   {
-    "id": "well-09",
-    "categoryId": "wellness",
-    "categoryName": "Wellness",
-    "name": "Steam (Herbal Swedana)",
-    "subtitle": "Traditional Medicated Steam Chamber Therapy",
-    "duration": "15 Minutes",
-    "priceMUR": 360,
-    "priceUSD": 8,
-    "badge": "Pore Detox & Cleanse",
-    "requiresDoctorConsultation": false,
-    "image": "assets/images/Wellness/Steam - Herbal Swedana.webp",
-    "description": "Traditional Ayurvedic medicated herbal steam chamber therapy that dilates bodily channels, opens pores, and expels deep-seated metabolic toxins.",
-    "benefits": [
-      "Medicated Steam Chamber",
-      "Pore Cleansing & Detox",
-      "Channel Opening",
-      "Lightness & Vitality"
-    ],
-    "doshaFocus": "Kapha & Vata Detox",
-    "recommendedFor": "Toxin elimination, sluggish metabolism, bodily stiffness, fluid retention"
-  },
-  {
-    "id": "well-10",
-    "categoryId": "wellness",
-    "categoryName": "Wellness",
-    "name": "Divya Dhara (Antistress Therapy)",
-    "subtitle": "Invigorating Herbal Bodywork & Forehead Decoction Stream",
-    "duration": "90 Minutes",
-    "priceMUR": 2700,
-    "priceUSD": 60,
-    "badge": "Stress & Anxiety Relief",
-    "requiresDoctorConsultation": false,
-    "image": "assets/images/Wellness/Divya Dhara - Antistress Therapy.webp",
-    "description": "Heavenly therapeutic ritual combining an invigorating whole-body herbal massage with continuous warm herbal decoction stream along the forehead.",
-    "benefits": [
+    id: "well-10",
+    categoryId: "wellness",
+    categoryName: "Wellness",
+    subcategoryId: "ayurveda",
+    subcategoryName: "Ayurveda",
+    name: "Divya Dhara",
+    subtitle: "Invigorating Herbal Bodywork & Forehead Decoction Stream",
+    duration: "90 Minutes",
+    priceMUR: 2700,
+    priceUSD: 60,
+    badge: "Stress & Anxiety Relief",
+    requiresDoctorConsultation: false,
+    image: "assets/images/Wellness/Divya Dhara - Antistress Therapy.webp",
+    description: "Heavenly therapeutic ritual combining an invigorating whole-body herbal massage with continuous warm herbal decoction stream along the forehead.",
+    benefits: [
       "Divya Abhyangam",
       "Warm Dhara Pouring",
       "Chakra Balancing",
       "Mental Tranquillity"
     ],
-    "doshaFocus": "Vata Pacifying",
-    "recommendedFor": "Executive burnout, anxiety, racing thoughts, deep emotional stress"
+    doshaFocus: "Vata Pacifying",
+    recommendedFor: "Executive burnout, anxiety, racing thoughts, deep emotional stress"
   },
   {
-    "id": "well-11",
-    "categoryId": "wellness",
-    "categoryName": "Wellness",
-    "name": "Abhyangam + Kizhi",
-    "subtitle": "Rhythmic Body Massage & Warm Herbal Bundle Fomentation",
-    "duration": "90 Minutes",
-    "priceMUR": 1800,
-    "priceUSD": 40,
-    "badge": "Joint & Back Care",
-    "requiresDoctorConsultation": false,
-    "image": "assets/images/Wellness/Abhyangam + Kizhi.webp",
-    "description": "Powerful restorative duo combining rhythmic full-body Abhyangam followed by warm herbal bundle (Kizhi) fomentation to relieve deep joint and back discomfort.",
-    "benefits": [
-      "Full Abhyangam Massage",
-      "Medicated Herbal Kizhi",
-      "Thermal Joint Care",
-      "Inflammation Relief"
-    ],
-    "doshaFocus": "Vata & Kapha Soothing",
-    "recommendedFor": "Lower back pain, shoulder stiffness, joint aches, body fatigue"
-  },
-  {
-    "id": "well-12",
-    "categoryId": "wellness",
-    "categoryName": "Wellness",
-    "name": "Manicure Paraffin",
-    "subtitle": "Thermal Paraffin Hand Therapy & Organic Nail Grooming",
-    "duration": "45 Minutes",
-    "priceMUR": 960,
-    "priceUSD": 21,
-    "badge": "Hand Moisture & Care",
-    "requiresDoctorConsultation": false,
-    "image": "assets/images/Wellness/Manicure Paraffin.webp",
-    "description": "Deeply moisturizing thermal hand therapy with organic nail grooming, gentle scrub, and a warm paraffin wax wrap to soften dry skin and soothe joints.",
-    "benefits": [
-      "Organic Hand Scrub",
-      "Nail & Cuticle Care",
-      "Warm Paraffin Wrap",
-      "Hydrating Hand Massage"
-    ],
-    "doshaFocus": "Vata Nourishing",
-    "recommendedFor": "Dry hands, brittle nails, hand stiffness, deep skin hydration"
-  },
-  {
-    "id": "well-13",
-    "categoryId": "wellness",
-    "categoryName": "Wellness",
-    "name": "Deep Tissue Massage and Facial",
-    "subtitle": "Muscle-Releasing Bodywork & Revitalizing Botanical Facial",
-    "duration": "90 Minutes",
-    "priceMUR": 2700,
-    "priceUSD": 60,
-    "badge": "Complete Body & Face Revival",
-    "requiresDoctorConsultation": false,
-    "image": "assets/images/Wellness/Deep Tissue Massage and Facial.webp",
-    "description": "Balanced dual treatment combining intensive muscle-releasing deep tissue therapy with a revitalizing Ayurvedic botanical facial for glowing complexion.",
-    "benefits": [
-      "Deep Tissue Bodywork",
-      "Herbal Facial Cleansing",
-      "Acupressure Marma Facial",
-      "Hydrating Mask & Steam"
-    ],
-    "doshaFocus": "Tridoshic Restoration",
-    "recommendedFor": "Athletes, intense muscular tension, dull facial skin, total relaxation"
-  },
-  {
-    "id": "well-14",
-    "categoryId": "wellness",
-    "categoryName": "Wellness",
-    "name": "Padamruta",
-    "subtitle": "Hip-to-Toe Herbal Oil Massage & Botanical Pouch Therapy",
-    "duration": "45 Minutes",
-    "priceMUR": 1200,
-    "priceUSD": 27,
-    "badge": "Leg & Foot Revitalization",
-    "requiresDoctorConsultation": false,
-    "image": "assets/images/Wellness/Padamruta.webp",
-    "description": "Focused lower-body therapy featuring a soothing hip-to-toe herbal oil massage and warm botanical pouch treatment to relieve tired legs and feet.",
-    "benefits": [
-      "Hip-to-Toe Massage",
-      "Warm Botanical Pouch",
-      "Sole Reflexology",
-      "Leg Fatigue Relief"
-    ],
-    "doshaFocus": "Vata & Pitta Cooling",
-    "recommendedFor": "Restless legs, standing fatigue, calf soreness, poor circulation in legs"
-  },
-  {
-    "id": "well-15",
-    "categoryId": "wellness",
-    "categoryName": "Wellness",
-    "name": "Sanjeevani",
-    "subtitle": "Abhyangam, Hot Herbal Kizhi & Soothing Ksheeradhara Triad",
-    "duration": "90 Minutes",
-    "priceMUR": 2700,
-    "priceUSD": 60,
-    "badge": "Ultimate Triad Renewal",
-    "requiresDoctorConsultation": false,
-    "image": "assets/images/Wellness/Sanjeevani.webp",
-    "description": "Ultimate revitalizing triad combining warm Abhyangam massage, hot herbal pouch fermentation (Kizhi), and soothing medicated milk streaming (Ksheeradhara).",
-    "benefits": [
+    id: "well-15",
+    categoryId: "wellness",
+    categoryName: "Wellness",
+    subcategoryId: "ayurveda",
+    subcategoryName: "Ayurveda",
+    name: "Sanjeevani",
+    subtitle: "Abhyangam, Hot Herbal Kizhi & Soothing Ksheeradhara Triad",
+    duration: "90 Minutes",
+    priceMUR: 2700,
+    priceUSD: 60,
+    badge: "Ultimate Triad Renewal",
+    requiresDoctorConsultation: false,
+    image: "assets/images/Wellness/Sanjeevani.webp",
+    description: "Ultimate revitalizing triad combining warm Abhyangam massage, hot herbal pouch fermentation (Kizhi), and soothing medicated milk streaming (Ksheeradhara).",
+    benefits: [
       "Full-Body Abhyanga",
       "Hot Herbal Kizhi",
       "Ksheeradhara Milk Stream",
       "Tissue Regeneration"
     ],
-    "doshaFocus": "Tridoshic Master Rejuvenation",
-    "recommendedFor": "Complete physical & mental rejuvenation, nerve renewal, deep fatigue"
+    doshaFocus: "Tridoshic Master Rejuvenation",
+    recommendedFor: "Complete physical & mental rejuvenation, nerve renewal, deep fatigue"
   },
   {
-    "id": "well-16",
-    "categoryId": "wellness",
-    "categoryName": "Wellness",
-    "name": "Manasamitram (Abhyanga + Dhara)",
-    "subtitle": "Nourishing Body Massage & Herb-Infused Milk Dhara",
-    "duration": "90 Minutes",
-    "priceMUR": 2700,
-    "priceUSD": 60,
-    "badge": "Deep Sleep & Mental Calm",
-    "requiresDoctorConsultation": false,
-    "image": "assets/images/Wellness/Manasamitram - Abhyanga + Dhara.webp",
-    "description": "Deeply calming therapy combining warm medicated oil body massage with a continuous gentle stream of herb-infused warm milk over the third eye.",
-    "benefits": [
+    id: "well-16",
+    categoryId: "wellness",
+    categoryName: "Wellness",
+    subcategoryId: "ayurveda",
+    subcategoryName: "Ayurveda",
+    name: "Manasamitram",
+    subtitle: "Nourishing Body Massage & Herb-Infused Milk Dhara",
+    duration: "90 Minutes",
+    priceMUR: 2700,
+    priceUSD: 60,
+    badge: "Deep Sleep & Mental Calm",
+    requiresDoctorConsultation: false,
+    image: "assets/images/Wellness/Manasamitram - Abhyanga + Dhara.webp",
+    description: "Deeply calming therapy combining warm medicated oil body massage with a continuous gentle stream of herb-infused warm milk over the third eye.",
+    benefits: [
       "Warm Oil Abhyangam",
       "Ksheeradhara Stream",
       "Cooling Head Therapy",
       "Deep Sleep Induction"
     ],
-    "doshaFocus": "Pitta & Vata Soothing",
-    "recommendedFor": "Insomnia, hypertension, anxiety, mental exhaustion, high stress"
+    doshaFocus: "Pitta & Vata Soothing",
+    recommendedFor: "Insomnia, hypertension, anxiety, mental exhaustion, high stress"
   },
   {
-    "id": "well-17",
-    "categoryId": "wellness",
-    "categoryName": "Wellness",
-    "name": "Ayur Soukya (Complete Package)",
-    "subtitle": "Master 4-in-1 Ayurvedic Wellness Journey",
-    "duration": "120 Minutes",
-    "priceMUR": 3600,
-    "priceUSD": 80,
-    "badge": "Master 4-in-1 Journey",
-    "requiresDoctorConsultation": false,
-    "image": "assets/images/Wellness/Ayur Soukya - Complete Package.webp",
-    "description": "Master Ayurvedic wellness package featuring 4 powerful modalities: Abhyangam body massage, warm herbal Kizhi, soothing Dhara, and detoxifying steam bath.",
-    "benefits": [
-      "Abhyangam Massage",
-      "Herbal Kizhi Fermentation",
-      "Soothing Dhara Stream",
-      "Medicated Herbal Steam"
-    ],
-    "doshaFocus": "Tridoshic Supreme Reset",
-    "recommendedFor": "Total wellness immersion, deep tissue cleansing, supreme detoxification"
-  },
-  {
-    "id": "well-18",
-    "categoryId": "wellness",
-    "categoryName": "Wellness",
-    "name": "Manasanthi (Anti Stress Therapy)",
-    "subtitle": "Shiro Abhyangam & Medicated Herbal Milk Pour",
-    "duration": "60 Minutes",
-    "priceMUR": 1800,
-    "priceUSD": 40,
-    "badge": "Tranquil Mind Reset",
-    "requiresDoctorConsultation": false,
-    "image": "assets/images/Wellness/Manasanthi - Anti Stress Therapy.webp",
-    "description": "Tranquil mental rejuvenation therapy combining restorative Shiro Abhyangam head massage with gentle Ksheeradhara medicated herbal milk streaming.",
-    "benefits": [
-      "Herbal Head Massage",
-      "Ksheeradhara Milk Pour",
-      "Mental Decompression",
-      "Sensory Calming"
-    ],
-    "doshaFocus": "Pitta & Vata Calming",
-    "recommendedFor": "Headaches, sensory overload, mental tension, eye strain, restlessness"
-  },
-  {
-    "id": "well-19",
-    "categoryId": "wellness",
-    "categoryName": "Wellness",
-    "name": "Punarjeeva (Sensory Rejuvenation)",
-    "subtitle": "2-Hour Synchronized Abhyangam, Kizhi & Herbal Facial",
-    "duration": "120 Minutes",
-    "priceMUR": 3600,
-    "priceUSD": 80,
-    "badge": "2-Hour Sensory Revival",
-    "requiresDoctorConsultation": false,
-    "image": "assets/images/Wellness/Punarjeeva (Sensory Rejuvenation).webp",
-    "description": "Complete two-hour sensory revival package incorporating synchronized Abhyangam, warm Kizhi compresses, and revitalizing herbal facial care for whole-body vitality.",
-    "benefits": [
-      "2-Hour Complete Journey",
-      "Abhyangam Massage",
-      "Warm Herbal Kizhi",
-      "Rejuvenating Facial Care"
-    ],
-    "doshaFocus": "Tridoshic Vitality",
-    "recommendedFor": "Exhaustion, loss of luster, full body revitalisation, sensory reset"
-  },
-  {
-    "id": "well-20",
-    "categoryId": "wellness",
-    "categoryName": "Wellness",
-    "name": "Mukhakanti (Ayurvedic Facial)",
-    "subtitle": "Radiance Facial, Marma Massage & Glow-Enhancing Lepam",
-    "duration": "60 Minutes",
-    "priceMUR": 1800,
-    "priceUSD": 40,
-    "badge": "Radiant Skin Glow",
-    "requiresDoctorConsultation": false,
-    "image": "assets/images/Wellness/Mukhakanti - Ayurvedic Facial.webp",
-    "description": "Radiance-boosting facial therapy featuring gentle herbal cleansing, steam, Marma acupressure facial massage, and botanical glow-enhancing Lepam.",
-    "benefits": [
-      "Herbal Cleanse & Exfoliation",
-      "Facial Marma Massage",
-      "Custom Lepam Mask",
-      "Floral Rose Mist"
-    ],
-    "doshaFocus": "Pitta Cooling & Glow",
-    "recommendedFor": "Dull complexion, sun exposure, facial tension, delicate skin nourishment"
-  },
-  {
-    "id": "well-21",
-    "categoryId": "wellness",
-    "categoryName": "Wellness",
-    "name": "Swedish Massage",
-    "subtitle": "Classic European Wellness Effleurage & Muscle Kneading",
-    "duration": "60 Minutes",
-    "priceMUR": 1800,
-    "priceUSD": 40,
-    "badge": "Classic Relaxation",
-    "requiresDoctorConsultation": false,
-    "image": "assets/images/Wellness/Swedish Massage.webp",
-    "description": "Classic European wellness massage using long flowing effleurage, gentle kneading, and rhythmic friction to enhance circulation and release muscular stress.",
-    "benefits": [
-      "Flowing Effleurage",
-      "Gentle Muscle Kneading",
-      "Circulation Boost",
-      "Physical Relaxation"
-    ],
-    "doshaFocus": "Stress & Fatigue Relief",
-    "recommendedFor": "General stress, everyday muscular tightness, circulation enhancement"
-  },
-  {
-    "id": "well-22",
-    "categoryId": "wellness",
-    "categoryName": "Wellness",
-    "name": "Ayurvedic Nirvana - Stress Buster",
-    "subtitle": "Abhyanga, Shirodhara & Warm Compresses Synergy",
-    "duration": "90 Minutes",
-    "priceMUR": 2700,
-    "priceUSD": 60,
-    "badge": "Ultimate Stress Buster",
-    "requiresDoctorConsultation": false,
-    "image": "assets/images/Wellness/Ayurvedic Nirvana - Stress Buster.webp",
-    "description": "Blissful multi-therapy session pairing full-body Abhyanga with Shirodhara and warm herbal compresses to dissolve accumulated nervous exhaustion.",
-    "benefits": [
+    id: "well-22",
+    categoryId: "wellness",
+    categoryName: "Wellness",
+    subcategoryId: "ayurveda",
+    subcategoryName: "Ayurveda",
+    name: "Nirvana - Stress Buster",
+    subtitle: "Abhyanga, Shirodhara & Warm Compresses Synergy",
+    duration: "90 Minutes",
+    priceMUR: 2700,
+    priceUSD: 60,
+    badge: "Ultimate Stress Buster",
+    requiresDoctorConsultation: false,
+    image: "assets/images/Wellness/Ayurvedic Nirvana - Stress Buster.webp",
+    description: "Blissful multi-therapy session pairing full-body Abhyanga with Shirodhara and warm herbal compresses to dissolve accumulated nervous exhaustion.",
+    benefits: [
       "Full-Body Abhyanga",
       "Shirodhara Stream",
       "Warm Herbal Compress",
       "Nervous System Reset"
     ],
-    "doshaFocus": "Vata & Pitta Calming",
-    "recommendedFor": "Chronic stress, nervous fatigue, mental overwhelm, burnout"
+    doshaFocus: "Vata & Pitta Calming",
+    recommendedFor: "Chronic stress, nervous fatigue, mental overwhelm, burnout"
   },
+
+  // --- 60 Minutes Treatments (Western & Ayurveda) ---
   {
-    "id": "well-23",
-    "categoryId": "wellness",
-    "categoryName": "Wellness",
-    "name": "Bamboo Massage",
-    "subtitle": "Warm Organic Bamboo Deep-Tissue Fascial Release",
-    "duration": "60 Minutes",
-    "priceMUR": 1800,
-    "priceUSD": 40,
-    "badge": "Deep Muscle Release",
-    "requiresDoctorConsultation": false,
-    "image": "assets/images/Wellness/Bamboo Massage.webp",
-    "description": "Innovative deep-tissue technique using warm, smooth organic bamboo stalks to roll and knead tight muscle groups, relieving stubborn stiffness.",
-    "benefits": [
-      "Warm Bamboo Rollers",
-      "Connective Tissue Kneading",
-      "Fascial Release",
-      "Blood Flow Enhancement"
+    id: "well-21",
+    categoryId: "wellness",
+    categoryName: "Wellness",
+    subcategoryId: "western",
+    subcategoryName: "Western",
+    name: "Swedish Massage",
+    subtitle: "Classic European Wellness Effleurage & Muscle Kneading",
+    duration: "60 Minutes",
+    priceMUR: 1800,
+    priceUSD: 40,
+    badge: "Classic Relaxation",
+    requiresDoctorConsultation: false,
+    image: "assets/images/Wellness/Swedish Massage.webp",
+    description: "Classic European wellness massage using long flowing effleurage, gentle kneading, and rhythmic friction to enhance circulation and release muscular stress.",
+    benefits: [
+      "Flowing Effleurage",
+      "Gentle Muscle Kneading",
+      "Circulation Boost",
+      "Physical Relaxation"
     ],
-    "doshaFocus": "Kapha & Vata Pacifying",
-    "recommendedFor": "Deep muscular knots, sports recovery, leg and back stiffness"
+    doshaFocus: "Stress & Fatigue Relief",
+    recommendedFor: "General stress, everyday muscular tightness, circulation enhancement"
   },
   {
-    "id": "well-24",
-    "categoryId": "wellness",
-    "categoryName": "Wellness",
-    "name": "Abhyangam Wellness Massage",
-    "subtitle": "Synchronized Full-Body Rhythmic Warm Oil Bodywork",
-    "duration": "45 Minutes",
-    "priceMUR": 1440,
-    "priceUSD": 32,
-    "badge": "Express Abhyangam",
-    "requiresDoctorConsultation": false,
-    "image": "assets/images/Wellness/Abhyangam Wellness Massage.webp",
-    "description": "Traditional full-body synchronized rhythmic massage with warm medicated oils to improve circulation, relieve muscle fatigue, and promote profound relaxation.",
-    "benefits": [
-      "Warm Oil Abhyangam",
-      "Rhythmic Muscle Strokes",
-      "Tension Relief",
-      "Herbal Hot Towel Wipe"
-    ],
-    "doshaFocus": "Vata Pacifying",
-    "recommendedFor": "Quick body recharge, circulation stimulation, muscular fatigue"
-  },
-  {
-    "id": "well-25",
-    "categoryId": "wellness",
-    "categoryName": "Wellness",
-    "name": "Rujahari (Pain Relieving Massage)",
-    "subtitle": "Specialized Deep Pressure & Pain-Relieving Herbal Oils",
-    "duration": "60 Minutes",
-    "priceMUR": 1800,
-    "priceUSD": 40,
-    "badge": "Chronic Pain Relief",
-    "requiresDoctorConsultation": false,
-    "image": "assets/images/Wellness/Rujahari - Pain Relieving Massage.webp",
-    "description": "Specialized therapeutic massage utilizing pain-relieving herbal oils and targeted pressure techniques to ease chronic joint aches and muscular stiffness.",
-    "benefits": [
-      "Pain-Relieving Herbal Oils",
-      "Deep Tissue Manipulation",
-      "Joint Flexibility Work",
-      "Therapeutic Warmth"
-    ],
-    "doshaFocus": "Vata Pain Relief",
-    "recommendedFor": "Joint aches, chronic back discomfort, stiff neck, shoulder tightness"
-  },
-  {
-    "id": "well-26",
-    "categoryId": "wellness",
-    "categoryName": "Wellness",
-    "name": "Ayur Relax (Abhyangam + Steam)",
-    "subtitle": "Classical Abhyanga Followed by Aromatic Herbal Steam",
-    "duration": "60 Minutes",
-    "priceMUR": 1800,
-    "priceUSD": 40,
-    "badge": "Relaxation & Steam Detox",
-    "requiresDoctorConsultation": false,
-    "image": "assets/images/Wellness/Ayur Relax - Abhyangam + Steam.webp",
-    "description": "A harmonious combination of classical Abhyanga body massage followed by an aromatic herbal steam bath to eliminate toxins and ease bodily tension.",
-    "benefits": [
-      "Full-Body Abhyangam",
-      "Herbal Steam Bath (Swedana)",
-      "Toxin Detoxification",
-      "Vital Energy Balance"
-    ],
-    "doshaFocus": "Vata & Kapha Harmonizing",
-    "recommendedFor": "Post-travel stiffness, body heaviness, deep relaxation, detoxification"
-  },
-  {
-    "id": "well-27",
-    "categoryId": "wellness",
-    "categoryName": "Wellness",
-    "name": "Deep Tissue Massage",
-    "subtitle": "Targeted Deep Pressure & Myofascial Knot Release",
-    "duration": "60 Minutes",
-    "priceMUR": 1800,
-    "priceUSD": 40,
-    "badge": "Trigger Point Therapy",
-    "requiresDoctorConsultation": false,
-    "image": "assets/images/Wellness/Deep Tissue Massage.webp",
-    "description": "Intense therapeutic massage focusing on deeper layers of muscle and connective tissue to release chronic knotting, adhesions, and postural tension.",
-    "benefits": [
+    id: "well-27",
+    categoryId: "wellness",
+    categoryName: "Wellness",
+    subcategoryId: "western",
+    subcategoryName: "Western",
+    name: "Deep Tissue Massage",
+    subtitle: "Targeted Deep Pressure & Myofascial Knot Release",
+    duration: "60 Minutes",
+    priceMUR: 1800,
+    priceUSD: 40,
+    badge: "Trigger Point Therapy",
+    requiresDoctorConsultation: false,
+    image: "assets/images/Wellness/Deep Tissue Massage.webp",
+    description: "Intense therapeutic massage focusing on deeper layers of muscle and connective tissue to release chronic knotting, adhesions, and postural tension.",
+    benefits: [
       "Targeted Deep Pressure",
       "Trigger Point Release",
       "Myofascial Relaxation",
       "Circulation Boosting"
     ],
-    "doshaFocus": "Postural Tension Relief",
-    "recommendedFor": "Desk workers, athletes, chronic neck & upper back tightness"
+    doshaFocus: "Postural Tension Relief",
+    recommendedFor: "Desk workers, athletes, chronic neck & upper back tightness"
   },
   {
-    "id": "well-28",
-    "categoryId": "wellness",
-    "categoryName": "Wellness",
-    "name": "Head, Neck, Shoulder & Foot Reflexology",
-    "subtitle": "Comprehensive Upper Body & Vital Foot Pressure Points",
-    "duration": "60 Minutes",
-    "priceMUR": 1800,
-    "priceUSD": 40,
-    "badge": "Upper Body & Foot Care",
-    "requiresDoctorConsultation": false,
-    "image": "assets/images/Wellness/Head - Neck - Shoulder & Foot Reflexology.webp",
-    "description": "Comprehensive upper body and reflexology treatment targeting stress-holding zones in the scalp, neck, shoulders, and vital pressure points in the feet.",
-    "benefits": [
-      "Shiro Scalp Massage",
-      "Neck & Shoulder Release",
-      "Acupressure Foot Reflexology",
-      "Herbal Soothing Oils"
-    ],
-    "doshaFocus": "Vata & Pitta Stress Soothing",
-    "recommendedFor": "Desk fatigue, computer strain, headache prevention, tired feet"
-  },
-  {
-    "id": "well-29",
-    "categoryId": "wellness",
-    "categoryName": "Wellness",
-    "name": "Manasamithra (Antistress Therapy)",
-    "subtitle": "Nurturing Body Oil Therapy & Continuous Forehead Stream",
-    "duration": "90 Minutes",
-    "priceMUR": 2700,
-    "priceUSD": 60,
-    "badge": "Burnout Recovery",
-    "requiresDoctorConsultation": false,
-    "image": "assets/images/Wellness/Manasamithra - Antistress Therapy.webp",
-    "description": "Calming ritual designed to alleviate mental burnout, featuring nurturing whole-body oil therapy combined with soothing continuous forehead herbal oil stream.",
-    "benefits": [
-      "Anti-Stress Abhyangam",
-      "Shirodhara Stream",
-      "Marma Calming Points",
-      "Herbal Scalp Soothe"
-    ],
-    "doshaFocus": "Vata & Pitta Pacifying",
-    "recommendedFor": "Mental burnout, emotional stress, insomnia, chronic exhaustion"
-  },
-  {
-    "id": "well-30",
-    "categoryId": "wellness",
-    "categoryName": "Wellness",
-    "name": "Reflexology Massage",
-    "subtitle": "Ancient Foot Sole Acupressure & Energetic Balancing",
-    "duration": "45 Minutes",
-    "priceMUR": 1440,
-    "priceUSD": 32,
-    "badge": "Acupressure Reflexology",
-    "requiresDoctorConsultation": false,
-    "image": "assets/images/Wellness/Reflexology Massage.webp",
-    "description": "Ancient reflex zone therapy applying precise thumb and finger pressure to reflex points on the soles to restore full-body energetic equilibrium.",
-    "benefits": [
-      "Herbal Foot Cleansing",
-      "Sole Reflex Point Therapy",
-      "Calf Pressure Release",
-      "Relaxing Botanical Balm"
-    ],
-    "doshaFocus": "Tridoshic Harmony",
-    "recommendedFor": "Foot fatigue, systemic balance, internal organ stimulation, relaxation"
-  },
-  {
-    "id": "well-31",
-    "categoryId": "wellness",
-    "categoryName": "Wellness",
-    "name": "Aroma Therapy",
-    "subtitle": "Pure Botanical Essential Oils & Gentle Lymphatic Strokes",
-    "duration": "60 Minutes",
-    "priceMUR": 1800,
-    "priceUSD": 40,
-    "badge": "Aromatherapy Bliss",
-    "requiresDoctorConsultation": false,
-    "image": "assets/images/Wellness/Aroma Therapy.webp",
-    "description": "Gentle, rhythmic wellness massage infused with therapeutic pure essential oils to harmonize mood, relieve anxiety, and deeply hydrate the skin.",
-    "benefits": [
+    id: "well-31",
+    categoryId: "wellness",
+    categoryName: "Wellness",
+    subcategoryId: "western",
+    subcategoryName: "Western",
+    name: "Aroma Therapy",
+    subtitle: "Pure Botanical Essential Oils & Gentle Lymphatic Strokes",
+    duration: "60 Minutes",
+    priceMUR: 1800,
+    priceUSD: 40,
+    badge: "Aromatherapy Bliss",
+    requiresDoctorConsultation: false,
+    image: "assets/images/Wellness/Aroma Therapy.webp",
+    description: "Gentle, rhythmic wellness massage infused with therapeutic pure essential oils to harmonize mood, relieve anxiety, and deeply hydrate the skin.",
+    benefits: [
       "Botanical Essential Oils",
       "Gentle Lymphatic Strokes",
       "Aromatherapy Inhalation",
       "Complete Mind-Body Calm"
     ],
-    "doshaFocus": "Emotional Equilibrium",
-    "recommendedFor": "Mood balance, gentle relaxation, sensitive skin, aromatherapy enthusiasts"
+    doshaFocus: "Emotional Equilibrium",
+    recommendedFor: "Mood balance, gentle relaxation, sensitive skin, aromatherapy enthusiasts"
   },
   {
-    "id": "well-32",
-    "categoryId": "wellness",
-    "categoryName": "Wellness",
-    "name": "Stone Massage",
-    "subtitle": "Warm Basalt Thermotherapy & Deep Muscular De-Stressing",
-    "duration": "60 Minutes",
-    "priceMUR": 1800,
-    "priceUSD": 40,
-    "badge": "Basalt Thermotherapy",
-    "requiresDoctorConsultation": false,
-    "image": "assets/images/Wellness/Stone Massage.webp",
-    "description": "Luxurious thermotherapy using smooth heated basalt stones placed on key energy centers to melt stubborn muscular tightness and induce deep relaxation.",
-    "benefits": [
+    id: "well-32",
+    categoryId: "wellness",
+    categoryName: "Wellness",
+    subcategoryId: "western",
+    subcategoryName: "Western",
+    name: "Stone Massage",
+    subtitle: "Warm Basalt Thermotherapy & Deep Muscular De-Stressing",
+    duration: "60 Minutes",
+    priceMUR: 1800,
+    priceUSD: 40,
+    badge: "Basalt Thermotherapy",
+    requiresDoctorConsultation: false,
+    image: "assets/images/Wellness/Stone Massage.webp",
+    description: "Luxurious thermotherapy using smooth heated basalt stones placed on key energy centers to melt stubborn muscular tightness and induce deep relaxation.",
+    benefits: [
       "Heated Basalt Stones",
       "Thermal Energy Balancing",
       "Warm Oil Sliding Strokes",
       "Deep Muscle De-Stressing"
     ],
-    "doshaFocus": "Vata & Kapha Melting",
-    "recommendedFor": "Deep muscular tension, cold constitution, poor circulation, deep relaxation"
+    doshaFocus: "Vata & Kapha Melting",
+    recommendedFor: "Deep muscular tension, cold constitution, poor circulation, deep relaxation"
+  },
+  {
+    id: "well-23",
+    categoryId: "wellness",
+    categoryName: "Wellness",
+    subcategoryId: "western",
+    subcategoryName: "Western",
+    name: "Bamboo Massage",
+    subtitle: "Warm Organic Bamboo Deep-Tissue Fascial Release",
+    duration: "60 Minutes",
+    priceMUR: 1800,
+    priceUSD: 40,
+    badge: "Deep Muscle Release",
+    requiresDoctorConsultation: false,
+    image: "assets/images/Wellness/Bamboo Massage.webp",
+    description: "Innovative deep-tissue technique using warm, smooth organic bamboo stalks to roll and knead tight muscle groups, relieving stubborn stiffness.",
+    benefits: [
+      "Warm Bamboo Rollers",
+      "Connective Tissue Kneading",
+      "Fascial Release",
+      "Blood Flow Enhancement"
+    ],
+    doshaFocus: "Kapha & Vata Pacifying",
+    recommendedFor: "Deep muscular knots, sports recovery, leg and back stiffness"
+  },
+  {
+    id: "well-02",
+    categoryId: "wellness",
+    categoryName: "Wellness",
+    subcategoryId: "ayurveda",
+    subcategoryName: "Ayurveda",
+    name: "Ayurvedic Body Scrub",
+    subtitle: "Exfoliating Botanical Udvarthanam & Lymphatic Glow",
+    duration: "60 Minutes",
+    priceMUR: 1800,
+    priceUSD: 40,
+    badge: "Exfoliation & Glow",
+    requiresDoctorConsultation: false,
+    image: "assets/images/Wellness/Ayurvedic Body Scrub Local.webp",
+    description: "Exfoliating full-body ritual using freshly blended local herbs, grains, and botanical oils (Udvarthanam) to refine skin texture and stimulate lymphatic drainage.",
+    benefits: [
+      "Botanical Herbal Scrub",
+      "Whole-Body Exfoliation",
+      "Lymphatic Stimulation",
+      "Nourishing Herbal Wash"
+    ],
+    doshaFocus: "Kapha & Pitta Balancing",
+    recommendedFor: "Dull skin, sluggish circulation, dead cell buildup, skin texture refinement"
+  },
+  {
+    id: "well-18",
+    categoryId: "wellness",
+    categoryName: "Wellness",
+    subcategoryId: "ayurveda",
+    subcategoryName: "Ayurveda",
+    name: "Manasanthi",
+    subtitle: "Shiro Abhyangam & Medicated Herbal Milk Pour",
+    duration: "60 Minutes",
+    priceMUR: 1800,
+    priceUSD: 40,
+    badge: "Tranquil Mind Reset",
+    requiresDoctorConsultation: false,
+    image: "assets/images/Wellness/Manasanthi - Anti Stress Therapy.webp",
+    description: "Tranquil mental rejuvenation therapy combining restorative Shiro Abhyangam head massage with gentle Ksheeradhara medicated herbal milk streaming.",
+    benefits: [
+      "Herbal Head Massage",
+      "Ksheeradhara Milk Pour",
+      "Mental Decompression",
+      "Sensory Calming"
+    ],
+    doshaFocus: "Pitta & Vata Calming",
+    recommendedFor: "Headaches, sensory overload, mental tension, eye strain, restlessness"
+  },
+  {
+    id: "well-25",
+    categoryId: "wellness",
+    categoryName: "Wellness",
+    subcategoryId: "ayurveda",
+    subcategoryName: "Ayurveda",
+    name: "Rujahari",
+    subtitle: "Specialized Deep Pressure & Pain-Relieving Herbal Oils",
+    duration: "60 Minutes",
+    priceMUR: 1800,
+    priceUSD: 40,
+    badge: "Chronic Pain Relief",
+    requiresDoctorConsultation: false,
+    image: "assets/images/Wellness/Rujahari - Pain Relieving Massage.webp",
+    description: "Specialized therapeutic massage utilizing pain-relieving herbal oils and targeted pressure techniques to ease chronic joint aches and muscular stiffness.",
+    benefits: [
+      "Pain-Relieving Herbal Oils",
+      "Deep Tissue Manipulation",
+      "Joint Flexibility Work",
+      "Therapeutic Warmth"
+    ],
+    doshaFocus: "Vata Pain Relief",
+    recommendedFor: "Joint aches, chronic back discomfort, stiff neck, shoulder tightness"
+  },
+  {
+    id: "well-26",
+    categoryId: "wellness",
+    categoryName: "Wellness",
+    subcategoryId: "ayurveda",
+    subcategoryName: "Ayurveda",
+    name: "Ayur Relax",
+    subtitle: "Classical Abhyanga Followed by Aromatic Herbal Steam",
+    duration: "60 Minutes",
+    priceMUR: 1800,
+    priceUSD: 40,
+    badge: "Relaxation & Steam Detox",
+    requiresDoctorConsultation: false,
+    image: "assets/images/Wellness/Ayur Relax - Abhyangam + Steam.webp",
+    description: "A harmonious combination of classical Abhyanga body massage followed by an aromatic herbal steam bath to eliminate toxins and ease bodily tension.",
+    benefits: [
+      "Full-Body Abhyangam",
+      "Herbal Steam Bath (Swedana)",
+      "Toxin Detoxification",
+      "Vital Energy Balance"
+    ],
+    doshaFocus: "Vata & Kapha Harmonizing",
+    recommendedFor: "Post-travel stiffness, body heaviness, deep relaxation, detoxification"
+  },
+  {
+    id: "well-28",
+    categoryId: "wellness",
+    categoryName: "Wellness",
+    subcategoryId: "ayurveda",
+    subcategoryName: "Ayurveda",
+    name: "Head, Neck, Shoulder & Foot Reflexology",
+    subtitle: "Comprehensive Upper Body & Vital Foot Pressure Points",
+    duration: "60 Minutes",
+    priceMUR: 1800,
+    priceUSD: 40,
+    badge: "Upper Body & Foot Care",
+    requiresDoctorConsultation: false,
+    image: "assets/images/Wellness/Head - Neck - Shoulder & Foot Reflexology.webp",
+    description: "Comprehensive upper body and reflexology treatment targeting stress-holding zones in the scalp, neck, shoulders, and vital pressure points in the feet.",
+    benefits: [
+      "Shiro Scalp Massage",
+      "Neck & Shoulder Release",
+      "Acupressure Foot Reflexology",
+      "Herbal Soothing Oils"
+    ],
+    doshaFocus: "Vata & Pitta Stress Soothing",
+    recommendedFor: "Desk fatigue, computer strain, headache prevention, tired feet"
   },
 
-  // =========================================================================
-  // 3. BEAUTY CARE
-  // =========================================================================
+  // --- 45 Minutes Treatments (Western & Ayurveda) ---
   {
-    id: "beauty-01",
-    categoryId: "beauty-care",
-    categoryName: "Beauty Care",
-    name: "Panchagavya Facial",
-    subtitle: "Sacred Ayurvedic Purifying & Blemish Clearing Ritual",
-    duration: "60 Minutes",
-    priceMUR: 1500,
-    priceUSD: 33,
-    badge: "Purifying & Detox",
+    id: "well-30",
+    categoryId: "wellness",
+    categoryName: "Wellness",
+    subcategoryId: "western",
+    subcategoryName: "Western",
+    name: "Reflexology Massage",
+    subtitle: "Ancient Foot Sole Acupressure & Energetic Balancing",
+    duration: "45 Minutes",
+    priceMUR: 1440,
+    priceUSD: 32,
+    badge: "Acupressure Reflexology",
     requiresDoctorConsultation: false,
-    image: "assets/images/Beauty Care/Panchagavya Facial.webp",
-    description: "Sacred Ayurvedic purifying therapy formulated with classical botanical ingredients to clear blemishes, balance natural sebum, and detoxify congested facial pores.",
+    image: "assets/images/Wellness/Reflexology Massage.webp",
+    description: "Ancient reflex zone therapy applying precise thumb and finger pressure to reflex points on the soles to restore full-body energetic equilibrium.",
     benefits: [
-      "Deep Pore Cleansing & Sebum Balance",
-      "Panchagavya Herbal Pack Application",
-      "Facial Acupressure & Marma Point Stimulation",
-      "Hydrating Floral Mist & Nourishing Finish"
+      "Herbal Foot Cleansing",
+      "Sole Reflex Point Therapy",
+      "Calf Pressure Release",
+      "Relaxing Botanical Balm"
     ],
-    doshaFocus: "Pitta & Kapha Balancing",
-    recommendedFor: "Blemishes, congested pores, uneven sebum, dull skin"
+    doshaFocus: "Tridoshic Harmony",
+    recommendedFor: "Foot fatigue, systemic balance, internal organ stimulation, relaxation"
   },
   {
-    id: "beauty-02",
-    categoryId: "beauty-care",
-    categoryName: "Beauty Care",
-    name: "Herbal Hair Pack",
-    subtitle: "Fresh Botanical Conditioning & Follicle Nourishment",
-    duration: "30 Minutes",
+    id: "well-14",
+    categoryId: "wellness",
+    categoryName: "Wellness",
+    subcategoryId: "ayurveda",
+    subcategoryName: "Ayurveda",
+    name: "Padamruta",
+    subtitle: "Hip-to-Toe Herbal Oil Massage & Botanical Pouch Therapy",
+    duration: "45 Minutes",
     priceMUR: 1200,
     priceUSD: 27,
-    badge: "Hair & Scalp",
+    badge: "Leg & Foot Revitalization",
     requiresDoctorConsultation: false,
-    image: "assets/images/Beauty Care/Herbal Hair Pack.webp",
-    description: "A soothing natural herbal mask prepared with freshly blended botanical extracts including Amla, Brahmi, Bhringraj, and Hibiscus. Deeply conditions the hair follicles and restores natural luster.",
+    image: "assets/images/Wellness/Padamruta.webp",
+    description: "Focused lower-body therapy featuring a soothing hip-to-toe herbal oil massage and warm botanical pouch treatment to relieve tired legs and feet.",
     benefits: [
-      "Fresh Herbal Scalp Pack Application",
-      "Deep Follicle Conditioning & Root Strengthening",
-      "Gentle Herbal Wash & Scalp Cooling",
-      "Restores Natural Hair Shine and Luster"
+      "Hip-to-Toe Massage",
+      "Warm Botanical Pouch",
+      "Sole Reflexology",
+      "Leg Fatigue Relief"
     ],
-    doshaFocus: "Pitta & Vata Soothing",
-    recommendedFor: "Hair thinning, dry brittle hair, scalp heat, lack of luster"
-  },
-  {
-    id: "beauty-03",
-    categoryId: "beauty-care",
-    categoryName: "Beauty Care",
-    name: "Njavara Facial",
-    subtitle: "Royal Red Rice & Medicated Milk Nourishing Ceremony",
-    duration: "60 Minutes",
-    priceMUR: 1500,
-    priceUSD: 33,
-    badge: "Royal Radiance",
-    requiresDoctorConsultation: false,
-    image: "assets/images/Beauty Care/Njavara Facial.webp",
-    description: "Classical royal Ayurvedic facial using medicated Njavara rice cooked in herbal milk to deeply nourish tissues, improve skin elasticity, and restore youthful radiance.",
-    benefits: [
-      "Njavara Rice Compress Fomentation",
-      "Mukhabhyanga Facial Lifting Massage",
-      "Herbal Cleanse & Warm Steam Opening",
-      "Nourishing Deep Face Pack"
-    ],
-    doshaFocus: "Vata & Pitta Rejuvenation",
-    recommendedFor: "Skin laxity, dullness, fine lines, dryness, youthful glow"
-  },
-  {
-    id: "beauty-04",
-    categoryId: "beauty-care",
-    categoryName: "Beauty Care",
-    name: "Back Facial",
-    subtitle: "Clarifying Exfoliation & Tension-Melting Back Ritual",
-    duration: "90 Minutes",
-    priceMUR: 2100,
-    priceUSD: 47,
-    badge: "Clarifying & Relief",
-    requiresDoctorConsultation: false,
-    image: "assets/images/Beauty Care/Back Facial.webp",
-    description: "Comprehensive clarifying therapy for the back that includes deep exfoliation, warm herbal steam, gentle pore cleansing, detoxifying clay mask, and tension-melting back massage.",
-    benefits: [
-      "Deep Exfoliation Back Scrub",
-      "Warm Herbal Steam & Gentle Pore Cleansing",
-      "Detoxifying Mud & Clay Mask",
-      "Therapeutic Tension-Melting Back Massage"
-    ],
-    doshaFocus: "Kapha & Vata Relief",
-    recommendedFor: "Back acne, clogged pores, upper body tension, stress fatigue"
+    doshaFocus: "Vata & Pitta Cooling",
+    recommendedFor: "Restless legs, standing fatigue, calf soreness, poor circulation in legs"
   },
 
   // =========================================================================
-  // 4. FACE CARE
+  // 3. BEAUTY CARE (Face Care, Body Care, Hair Care, Hand & Foot Care)
   // =========================================================================
+
+  // --- Subcategory: Face Care ---
   {
     id: "face-01",
-    categoryId: "face-care",
-    categoryName: "Face Care",
+    categoryId: "beauty-care",
+    categoryName: "Beauty Care",
+    subcategoryId: "face-care",
+    subcategoryName: "Face Care",
     name: "Njavara Facial",
     subtitle: "Classical Royal Medicated Rice Nourishing Facial",
     duration: "60 Minutes",
@@ -2406,8 +2289,10 @@ const TREATMENTS_DATA = [
   },
   {
     id: "face-02",
-    categoryId: "face-care",
-    categoryName: "Face Care",
+    categoryId: "beauty-care",
+    categoryName: "Beauty Care",
+    subcategoryId: "face-care",
+    subcategoryName: "Face Care",
     name: "Panchagavya Facial",
     subtitle: "Sacred Classical Botanical Sebum Balancing Therapy",
     duration: "60 Minutes",
@@ -2428,8 +2313,10 @@ const TREATMENTS_DATA = [
   },
   {
     id: "face-03",
-    categoryId: "face-care",
-    categoryName: "Face Care",
+    categoryId: "beauty-care",
+    categoryName: "Beauty Care",
+    subcategoryId: "face-care",
+    subcategoryName: "Face Care",
     name: "Red Sandal Facial",
     subtitle: "Opulent Cooling & Sun Tan Reversal Therapy",
     duration: "60 Minutes",
@@ -2449,75 +2336,11 @@ const TREATMENTS_DATA = [
     recommendedFor: "Sun tan, inflammation, skin redness, uneven complexion"
   },
   {
-    id: "face-04",
-    categoryId: "face-care",
-    categoryName: "Face Care",
-    name: "Deep Cleansing Facial",
-    subtitle: "Purifying Botanical Extraction & Clay Mask",
-    duration: "60 Minutes",
-    priceMUR: 1500,
-    priceUSD: 33,
-    badge: "Purifying Care",
-    requiresDoctorConsultation: false,
-    image: "assets/images/Face Care/Deep Cleansing Facial.webp",
-    description: "Intensive purifying treatment combining gentle steam, herbal exfoliation, and therapeutic clay masks to eliminate pollutants and refresh dull tired skin.",
-    benefits: [
-      "Steam & Gentle Extraction",
-      "Botanical Exfoliation",
-      "Clay & Herbal Mask",
-      "Toning Herbal Mist"
-    ],
-    doshaFocus: "Tridoshic / All Skin Types",
-    recommendedFor: "Pollution-exposed skin, congested pores, dull tired complexion"
-  },
-  {
-    id: "face-05",
-    categoryId: "face-care",
-    categoryName: "Face Care",
-    name: "Anti-Aging Facial",
-    subtitle: "Restorative Kumkumadi Ritual & Firming Marma Massage",
-    duration: "60 Minutes",
-    priceMUR: 1500,
-    priceUSD: 33,
-    badge: "Age-Defying",
-    requiresDoctorConsultation: false,
-    image: "assets/images/Face Care/Anti-Aging Facial.webp",
-    description: "Restorative age-defying ritual infused with Kumkumadi oils and firming Marma massage to boost natural collagen synthesis and soften fine lines.",
-    benefits: [
-      "Firming Marma Massage",
-      "Kumkumadi Serum Infusion",
-      "Herbal Collagen Mask",
-      "Eye Contour Care"
-    ],
-    doshaFocus: "Vata & Pitta Nourishment",
-    recommendedFor: "Fine lines, loss of elasticity, mature skin, tired eye contours"
-  },
-  {
-    id: "face-06",
-    categoryId: "face-care",
-    categoryName: "Face Care",
-    name: "Brightening Facial",
-    subtitle: "Saffron, Turmeric & Antioxidant Glow Therapy",
-    duration: "60 Minutes",
-    priceMUR: 1500,
-    priceUSD: 33,
-    badge: "Radiance & Glow",
-    requiresDoctorConsultation: false,
-    image: "assets/images/Face Care/Brightening Facial.webp",
-    description: "Glow-enhancing facial rich in saffron, turmeric, and natural antioxidants to fade dark spots and unveil vibrant, translucent, radiant facial skin.",
-    benefits: [
-      "Saffron & Turmeric Scrub",
-      "Luminous Glow Massage",
-      "Herbal Brightening Pack",
-      "Rose Water Hydration"
-    ],
-    doshaFocus: "Pitta & Kapha Skin",
-    recommendedFor: "Hyperpigmentation, uneven skin tone, dark spots, dullness"
-  },
-  {
     id: "face-07",
-    categoryId: "face-care",
-    categoryName: "Face Care",
+    categoryId: "beauty-care",
+    categoryName: "Beauty Care",
+    subcategoryId: "face-care",
+    subcategoryName: "Face Care",
     name: "Manjishta Facial",
     subtitle: "Targeted Blood-Purifying & Complexion-Clearing Therapy",
     duration: "60 Minutes",
@@ -2538,8 +2361,10 @@ const TREATMENTS_DATA = [
   },
   {
     id: "face-08",
-    categoryId: "face-care",
-    categoryName: "Face Care",
+    categoryId: "beauty-care",
+    categoryName: "Beauty Care",
+    subcategoryId: "face-care",
+    subcategoryName: "Face Care",
     name: "Eladi Facial",
     subtitle: "Ancient Cardamom & Herbal Texture Refining Ritual",
     duration: "60 Minutes",
@@ -2560,8 +2385,10 @@ const TREATMENTS_DATA = [
   },
   {
     id: "face-09",
-    categoryId: "face-care",
-    categoryName: "Face Care",
+    categoryId: "beauty-care",
+    categoryName: "Beauty Care",
+    subcategoryId: "face-care",
+    subcategoryName: "Face Care",
     name: "Nalpamaradi Facial",
     subtitle: "Sacred Bark & Golden Turmeric Sun Damage Repair",
     duration: "60 Minutes",
@@ -2581,34 +2408,37 @@ const TREATMENTS_DATA = [
     recommendedFor: "Sun tan, UV exposure, pigmentation, skin revitalization"
   },
   {
-    id: "face-10",
-    categoryId: "face-care",
-    categoryName: "Face Care",
-    name: "Threading",
-    subtitle: "Precision Organic Cotton Facial Hair Removal",
-    duration: "10 Minutes",
-    priceMUR: 90,
-    priceUSD: 2,
-    badge: "Express Shaping",
+    id: "face-mukhakanti",
+    categoryId: "beauty-care",
+    categoryName: "Beauty Care",
+    subcategoryId: "face-care",
+    subcategoryName: "Face Care",
+    name: "Mukhakanti (Ayurvedic Facial)",
+    subtitle: "Radiance Facial, Marma Massage & Glow-Enhancing Lepam",
+    duration: "60 Minutes",
+    priceMUR: 1800,
+    priceUSD: 40,
+    badge: "Radiant Skin Glow",
     requiresDoctorConsultation: false,
-    image: "assets/images/Face Care/Threading.webp",
-    description: "Precise, gentle organic cotton thread facial hair removal for perfectly sculpted eyebrows, upper lip, or chin, finished with cooling aloe.",
+    image: "assets/images/Wellness/Mukhakanti - Ayurvedic Facial.webp",
+    description: "Radiance-boosting facial therapy featuring gentle herbal cleansing, steam, Marma acupressure facial massage, and botanical glow-enhancing Lepam.",
     benefits: [
-      "Organic Cotton Threading",
-      "Precision Brow Shaping",
-      "Cooling Aloe Vera Touch"
+      "Herbal Cleanse & Exfoliation",
+      "Facial Marma Massage",
+      "Custom Lepam Mask",
+      "Floral Rose Mist"
     ],
-    doshaFocus: "All Skin Types",
-    recommendedFor: "Eyebrows, upper lip, chin shaping, gentle hair removal"
+    doshaFocus: "Pitta Cooling & Glow",
+    recommendedFor: "Dull complexion, sun exposure, facial tension, delicate skin nourishment"
   },
 
-  // =========================================================================
-  // 5. BODY CARE
-  // =========================================================================
+  // --- Subcategory: Body Care ---
   {
     id: "body-01",
-    categoryId: "body-care",
-    categoryName: "Body Care",
+    categoryId: "beauty-care",
+    categoryName: "Beauty Care",
+    subcategoryId: "body-care",
+    subcategoryName: "Body Care",
     name: "Herbal Body Scrub",
     subtitle: "Traditional Udvarthanam-Inspired Therapy",
     duration: "60 Minutes",
@@ -2693,35 +2523,38 @@ const TREATMENTS_DATA = [
       }
     ]
   },
-
-  // =========================================================================
-  // 6. HAIR CARE
-  // =========================================================================
   {
-    id: "hair-01",
-    categoryId: "hair-care",
-    categoryName: "Hair Care",
-    name: "Herbal Hair Pack",
-    subtitle: "Fresh Botanical Scalp Mask & Conditioning",
-    duration: "30 Minutes",
-    priceMUR: 1200,
-    priceUSD: 27,
-    badge: "Scalp Nourishment",
+    id: "body-02",
+    categoryId: "beauty-care",
+    categoryName: "Beauty Care",
+    subcategoryId: "body-care",
+    subcategoryName: "Body Care",
+    name: "Back Facial",
+    subtitle: "Clarifying Exfoliation & Tension-Melting Back Ritual",
+    duration: "90 Minutes",
+    priceMUR: 2100,
+    priceUSD: 47,
+    badge: "Clarifying & Relief",
     requiresDoctorConsultation: false,
-    image: "assets/images/Hair Care/Herbal Hair Pack.webp",
-    description: "A soothing natural herbal mask prepared with freshly blended botanical extracts including Amla, Brahmi, Bhringraj, and Hibiscus. Deeply conditions the hair follicles, cools excess scalp heat, and restores natural softness and luster.",
+    image: "assets/images/Beauty Care/Back Facial.webp",
+    description: "Comprehensive clarifying therapy for the back that includes deep exfoliation, warm herbal steam, gentle pore cleansing, detoxifying clay mask, and tension-melting back massage.",
     benefits: [
-      "Fresh Herbal Scalp Pack",
-      "Follicle Conditioning",
-      "Gentle Herbal Wash"
+      "Deep Exfoliation Back Scrub",
+      "Warm Herbal Steam & Gentle Pore Cleansing",
+      "Detoxifying Mud & Clay Mask",
+      "Therapeutic Tension-Melting Back Massage"
     ],
-    doshaFocus: "Pitta & Vata Scalp Relief",
-    recommendedFor: "Scalp heat, dryness, lack of hair shine, follicle weakness"
+    doshaFocus: "Kapha & Vata Relief",
+    recommendedFor: "Back acne, clogged pores, upper body tension, stress fatigue"
   },
+
+  // --- Subcategory: Hair Care ---
   {
     id: "hair-02",
-    categoryId: "hair-care",
-    categoryName: "Hair Care",
+    categoryId: "beauty-care",
+    categoryName: "Beauty Care",
+    subcategoryId: "hair-care",
+    subcategoryName: "Hair Care",
     name: "Keshavardhini (Hair Strengthening)",
     subtitle: "Intensive Ayurvedic Scalp Therapy & Marma Stimulation",
     duration: "60 Minutes",
@@ -2740,14 +2573,37 @@ const TREATMENTS_DATA = [
     doshaFocus: "Tridoshic Hair Rejuvenation",
     recommendedFor: "Hair fall, thinning hair, scalp stress, follicle strengthening"
   },
+  {
+    id: "hair-01",
+    categoryId: "beauty-care",
+    categoryName: "Beauty Care",
+    subcategoryId: "hair-care",
+    subcategoryName: "Hair Care",
+    name: "Herbal Hair Pack",
+    subtitle: "Fresh Botanical Scalp Mask & Conditioning",
+    duration: "30 Minutes",
+    priceMUR: 1200,
+    priceUSD: 27,
+    badge: "Scalp Nourishment",
+    requiresDoctorConsultation: false,
+    image: "assets/images/Hair Care/Herbal Hair Pack.webp",
+    description: "A soothing natural herbal mask prepared with freshly blended botanical extracts including Amla, Brahmi, Bhringraj, and Hibiscus. Deeply conditions the hair follicles, cools excess scalp heat, and restores natural softness and luster.",
+    benefits: [
+      "Fresh Herbal Scalp Pack",
+      "Follicle Conditioning",
+      "Gentle Herbal Wash"
+    ],
+    doshaFocus: "Pitta & Vata Scalp Relief",
+    recommendedFor: "Scalp heat, dryness, lack of hair shine, follicle weakness"
+  },
 
-  // =========================================================================
-  // 7. HAND & FOOT CARE
-  // =========================================================================
+  // --- Subcategory: Hand & Foot Care ---
   {
     id: "handfoot-01",
-    categoryId: "hand-foot-care",
-    categoryName: "Hand & Foot Care",
+    categoryId: "beauty-care",
+    categoryName: "Beauty Care",
+    subcategoryId: "hand-foot-care",
+    subcategoryName: "Hand & Foot Care",
     name: "Pedicure & Manicure",
     subtitle: "Complete Dual Holistic Grooming Package",
     duration: "90 Minutes",
@@ -2768,8 +2624,10 @@ const TREATMENTS_DATA = [
   },
   {
     id: "handfoot-02",
-    categoryId: "hand-foot-care",
-    categoryName: "Hand & Foot Care",
+    categoryId: "beauty-care",
+    categoryName: "Beauty Care",
+    subcategoryId: "hand-foot-care",
+    subcategoryName: "Hand & Foot Care",
     name: "Pedicure",
     subtitle: "Essential Botanical Foot Exfoliation & Massage",
     duration: "60 Minutes",
@@ -2790,8 +2648,10 @@ const TREATMENTS_DATA = [
   },
   {
     id: "handfoot-03",
-    categoryId: "hand-foot-care",
-    categoryName: "Hand & Foot Care",
+    categoryId: "beauty-care",
+    categoryName: "Beauty Care",
+    subcategoryId: "hand-foot-care",
+    subcategoryName: "Hand & Foot Care",
     name: "Manicure",
     subtitle: "Quick Hand Care, Botanical Scrub & Hydrating Massage",
     duration: "30 Minutes",
@@ -2809,50 +2669,6 @@ const TREATMENTS_DATA = [
     ],
     doshaFocus: "Vata Nourishing",
     recommendedFor: "Dry cuticles, dull nails, hand tension, express grooming"
-  },
-  {
-    id: "handfoot-04",
-    categoryId: "hand-foot-care",
-    categoryName: "Hand & Foot Care",
-    name: "Royal Pedicure",
-    subtitle: "Indulgent Floral Bath, Extended Reflexology & Callus Therapy",
-    duration: "60 Minutes",
-    priceMUR: 1800,
-    priceUSD: 40,
-    badge: "Royal Luxury",
-    requiresDoctorConsultation: false,
-    image: "assets/images/Hand and Foot Care/Royal Pedicure.webp",
-    description: "An indulgent luxury foot therapy with fragrant floral baths, essential oil scrubs, intensive callus smoothing, and an extended Ayurvedic reflexology massage along the calves and soles.",
-    benefits: [
-      "Floral Rose Petal Soak",
-      "Aromatic Herbal Scrub",
-      "Intensive Callus Care",
-      "Royal Calf & Foot Massage"
-    ],
-    doshaFocus: "Pitta Cooling & Calming",
-    recommendedFor: "Calf tension, deep foot stress, severe dry heels, luxurious pampering"
-  },
-  {
-    id: "handfoot-05",
-    categoryId: "hand-foot-care",
-    categoryName: "Hand & Foot Care",
-    name: "Paraffin Foot Spa",
-    subtitle: "Deep Thermal Paraffin Wax Wrap & Heel Repair",
-    duration: "90 Minutes",
-    priceMUR: 2160,
-    priceUSD: 48,
-    badge: "Intensive Repair",
-    requiresDoctorConsultation: false,
-    image: "assets/images/Hand and Foot Care/Paraffin Foot Spa.webp",
-    description: "A deeply therapeutic thermal treatment enveloping feet in warm paraffin wax. Locks in deep moisture, eases joint stiffness, repairs cracked heels, and stimulates circulation with reflexology.",
-    benefits: [
-      "Herbal Foot Exfoliation",
-      "Warm Paraffin Wax Wrap",
-      "Intensive Heel Repair",
-      "Reflexology Massage"
-    ],
-    doshaFocus: "Vata Pacifying & Warming",
-    recommendedFor: "Cracked heels, stiff foot joints, intense dryness, circulation boost"
   }
 ];
 
